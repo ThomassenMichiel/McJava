@@ -10,7 +10,7 @@ public class CustomerOrder {
     private Long id;
     private String name;
     private String telephoneNumber;
-    private List<MenuItem> orderedItems;
+    private List<OrderItem> orderedItems;
     
     public Long getId() {
         return id;
@@ -36,21 +36,21 @@ public class CustomerOrder {
         this.telephoneNumber = telephoneNumber;
     }
     
-    public List<MenuItem> getOrderedItems() {
+    public List<OrderItem> getOrderedItems() {
         return orderedItems;
     }
     
-    public void setOrderedItems(List<MenuItem> orderedItems) {
+    public void setOrderedItems(List<OrderItem> orderedItems) {
         this.orderedItems = orderedItems;
     }
     
-    public void addToOrder(MenuItem menuItem) {
+    public void addToOrder(OrderItem orderItem) {
     }
     
-    public void removeFromOrder(MenuItem menuItem) {
+    public void removeFromOrder(OrderItem orderItem) {
     }
     
-    public void editOrder(MenuItem menuItem) {
+    public void editOrder(OrderItem orderItem) {
     
     }
 }

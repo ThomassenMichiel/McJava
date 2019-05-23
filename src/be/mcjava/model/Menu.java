@@ -6,13 +6,13 @@ import java.util.List;
  * Contains the data for the menu, where the customer can choose and order his/her food.
  */
 public class Menu {
-    private List<MenuItem> menuItems;
+    private List<Product> products;
     
-    public List<MenuItem> getMenuItems() {
-        return menuItems;
+    public List<Product> getProducts() {
+        return products;
     }
     
-    public void setMenuItems(List<MenuItem> menuItems) {
-        this.menuItems = menuItems;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

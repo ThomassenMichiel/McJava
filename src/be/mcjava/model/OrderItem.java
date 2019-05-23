@@ -3,9 +3,9 @@ package be.mcjava.model;
 import java.math.BigDecimal;
 
 /**
- * Contains all the data related to a single MenuItem
+ * Contains all the data related to a single ordered item on the CustomerOrder
  */
-public class MenuItem {
+public class OrderItem {
     private Long id;
     private Product product;
     private int amount;
