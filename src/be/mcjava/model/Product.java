@@ -11,6 +11,16 @@ public class Product {
     private Map<Ingredient, Integer> ingredients;
     private BigDecimal price;
     
+    public Product(Map<Ingredient, Integer> ingredients, BigDecimal price) {
+        this(null, ingredients, price);
+    }
+    
+    public Product(Long id, Map<Ingredient, Integer> ingredients, BigDecimal price) {
+        setId(id);
+        setIngredients(ingredients);
+        setPrice(price);
+    }
+    
     public Long getId() {
         return id;
     }
@@ -36,7 +46,27 @@ public class Product {
     }
     
     public boolean isAvailable() {
-        //todo: implement this, returns false so code will compile -Michiel 24/5/2019
-        return false;
+        return ingredients.entrySet()
+                .stream()
+                .allMatch(this::availableIngredients);
+    }
+    
+    private boolean availableIngredients(Map.Entry<Ingredient, Integer> entry) {
+        return entry.getKey().getCurrentStock() >= entry.getValue();
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        
+        Product product = (Product) o;
+        
+        return getIngredients().equals(product.getIngredients());
+    }
+    
+    @Override
+    public int hashCode() {
+        return 29 * ingredients.hashCode();
     }
 }

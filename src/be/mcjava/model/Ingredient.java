@@ -8,6 +8,16 @@ public class Ingredient {
     private String name;
     private int currentStock;
     
+    public Ingredient(String name, int currentStock) {
+        this(null,name,currentStock);
+    }
+    
+    public Ingredient(Long id, String name, int currentStock) {
+        setId(id);
+        setName(name);
+        setCurrentStock(currentStock);
+    }
+    
     public Long getId() {
         return id;
     }
@@ -33,7 +43,21 @@ public class Ingredient {
     }
     
     public boolean isAvailable() {
-        //todo: implement this, returns false so code will compile -Michiel 24/5/2019
-        return false;
+        return currentStock > 0;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        
+        Ingredient that = (Ingredient) o;
+        
+        return getName().equals(that.getName());
+    }
+    
+    @Override
+    public int hashCode() {
+        return 31 * name.hashCode();
     }
 }
