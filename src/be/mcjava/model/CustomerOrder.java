@@ -1,6 +1,5 @@
 package be.mcjava.model;
 
-
 import java.util.List;
 
 /**
@@ -11,17 +10,9 @@ public class CustomerOrder {
     private String name;
     private String telephoneNumber;
     private List<OrderItem> itemsToOrder;
-    private boolean finished;
+    private boolean ordered;
     
-    public CustomerOrder(String name, String telephoneNumber, List<OrderItem> itemsToOrder) {
-        this(null,name,telephoneNumber,itemsToOrder);
-    }
-    
-    public CustomerOrder(Long id, String name, String telephoneNumber, List<OrderItem> itemsToOrder) {
-        setId(id);
-        setName(name);
-        setTelephoneNumber(telephoneNumber);
-        setItemsToOrder(itemsToOrder);
+    private CustomerOrder() {
     }
     
     public Long getId() {
@@ -56,14 +47,12 @@ public class CustomerOrder {
         this.itemsToOrder = itemsToOrder;
     }
     
-    public boolean isFinished() {
-        return finished;
+    public boolean isOrdered() {
+        return ordered;
     }
     
-    public void setFinished(boolean finished) {
-        boolean actuallyFinished = getItemsToOrder().stream()
-                .allMatch(OrderItem::isFinished);
-        this.finished = actuallyFinished && finished;
+    public void setOrdered(boolean ordered) {
+        this.ordered = ordered;
     }
     
     public void addItem(OrderItem orderItem) {
@@ -84,6 +73,43 @@ public class CustomerOrder {
         if (itemsToOrder.contains(orderItem)) {
             int positionOfOrderItem = itemsToOrder.indexOf(orderItem);
             itemsToOrder.set(positionOfOrderItem,orderItem);
+        }
+    }
+    
+    public static class Builder {
+        private Long id;
+        private String name;
+        private String telephoneNumber;
+        private List<OrderItem> itemsToOrder;
+        
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+        
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+        
+        public Builder telephoneNumber(String telephoneNumber) {
+            this.telephoneNumber = telephoneNumber;
+            return this;
+        }
+        
+        public Builder withItemsToOrder(List<OrderItem> orderItems) {
+            this.itemsToOrder = orderItems;
+            return this;
+        }
+        
+        public CustomerOrder build() {
+            CustomerOrder customerOrder = new CustomerOrder();
+            customerOrder.setId(id);
+            customerOrder.setName(name);
+            customerOrder.setTelephoneNumber(telephoneNumber);
+            customerOrder.setItemsToOrder(itemsToOrder);
+            
+            return customerOrder;
         }
     }
 }
