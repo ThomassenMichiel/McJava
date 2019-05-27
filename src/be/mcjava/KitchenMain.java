@@ -1,8 +1,8 @@
 package be.mcjava;
 
-public class CustomerMain {
+public class KitchenMain {
 
     public static void main(String[] args) {
-	    // Main class for the customers
+	    // Main class for the cooks
     }
 }
