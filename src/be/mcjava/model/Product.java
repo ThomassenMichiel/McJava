@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 /**
- * Contains all the data related to a single product (e.g. BigMac
+ * Contains all the data related to a single product (e.g. BigMac).
+ * <p>
+ * This class represents the default value for a product, which can later be changed.
  */
 public class Product {
     private Long id;

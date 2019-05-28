@@ -52,12 +52,12 @@ public class Ingredient {
         if (o == null || getClass() != o.getClass()) return false;
         
         Ingredient that = (Ingredient) o;
-        
+    
         return getName().equals(that.getName());
     }
     
     @Override
     public int hashCode() {
-        return 31 * name.hashCode();
+        return 31 * getName().hashCode();
     }
 }
