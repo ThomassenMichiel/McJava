@@ -81,6 +81,6 @@ public class OrderItem {
     
     @Override
     public int hashCode() {
-        return getProduct().hashCode();
+        return 23 * getProduct().hashCode();
     }
 }

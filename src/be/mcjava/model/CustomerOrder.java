@@ -10,6 +10,7 @@ public class CustomerOrder {
     private String name;
     private String telephoneNumber;
     private List<OrderItem> itemsToOrder;
+    private boolean finishedCooking;
     private boolean ordered;
     
     private CustomerOrder() {
@@ -55,6 +56,16 @@ public class CustomerOrder {
         this.ordered = ordered;
     }
     
+    public boolean isFinishedCooking() {
+        return finishedCooking;
+    }
+    
+    public void setFinishedCooking(boolean finished) {
+        boolean actuallyFinished = getItemsToOrder().stream()
+                .allMatch(OrderItem::isFinished);
+        this.finishedCooking = actuallyFinished && finished;
+    }
+    
     public void addItem(OrderItem orderItem) {
         if (itemsToOrder.contains(orderItem)) {
             int positionOfOrderItem = itemsToOrder.indexOf(orderItem);
@@ -72,7 +83,7 @@ public class CustomerOrder {
     public void editOrder(OrderItem orderItem) {
         if (itemsToOrder.contains(orderItem)) {
             int positionOfOrderItem = itemsToOrder.indexOf(orderItem);
-            itemsToOrder.set(positionOfOrderItem,orderItem);
+            itemsToOrder.set(positionOfOrderItem, orderItem);
         }
     }
     
