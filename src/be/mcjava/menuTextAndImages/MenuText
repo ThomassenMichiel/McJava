@@ -1,0 +1,133 @@
+McJava Menu
+
+Mcwraps:	- mcwrap chicken
+		    - mcwrap veggie
+		    - petit chicken wrap
+
+McMenu:	- Happy Meal
+			- a sandwich of your choice (McFish®, Hamburger, Cheeseburger, Chicken McNuggets® of Veggie Nuggets)
+			- a small portion of french fries
+			- a portion of small carrots
+			- a softdrink 25 cl or an applejuice or Tropicana orangejuice or Vittel 33 cl or Perrier 33 cl or a Fristi
+			- a dessert of your choice (Petit Lu, an icecreamcone, Ice Squeeze, fresh chunks of pineapple, an Actimel or a Danonino)
+		- Medium Menu
+			- 1 sandwich of your choice
+			- 1 medium portion of french fries or Mixed Salad
+			- 1 bottle Vittel 33 cl or 1 can Perrier 33 cl or 1 Tropicana orangejuice 25 cl or a softdrink 40 cl
+		- Large Menu
+			- 1 sandwich of your choice
+			- 1 large portion of french fries or Mixed Salad
+			- 1 bottle Vittel 50 cl or 1 bottle Perrier 50 cl or 1 Tropicana orangejuice 25 cl or a softdrink 50 cl
+		- Salads Menu
+			choice:
+				- Cheese & Bacon Salad (BACON)
+				- Pesto & Mozzarella Salad (MOZZARELLA)
+				- Caesar Salad (GEGRILDE KIP)
+			+ 1 bottle Vittel 33 cl or 1 can Perrier 33 cl or 1 Tropicana orangejuice 25 cl or a softdrink 40 cl
+		- Breakfast
+			-Easy morning
+				Choice of 2 coffee cakes: croissant or chocolate bun, coffee or tea.
+			-Cheesy morning
+				A delicious toasted sandwich filled with cheddar cheese and bacon, coffee or tea.
+			-McMuffin™ morning
+				A delicious Bacon McMuffin ™ & Egg or Beef Bacon McMuffin ™ & Egg, coffee or tea.
+			-Sweet morning
+				Six soft mini pancakes with syrup or Nutella, with coffee or tea.
+			-Scrambled morning
+				Two delicious slices of bacon, scrambled eggs, a McMuffin ™ sandwich, coffee or tea.
+Sandwiches:	- Irresistible don Juan
+			    chorizo, 2 slices of beef, chorizo ​​and manchego. And all accompanied by a delicious aioli sauce, a tapenade of onions and tomatoes, sun-dried tomatoes and a fresh Batavia salad.
+		    - Maestro generous Jack
+			    2 slices of 100% beef, extra long, crispy bacon, traditionally ripened Maredsous Caractère for extra characterful taste, fresh vegetables (1 slice of tomato, red onion and Batavia salad) and a double portion of fresh lemon mayonnaise . And all this between an extra soft, golden brown baked brioche bread with sesame and linseed seeds
+		    - Maestro generous jacqueline
+			    2 crispy chicken fillets, extra long crispy strips of bacon, traditionally aged Maredsous Caractère for extra characterful taste, fresh salad and a double portion of fresh lemon mayonnaise. And all this between an extra soft, golden brown baked brioche bread with sesame and poppy seeds.
+		    - Big mac
+			    two slices of 100% pure beef, melted cheddar, onions, pickles, a bed of lettuce and a unique sauce
+		    - cheeseburger
+			    A slice of 100% pure beef, a slice of melting cheddar, a slice of pickle, onions, ketchup and soft mustard in a classic sandwich
+		    - double cheese
+			    2 slices of 100% pure beef, 2 slices of melted cheddar, 2 slices of pickle, 2 ketchup and mustard sauces
+		    - hamburger
+			    A slice of 100% pure beef, two slices of pickle, onions, soft mustard and ketchup
+		    - royal cheese
+			    The two slices of melting cheddar, the 100% pure beef slice and sesame bread
+		    - cheese samuraï
+			    a slice of 100% pure beef, a slice of melting cheddar, and especially a delicious Samuraï saucen
+		    - royal crispy bacon
+			    crispy bacon, 100% pure beef, melted cheddar and a special bacon sauce, served between a soft bun with sesame seeds.
+		    - royal deluxe
+			    a slice of 100% pure beef, a slice of melting cheddar, salad and the mythical mustard sauce, served between a soft bun with sesame seeds.
+		    - royal-o-fish
+			    breaded fish fillet, the crispy cucumber slices, the fresh lettuce and unique tartar sauce
+		    - filet-o-fish
+			    breaded fish fillet and the light herb sauce with onions and capers, all in a nice warm bun
+		    - bacon clubhouse beef
+			    brioche bread with 1 slice of 100% beef, tomato, Batavia salad, cheddar cheese, crispy bacon, grilled onion and our delicious Big Mac sauce
+		    - bacon clubhouse chicken
+			    brioche bread with crispy chicken, tomato, Batavia salad, cheddar cheese, crispy bacon, grilled onion and our delicious Big Mac sauce
+		    - mcfish
+ 			    in a soft sandwich is a delicious crispy breaded fish fillet with a little ketchup.
+		    - mcchicken
+		    	 chicken, a light sauce with a hint of lemon
+		    - mcveggie
+			    A soft breaded veggie fillet based on skimmed milk, a light sauce with a hint of lemon and a fresh salad
+		    - veggie deluxe
+			    a breaded veggie fillet based on skimmed milk, with tasty vegetables such as cucumber, onions, tomatoes & salad.
+		    - cheese snacks
+		    - sharing box
+		    - sharing box veggie
+		    - veggie nuggets
+		    - 4 chickennuggets
+		    - 6 chickennuggets
+		    - 9 chickennuggets
+		    - 20 chickennuggets
+		    - chicken wing
+
+Salads:		- Side Salade
+		    - cheese and bacon salad
+		    - mozarella and pesto salad
+		    - grilled chicken salad
+
+frieten: 	- patatas bravas
+		    - small
+		    - medium
+		    - large
+
+Dranken: koud	- fanta
+		        - sprite
+		        - cola
+		        - cola light
+		        - cola zero
+		        - LIPTON ICE TEA
+		        - VITTEL
+		        - PERRIER
+		        - FRISTI
+	        	- TROPICANA
+		        - JUPILER
+		        - TROPICANA® APPEL
+	  warm 	- caramel latte
+		    - cappuccino deluxe
+		    - caffe latte deluxe
+		    - hot coco deluxe
+		    - hot coco
+		    - espresso
+		    - coffee
+		    - cappuccino
+		    - caffe latte
+		    - thee
+
+Sauzen:	`	- pesto dressing
+		    - ketchup
+		    - mayonaise
+		    - barbeque saus
+		    - curry
+		    - Sweet-sour sauce
+		    - french fries saus
+Breakfast	- croissant
+		    - toast bacon cheese
+		    - puffed pastry with chocolate
+		    - pancakes
+		    - beef bacon mcmuffin and egg
+		    - bacon mcmuffin and egg
+		    - fruit salad
+		    - mcmuffin with bacon and egg
