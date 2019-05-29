@@ -10,18 +10,11 @@ import java.util.Map;
  */
 public class Product {
     private Long id;
+    private String name;
     private Map<Ingredient, Integer> ingredients;
     private BigDecimal price;
     
-    public Product(Map<Ingredient, Integer> ingredients, BigDecimal price) {
-        this(null, ingredients, price);
-    }
-    
-    public Product(Long id, Map<Ingredient, Integer> ingredients, BigDecimal price) {
-        setId(id);
-        setIngredients(ingredients);
-        setPrice(price);
-    }
+    private Product(){}
     
     public Long getId() {
         return id;
@@ -29,6 +22,14 @@ public class Product {
     
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
     }
     
     public Map<Ingredient, Integer> getIngredients() {
@@ -70,5 +71,42 @@ public class Product {
     @Override
     public int hashCode() {
         return 29 * ingredients.hashCode();
+    }
+    
+    public static class Builder {
+        private Long id;
+        private String name;
+        private Map<Ingredient, Integer> ingredients;
+        private BigDecimal price;
+        
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+        
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+        
+        public Builder withIngredients(Map<Ingredient, Integer> ingredients) {
+            this.ingredients = ingredients;
+            return this;
+        }
+        
+        public Builder withPrice(BigDecimal price) {
+            this.price = price;
+            return this;
+        }
+        
+        public Product build() {
+            Product product = new Product();
+            product.setId(id);
+            product.setName(name);
+            product.setPrice(price);
+            product.setIngredients(ingredients);
+            
+            return product;
+        }
     }
 }
