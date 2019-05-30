@@ -7,45 +7,40 @@ CREATE TABLE IF NOT EXISTS ingredient(
 CREATE TABLE IF NOT EXISTS product(
   id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(30) NOT NULL,
-  ingredients INT,
   price DECIMAL(6,2)
 );
 
 CREATE TABLE IF NOT EXISTS menu(
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  products INT
+  id INT PRIMARY KEY AUTO_INCREMENT
 );
 
 CREATE TABLE IF NOT EXISTS product_ingredient(
   ingredient_id INT,
   product_id INT,
   amount INT,
-  CONSTRAINT `fk_ingredient_id` FOREIGN KEY (ingredient_id) REFERENCES ingredient(id),
-  CONSTRAINT `fk_product_ingredient` FOREIGN KEY (product_id) REFERENCES product(id)
+  CONSTRAINT `fk_product_ingredient_to_ingredient_id` FOREIGN KEY (ingredient_id) REFERENCES ingredient(id),
+  CONSTRAINT `fk_product_ingredient_to_product_id` FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
 CREATE TABLE IF NOT EXISTS menu_product(
   id INT PRIMARY KEY AUTO_INCREMENT,
   product_id INT,
   menu_id INT,
-  CONSTRAINT `fk_menu_id` FOREIGN KEY (menu_id) REFERENCES menu(id),
-  CONSTRAINT `fk_product_id` FOREIGN KEY (product_id) REFERENCES product(id)
+  CONSTRAINT `fk_menu_product_to_menu_id` FOREIGN KEY (menu_id) REFERENCES menu(id),
+  CONSTRAINT `fk_menu_product_to_product_id` FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
 CREATE TABLE IF NOT EXISTS order_item(
   id INT PRIMARY KEY AUTO_INCREMENT,
-  product_id INT,
   amount INT,
   total_price DECIMAL(6,2),
-  finished BOOL,
-  FOREIGN KEY (product_id) REFERENCES product(id)
+  finished BOOL
 );
 
 CREATE TABLE IF NOT EXISTS customer_order(
   id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(30),
   telephone_number VARCHAR(15),
-  items_to_order INT,
   finished_cooking BOOL,
   ordered BOOL
 );
