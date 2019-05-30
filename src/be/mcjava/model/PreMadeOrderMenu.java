@@ -4,22 +4,31 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  {
-    private BigDecimal menuPrice;
+    private BigDecimal price;
+    private String name;
     
     
     @Override
     public BigDecimal getPrice() {
-        return menuPrice;
+        return price;
     }
     
     @Override
     public void setPrice(BigDecimal price) {
-        this.menuPrice = price;
+        this.price = price;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
     }
     
     @Override
     protected void recalculateTotalPrice(List<SingleOrderItem> singleOrderItems, int amount) {
-        setPrice(menuPrice.multiply(new BigDecimal(amount)));
+        setPrice(price.multiply(new BigDecimal(amount)));
     }
     
     
