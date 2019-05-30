@@ -13,6 +13,7 @@ public class Product {
     private String name;
     private Map<Ingredient, Integer> ingredients;
     private BigDecimal price;
+    private boolean customized;
     
     private Product(){}
     
@@ -48,6 +49,14 @@ public class Product {
         this.price = price;
     }
     
+    public boolean isCustomized() {
+        return customized;
+    }
+    
+    public void setCustomized(boolean customized) {
+        this.customized = customized;
+    }
+    
     public boolean isAvailable() {
         return ingredients.entrySet()
                 .stream()
@@ -78,6 +87,7 @@ public class Product {
         private String name;
         private Map<Ingredient, Integer> ingredients;
         private BigDecimal price;
+        private boolean customized;
         
         public Builder withId(Long id) {
             this.id = id;
@@ -99,12 +109,18 @@ public class Product {
             return this;
         }
         
+        public Builder isCustomized(boolean customized) {
+            this.customized = customized;
+            return this;
+        }
+        
         public Product build() {
             Product product = new Product();
             product.setId(id);
             product.setName(name);
             product.setPrice(price);
             product.setIngredients(ingredients);
+            product.setCustomized(customized);
             
             return product;
         }
