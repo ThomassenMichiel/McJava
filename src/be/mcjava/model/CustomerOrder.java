@@ -1,5 +1,6 @@
 package be.mcjava.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -12,8 +13,10 @@ public class CustomerOrder {
     private List<OrderItem> itemsToOrder;
     private boolean finishedCooking;
     private boolean ordered;
+    private BigDecimal finalPrice;
     
     private CustomerOrder() {
+        finalPrice = BigDecimal.ZERO;
     }
     
     public Long getId() {
@@ -66,24 +69,31 @@ public class CustomerOrder {
         this.finishedCooking = actuallyFinished && finished;
     }
     
-    public void addItem(OrderItem orderItem) {
-        if (itemsToOrder.contains(orderItem)) {
-            int positionOfOrderItem = itemsToOrder.indexOf(orderItem);
+    public BigDecimal getFinalPrice() {
+        finalPrice = itemsToOrder.stream()
+                .map(OrderItem::getPrice)
+                .reduce(BigDecimal.ZERO,BigDecimal::add);
+        return finalPrice;
+    }
+    
+    public void addItem(OrderItem singleOrderItem) {
+        if (itemsToOrder.contains(singleOrderItem)) {
+            int positionOfOrderItem = itemsToOrder.indexOf(singleOrderItem);
             OrderItem existingOrder = itemsToOrder.get(positionOfOrderItem);
-            existingOrder.setAmount(existingOrder.getAmount() + orderItem.getAmount());
+            existingOrder.setAmount(existingOrder.getAmount() + singleOrderItem.getAmount());
             return;
         }
-        itemsToOrder.add(orderItem);
+        itemsToOrder.add(singleOrderItem);
     }
     
-    public void removeFromOrder(OrderItem orderItem) {
-        itemsToOrder.remove(orderItem);
+    public void removeFromOrder(OrderItem singleOrderItem) {
+        itemsToOrder.remove(singleOrderItem);
     }
     
-    public void editOrder(OrderItem orderItem) {
-        if (itemsToOrder.contains(orderItem)) {
-            int positionOfOrderItem = itemsToOrder.indexOf(orderItem);
-            itemsToOrder.set(positionOfOrderItem, orderItem);
+    public void editOrder(OrderItem singleOrderItem) {
+        if (itemsToOrder.contains(singleOrderItem)) {
+            int positionOfOrderItem = itemsToOrder.indexOf(singleOrderItem);
+            itemsToOrder.set(positionOfOrderItem, singleOrderItem);
         }
     }
     
@@ -108,8 +118,8 @@ public class CustomerOrder {
             return this;
         }
         
-        public Builder withItemsToOrder(List<OrderItem> orderItems) {
-            this.itemsToOrder = orderItems;
+        public Builder withItemsToOrder(List<OrderItem> singleOrderItems) {
+            this.itemsToOrder = singleOrderItems;
             return this;
         }
         
