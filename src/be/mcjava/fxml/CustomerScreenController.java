@@ -7,6 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CustomerScreenController {
 
     //checks if it is a string with only letters.
@@ -16,7 +19,9 @@ public class CustomerScreenController {
     }
     //checks valid phone-number
     public boolean isPhoneNumber(String num){
-        return true;
+        Pattern p = Pattern.compile("(0/91)?[7-9][0-9]{9}");
+        Matcher m = p.matcher(num);
+        return (m.find() && m.group().equals(num));
     }
     @FXML
     private void continuePressed(ActionEvent event) throws Exception{
