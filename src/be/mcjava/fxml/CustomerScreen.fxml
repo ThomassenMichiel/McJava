@@ -5,7 +5,8 @@
 <?import javafx.scene.image.*?>
 
 <?import javafx.geometry.Insets?>
-<BorderPane xmlns="http://javafx.com/javafx">
+<BorderPane xmlns:fx="http://javafx.com/javafx"
+fx:controller="be.mcjava.fxml.CustomerScreenController">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
@@ -28,7 +29,7 @@
                 <Label text="Phone-number: "/>
                 <TextField promptText="012/3456789"/>
             </HBox>
-            <Button text="Continue to the ordering menu"/>
+            <Button text="Continue to the ordering menu" onAction="#continuePressed"/>
         </VBox>
     </center>
 </BorderPane>

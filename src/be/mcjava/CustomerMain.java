@@ -13,7 +13,8 @@ public class CustomerMain extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception{
-        Parent root = FXMLLoader.load( getClass().getResource( "mcJavaCustomerFXML/CustomerScreen.fxml" ) );
+
+        Parent root = FXMLLoader.load( getClass().getResource( "fxml/CustomerScreen.fxml" ) );
         Scene scene = new Scene( root, 650,450 );
         stage.setScene( scene );
         stage.show();
