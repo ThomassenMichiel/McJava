@@ -15,26 +15,27 @@ CREATE TABLE IF NOT EXISTS menu(
 );
 
 CREATE TABLE IF NOT EXISTS product_ingredient(
-  ingredient_id INT,
   product_id INT,
+  ingredient_id INT,
   amount INT,
   CONSTRAINT `fk_product_ingredient_to_ingredient_id` FOREIGN KEY (ingredient_id) REFERENCES ingredient(id),
   CONSTRAINT `fk_product_ingredient_to_product_id` FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
 CREATE TABLE IF NOT EXISTS menu_product(
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  product_id INT,
   menu_id INT,
+  product_id INT,
   CONSTRAINT `fk_menu_product_to_menu_id` FOREIGN KEY (menu_id) REFERENCES menu(id),
   CONSTRAINT `fk_menu_product_to_product_id` FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
 CREATE TABLE IF NOT EXISTS order_item(
   id INT PRIMARY KEY AUTO_INCREMENT,
+  product_id INT,
   amount INT,
   total_price DECIMAL(6,2),
-  finished BOOL
+  finished BOOL,
+  CONSTRAINT `fk_order_item_product` FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
 CREATE TABLE IF NOT EXISTS customer_order(
