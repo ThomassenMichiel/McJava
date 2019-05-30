@@ -28,7 +28,7 @@
                 <Label text="Phone-number: "/>
                 <TextField promptText="012/3456789"/>
             </HBox>
-            <Button text="Go to Order"/>
+            <Button text="Continue to the ordering menu"/>
         </VBox>
     </center>
 </BorderPane>

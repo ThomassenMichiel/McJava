@@ -15,7 +15,6 @@ public class CustomerMain extends Application {
     public void start(Stage stage) throws Exception{
         Parent root = FXMLLoader.load( getClass().getResource( "mcJavaCustomerFXML/CustomerScreen.fxml" ) );
         Scene scene = new Scene( root, 650,450 );
-        stage.setTitle( "CustomerScreen" );
         stage.setScene( scene );
         stage.show();
     }
