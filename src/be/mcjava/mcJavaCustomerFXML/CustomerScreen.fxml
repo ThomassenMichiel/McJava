@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <center>
+        <VBox alignment="TOP_CENTER">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <ImageView>
+                <Image url ="@mcdoLogo.png" />
+            </ImageView>
+            <Label text="Welcome to Mc Donalds." />
+            <Label text="Please list your name and phone-number in the designated fields." />
+            <HBox spacing="10" alignment="CENTER">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <Label text="Name: "/>
+                <TextField promptText="name"/>
+                <Label text="Phone-number: "/>
+                <TextField promptText="012/3456789"/>
+            </HBox>
+            <Button text="Go to Order"/>
+        </VBox>
+    </center>
+</BorderPane>
+
