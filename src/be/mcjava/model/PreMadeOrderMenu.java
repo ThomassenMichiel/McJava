@@ -7,7 +7,6 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
     private BigDecimal price;
     private String name;
     
-    
     @Override
     public BigDecimal getPrice() {
         return price;
@@ -31,6 +30,68 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
         setPrice(price.multiply(new BigDecimal(amount)));
     }
     
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PreMadeOrderMenu)) return false;
+        if (!super.equals(o)) return false;
+        
+        PreMadeOrderMenu that = (PreMadeOrderMenu) o;
+        
+        if (!getPrice().equals(that.getPrice())) return false;
+        return getName().equals(that.getName());
+    }
     
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + getPrice().hashCode();
+        result = 31 * result + getName().hashCode();
+        return result;
+    }
+    
+    public static class Builder {
+        private Long id;
+        private String name;
+        private List<SingleOrderItem> product;
+        private int amount;
+        private BigDecimal price;
+        
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+        
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+        
+        public Builder withProduct(List<SingleOrderItem> product) {
+            this.product = product;
+            return this;
+        }
+        
+        public Builder withAmount(int amount) {
+            this.amount = amount;
+            return this;
+        }
+        
+        public Builder withPrice(BigDecimal price) {
+            this.price = price;
+            return this;
+        }
+        
+        public PreMadeOrderMenu build() {
+            PreMadeOrderMenu menu = new PreMadeOrderMenu();
+            menu.setId(id);
+            menu.setName(name);
+            menu.setItems(product);
+            menu.setPrice(price);
+            menu.setAmount(amount);
+            
+            return menu;
+        }
+    }
     
 }
