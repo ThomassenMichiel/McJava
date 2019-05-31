@@ -1,0 +1,33 @@
+.root {
+   -fx-font: bold 16px Tahoma;
+}
+
+.gridPane {
+	-fx-padding: 10px;
+	-fx-vgap: 5px;
+	-fx-hgap: 5px;
+}
+
+.error {
+   -fx-border-color: red;
+}
+
+.button {
+   -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
+}
+
+.label {
+   -fx-font-family: 'Magneto';
+}
+
+.image-view {
+   -fx-border-color: red;
+   -fx-background-color: green;
+   -fx-color: orange;
+   -fx-opacity: 0.5;
+   -fx-cursor: hand;
+}
+
+.pane{
+    -fx-background-color: blue;
+}
