@@ -6,7 +6,7 @@
 
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/javafx"
-fx:controller="be.mcjava.fxml.CustomerScreenController">
+fx:controller="be.mcjava.view.CustomerScreenController">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
@@ -16,7 +16,7 @@ fx:controller="be.mcjava.fxml.CustomerScreenController">
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
             <ImageView>
-                <Image url ="@mcdoLogo.png" />
+                <Image url ="@../menutextandimages/mcdoLogo.png" />
             </ImageView>
             <Label text="Welcome to Mc Donalds." />
             <Label text="Please list your name and phone-number in the designated fields." />
@@ -29,7 +29,7 @@ fx:controller="be.mcjava.fxml.CustomerScreenController">
                 <Label text="Phone-number: "/>
                 <TextField promptText="012/3456789"/>
             </HBox>
-            <Button text="Continue to the ordering menu" onAction="#continuePressed"/>
+            <Button text="Continue to the ordering menu" onAction="#continueFromLoginToMenuPressed"/>
         </VBox>
     </center>
 </BorderPane>
