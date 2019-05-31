@@ -74,4 +74,4 @@ insert into ingredient values (73,'cheese_cheddar',500);
 insert into ingredient values (74,'standard_onion_slice',500);
 insert into ingredient values (75,'burger_sauce_big_mac',500);
 insert into ingredient values (76,'burger_sauce_ketchup',500);
-insert into ingredient values (77,'burger_sauce_mustar',500);
+insert into ingredient values (77,'burger_sauce_mustard',500);
