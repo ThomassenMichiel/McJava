@@ -54,3 +54,11 @@ CREATE TABLE IF NOT EXISTS customer_order_items (
   CONSTRAINT `fk_customer_order_items_to_order_item` FOREIGN KEY (order_item_id) REFERENCES order_item (id),
   CONSTRAINT `fk_customer_order_items_to_customer_order` FOREIGN KEY (customer_order_id) REFERENCES customer_order (id)
 );
+
+create table if not exists allowed_menu_products (
+	premade_menu_id INT,
+	menu_item_number INT,
+	product_id INT,
+	CONSTRAINT `fk_allowed_menu_products_premade_menu_id` FOREIGN KEY(premade_menu_id) REFERENCES premade_menu(id),
+	CONSTRAINT `fk_allowed_menu_products_product_id` FOREIGN KEY(product_id) REFERENCES product(id)
+);
