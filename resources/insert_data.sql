@@ -77,6 +77,14 @@ insert into ingredient values (74,'standard_onion_slice',500);
 insert into ingredient values (75,'burger_sauce_big_mac',500);
 insert into ingredient values (76,'burger_sauce_ketchup',500);
 insert into ingredient values (77,'burger_sauce_mustard',500);
+insert into ingredient values(78,'fries_sauce_mayo',1000);
+insert into ingredient values(79,'fries_sauce_ketchup',1000);
+insert into ingredient values(80,'fries_sauce_sweet mayo',1000);
+insert into ingredient values(81,'fries_sauce_coctail',1000);
+insert into ingredient values(82,'salad_sauce_dressing',500);
+insert into ingredient values(83,'salad_sauce_coctail',500);
+insert into ingredient values(84,'salad_sauce_ceasar',500);
+insert into ingredient values(85,'salad_sauce_vinegrette',500);
 
 #   create products and use product_ingredient to attach one or more ingredients to a product
 #   4 premade menus are created
@@ -240,3 +248,19 @@ insert into premade_menu values (4,'Salads Menu',6);
         insert into product_ingredient values(55,11,2);
         insert into product_ingredient values(55,76,1);
         insert into product_ingredient values(55,77,1);
+    insert into product values (56,'Portion of mayonaise',0.5);
+        insert into product_ingredient values(56,78,1);
+    insert into product values (57,'Portion of ketchup',0.5);
+        insert into product_ingredient values(57,79,1);
+    insert into product values (58,'Portion of sweet mayonaise',0.5);
+        insert into product_ingredient values(58,80,1);
+    insert into product values (59,'Portion of coctail',0.5);
+        insert into product_ingredient values(59,81,1);
+    insert into product values (60,'Dressing for salad',0.5);
+        insert into product_ingredient values(60,82,1);
+    insert into product values (61,'Coctail sauce for salad',0.5);
+        insert into product_ingredient values(61,83,1);
+    insert into product values (62,'Ceasar sauce for salad',0.5);
+        insert into product_ingredient values(62,84,1);
+    insert into product values (63,'Dressing for salad',0.5);
+        insert into product_ingredient values(63,85,1);
