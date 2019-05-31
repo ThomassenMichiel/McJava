@@ -88,9 +88,9 @@ insert into ingredient values(85,'salad_sauce_vinegrette',500);
 
 #   create products and use product_ingredient to attach one or more ingredients to a product
 #   4 premade menus are created
-#   only 1 product is attached to a premade_menu by using premade_menu_product (carrots is attached to the Happy Meal)
-#   because thats the only thing that is default in a meal
-#   all the rest in all premade_menu s is to be chosen when ordering
+#   only 2 products are attached to a premade_menu by using premade_menu_product (carrots & fries are attached to the Happy Meal)
+#   because thats the only thing that is default in that meal
+#   all the rest in all premade menus is variable and to be chosen when ordering
 
     insert into product values (1,'McWrap Chicken',4);
         insert into product_ingredient values (1,1,3);
@@ -126,6 +126,7 @@ insert into premade_menu values (1,'Happy Meal',4);
         insert into product_ingredient values(9,15,4);
     insert into product values (10,'Fries Small',2);
         insert into product_ingredient values(10,16,1);
+            insert into premade_menu_product values (1,10);
     insert into product values (11,'Carrots Small',0.5);
         insert into product_ingredient values(11,17,1);
             insert into premade_menu_product values (1,11);
@@ -262,5 +263,129 @@ insert into premade_menu values (4,'Salads Menu',6);
         insert into product_ingredient values(61,83,1);
     insert into product values (62,'Ceasar sauce for salad',0.5);
         insert into product_ingredient values(62,84,1);
-    insert into product values (63,'Dressing for salad',0.5);
+    insert into product values (63,'Vinegrette for salad',0.5);
         insert into product_ingredient values(63,85,1);
+
+
+#	happy meal (id = 1)
+
+#		small sandwich or nuggets
+
+insert into allowed_menu_products values (1,1,5);
+insert into allowed_menu_products values (1,1,6);
+insert into allowed_menu_products values (1,1,7);
+insert into allowed_menu_products values (1,1,8);
+
+#		drink 25 cl.
+insert into allowed_menu_products values (1,2,12);
+insert into allowed_menu_products values (1,2,13);
+insert into allowed_menu_products values (1,2,14);
+insert into allowed_menu_products values (1,2,15);
+insert into allowed_menu_products values (1,2,16);
+insert into allowed_menu_products values (1,2,17);
+insert into allowed_menu_products values (1,2,18);
+insert into allowed_menu_products values (1,2,19);
+insert into allowed_menu_products values (1,2,20);
+insert into allowed_menu_products values (1,2,21);
+
+#		dessert
+insert into allowed_menu_products values (1,3,22);
+insert into allowed_menu_products values (1,3,23);
+insert into allowed_menu_products values (1,3,24);
+insert into allowed_menu_products values (1,3,25);
+insert into allowed_menu_products values (1,3,26);
+insert into allowed_menu_products values (1,3,27);
+
+#		sauce
+insert into allowed_menu_products values (1,4,56);
+insert into allowed_menu_products values (1,4,57);
+insert into allowed_menu_products values (1,4,58);
+insert into allowed_menu_products values (1,4,59);
+
+#		defaults present in curent menu (small fries and carrots)
+insert into allowed_menu_products values (1,5,10);
+insert into allowed_menu_products values (1,6,11);
+
+#	Medium Menu(id = 2)
+
+#		sandwich of your choice
+insert into allowed_menu_products values (2,1,51);
+insert into allowed_menu_products values (2,1,52);
+insert into allowed_menu_products values (2,1,53);
+insert into allowed_menu_products values (2,1,54);
+insert into allowed_menu_products values (2,1,55);
+
+#		fries or Mixed Salad
+insert into allowed_menu_products values (2,2,28);
+insert into allowed_menu_products values (2,2,29);
+
+#		drink 33 cl
+insert into allowed_menu_products values (2,3,30);
+insert into allowed_menu_products values (2,3,31);
+insert into allowed_menu_products values (2,3,32);
+insert into allowed_menu_products values (2,3,33);
+insert into allowed_menu_products values (2,3,34);
+insert into allowed_menu_products values (2,3,35);
+insert into allowed_menu_products values (2,3,36);
+insert into allowed_menu_products values (2,3,37);
+
+#		sauce
+insert into allowed_menu_products values (2,4,56);
+insert into allowed_menu_products values (2,4,57);
+insert into allowed_menu_products values (2,4,58);
+insert into allowed_menu_products values (2,4,59);
+
+
+#	Large Menu (id = 3)
+
+#		sandwich of your choice
+insert into allowed_menu_products values (3,1,51);
+insert into allowed_menu_products values (3,1,52);
+insert into allowed_menu_products values (3,1,53);
+insert into allowed_menu_products values (3,1,54);
+insert into allowed_menu_products values (3,1,55);
+
+#		fries or Mixed Salad
+insert into allowed_menu_products values (3,2,38);
+insert into allowed_menu_products values (3,2,39);
+
+#		drinks 50 cl
+insert into allowed_menu_products values (3,3,40);
+insert into allowed_menu_products values (3,3,41);
+insert into allowed_menu_products values (3,3,42);
+insert into allowed_menu_products values (3,3,43);
+insert into allowed_menu_products values (3,3,44);
+insert into allowed_menu_products values (3,3,45);
+insert into allowed_menu_products values (3,3,46);
+insert into allowed_menu_products values (3,3,47);
+
+#		sauce
+insert into allowed_menu_products values (3,4,56);
+insert into allowed_menu_products values (3,4,57);
+insert into allowed_menu_products values (3,4,58);
+insert into allowed_menu_products values (3,4,59);
+
+#	Salads Menu (id = 4)
+
+#		Cheese & Bacon Salad (BACON) OR Pesto & Mozzarella Salad (MOZZARELLA) OR Caesar Salad (GEGRILDE KIP)
+insert into allowed_menu_products values (4,1,48);
+insert into allowed_menu_products values (4,1,49);
+insert into allowed_menu_products values (4,1,50);
+
+#			drinks 33 cl
+
+insert into allowed_menu_products values (4,2,30);
+insert into allowed_menu_products values (4,2,31);
+insert into allowed_menu_products values (4,2,32);
+insert into allowed_menu_products values (4,2,33);
+insert into allowed_menu_products values (4,2,34);
+insert into allowed_menu_products values (4,2,35);
+insert into allowed_menu_products values (4,2,36);
+insert into allowed_menu_products values (4,2,37);
+
+#			sauce
+
+insert into allowed_menu_products values (4,3,60);
+insert into allowed_menu_products values (4,3,61);
+insert into allowed_menu_products values (4,3,62);
+insert into allowed_menu_products values (4,3,63);
