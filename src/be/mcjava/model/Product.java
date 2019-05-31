@@ -89,15 +89,15 @@ public class Product {
         private BigDecimal price;
         private boolean customized;
         
+        public Builder(String name) {
+            this.name = name;
+        }
+        
         public Builder withId(Long id) {
             this.id = id;
             return this;
         }
         
-        public Builder withName(String name) {
-            this.name = name;
-            return this;
-        }
         
         public Builder withIngredients(Map<Ingredient, Integer> ingredients) {
             this.ingredients = ingredients;
