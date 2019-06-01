@@ -6,6 +6,16 @@ import java.util.List;
 public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  {
     private BigDecimal price;
     private String name;
+    private String pictureName;
+
+
+    public String getpictureName() {
+        return pictureName;
+    }
+
+    public void setpictureName(String pictureName) {
+        this.pictureName = pictureName;
+    }
     
     @Override
     public BigDecimal getPrice() {
@@ -30,7 +40,7 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
         setPrice(price.multiply(new BigDecimal(amount)));
     }
     
-    @Override
+/*    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PreMadeOrderMenu)) return false;
@@ -48,7 +58,7 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
         result = 31 * result + getPrice().hashCode();
         result = 31 * result + getName().hashCode();
         return result;
-    }
+    }*/
     
     public static class Builder {
         private Long id;
@@ -56,6 +66,7 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
         private List<SingleOrderItem> product;
         private int amount;
         private BigDecimal price;
+        private String pictureName;
         
         public Builder withId(Long id) {
             this.id = id;
@@ -79,6 +90,11 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
         
         public Builder withPrice(BigDecimal price) {
             this.price = price;
+            return this;
+        }
+        
+        public Builder withPictureName(String pictureName){
+            this.pictureName = pictureName;
             return this;
         }
         

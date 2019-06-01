@@ -1,48 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import java.net.URL?>
+
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.control.Button?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="be.mcjava.view.MenuActionController"
-            prefHeight="400.0" prefWidth="600.0">
+<FlowPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="be.mcjava.view.MenuActionController"
+          prefHeight="400.0" prefWidth="600.0">
     <stylesheets>
         <URL value="@mcjava.css"/>
     </stylesheets>
-    <FlowPane>
-        <Pane>
-
-            <ImageView onMouseClicked="#menusClicked" scaleX="1" scaleY="1">
-                <Image url="@../menuTextAndImages/big mac menu.jpg"/>
-            </ImageView>
-        </Pane>
-
-        <Button text="hello there"/>
-        <ImageView onMouseClicked="#burgersClicked" scaleX="1" scaleY="1">
-            <Image url="@../menuTextAndImages/generousjack.png"/>
-        </ImageView>
-        <ImageView onMouseClicked="#drinksClicked" scaleX="1" scaleY="1">
-            <Image url="@../menuTextAndImages/cola.png"/>
-        </ImageView>
-        <ImageView onMouseClicked="#drinksClicked" scaleX="1" scaleY="1">
-            <Image url="@../menuTextAndImages/cola.png"/>
-        </ImageView>
-        <ImageView onMouseClicked="#drinksClicked" scaleX="1" scaleY="1">
-            <Image url="@../menuTextAndImages/cola.png"/>
-        </ImageView>
-        <ImageView onMouseClicked="#drinksClicked" scaleX="1" scaleY="1">
-            <Image url="@../menuTextAndImages/cola.png"/>
-        </ImageView>
-        <ImageView onMouseClicked="#drinksClicked" scaleX="1" scaleY="1">
-            <Image url="@../menuTextAndImages/cola.png"/>
-        </ImageView>
-        <ImageView onMouseClicked="#drinksClicked" scaleX="1" scaleY="1">
-            <Image url="@../menuTextAndImages/cola.png"/>
-        </ImageView>
-
-    </FlowPane>
-</AnchorPane>
+    <GridPane fx:id="maingrid">
+    <ImageView onMouseClicked="#menusClicked" scaleX="1" scaleY="1"
+               GridPane.columnIndex="0"
+               GridPane.rowIndex="0">
+        <Image url="@../menuTextAndImages/big mac menu.jpg"/>
+    </ImageView>
+        <Button fx:id="btn" text="click me"/>
+    </GridPane>
+</FlowPane>

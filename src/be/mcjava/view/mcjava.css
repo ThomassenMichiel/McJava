@@ -24,9 +24,14 @@
    -fx-border-color: red;
    -fx-background-color: green;
    -fx-color: orange;
-   -fx-opacity: 0.5;
+   -fx-opacity: 0.8;
    -fx-cursor: hand;
 }
+
+.image-view:hover {
+    -fx-opacity: 1.0;
+}
+
 
 .pane{
     -fx-background-color: blue;
