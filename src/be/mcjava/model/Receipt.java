@@ -1,52 +1,29 @@
 package be.mcjava.model;
 
-import java.math.BigDecimal;
-import java.util.List;
+import java.time.LocalDateTime;
 
 public class Receipt {
-    private Long id;
-    private String name;
-    private String telephoneNumber;
-    private List<OrderItem> orderedItems;
-    private BigDecimal orderPrice;
+    private CustomerOrder customerOrder;
+    private LocalDateTime orderTime;
     
-    public Long getId() {
-        return id;
+    public Receipt(CustomerOrder customerOrder) {
+        this.customerOrder = customerOrder;
+        this.orderTime = LocalDateTime.now();
     }
     
-    public void setId(Long id) {
-        this.id = id;
+    public CustomerOrder getCustomerOrder() {
+        return customerOrder;
     }
     
-    public String getName() {
-        return name;
+    public void setCustomerOrder(CustomerOrder customerOrder) {
+        this.customerOrder = customerOrder;
     }
     
-    public void setName(String name) {
-        this.name = name;
+    public LocalDateTime getOrderTime() {
+        return orderTime;
     }
     
-    public String getTelephoneNumber() {
-        return telephoneNumber;
-    }
-    
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
-    }
-    
-    public List<OrderItem> getOrderedItems() {
-        return orderedItems;
-    }
-    
-    public void setOrderedItems(List<OrderItem> orderedItems) {
-        this.orderedItems = orderedItems;
-    }
-    
-    public BigDecimal getOrderPrice() {
-        return orderPrice;
-    }
-    
-    public void setOrderPrice(BigDecimal orderPrice) {
-        this.orderPrice = orderPrice;
+    public void setOrderTime(LocalDateTime orderTime) {
+        this.orderTime = orderTime;
     }
 }

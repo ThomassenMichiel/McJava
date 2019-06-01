@@ -1,7 +1,5 @@
 package be.mcjava.model;
 
-import java.util.Objects;
-
 /**
  * Contains the data for all the ingredients
  */
