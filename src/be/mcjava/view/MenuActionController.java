@@ -1,7 +1,7 @@
 package be.mcjava.view;
 
 import be.mcjava.model.PreMadeOrderMenu;
-import be.mcjava.service.MenuService;
+import be.mcjava.dao.PreMadeOrderMenuDao;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,8 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -55,8 +53,8 @@ public class MenuActionController {
     }
 
     private void getMenuData() throws SQLException {
-        MenuService menuService = new MenuService();
-        preMadeOrderMenuList = menuService.populateMenus();
+        PreMadeOrderMenuDao preMadeOrderMenuDao = new PreMadeOrderMenuDao();
+        preMadeOrderMenuList = preMadeOrderMenuDao.populatePreMadeOrderMenu();
     }
 
     @FXML

@@ -1,14 +1,12 @@
-package be.mcjava.service;
+package be.mcjava.dao;
 
-import be.mcjava.model.Menu;
 import be.mcjava.model.PreMadeOrderMenu;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuService {
+public class PreMadeOrderMenuDao {
     private static final String url = "jdbc:mysql://192.168.99.100/test_db";
     private static final String user = "root";
     private static final String password = "password";
@@ -17,7 +15,7 @@ public class MenuService {
         return DriverManager.getConnection(url, user, password);
     }
 
-    public List<PreMadeOrderMenu> populateMenus() throws SQLException {
+    public List<PreMadeOrderMenu> populatePreMadeOrderMenu() throws SQLException {
         String sql = "select * from premade_menu";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             List<PreMadeOrderMenu> preMadeOrderMenuListList = new ArrayList<>();
