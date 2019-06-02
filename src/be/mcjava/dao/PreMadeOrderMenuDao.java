@@ -17,18 +17,22 @@ public class PreMadeOrderMenuDao {
 
     public List<PreMadeOrderMenu> populatePreMadeOrderMenu() throws SQLException {
         String sql = "select * from premade_menu";
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            List<PreMadeOrderMenu> preMadeOrderMenuListList = new ArrayList<>();
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    PreMadeOrderMenu preMadeOrderMenu = new PreMadeOrderMenu();
-                    preMadeOrderMenu.setName(resultSet.getString("name"));
-                    preMadeOrderMenu.setPrice(resultSet.getBigDecimal("price"));
-                    preMadeOrderMenu.setpictureName(resultSet.getString("graphic_name"));
-                    preMadeOrderMenuListList.add(preMadeOrderMenu);
-                }
-                return preMadeOrderMenuListList;
+        List<PreMadeOrderMenu> preMadeOrderMenuList = new ArrayList<>();
+
+        try (
+                PreparedStatement preparedStatement = DaoConnector.getConnection().prepareStatement(sql);
+                ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                PreMadeOrderMenu preMadeOrderMenu = new PreMadeOrderMenu();
+                preMadeOrderMenu.setName(resultSet.getString("name"));
+                preMadeOrderMenu.setPrice(resultSet.getBigDecimal("price"));
+                preMadeOrderMenu.setpictureName(resultSet.getString("graphic_name"));
+                preMadeOrderMenuList.add(preMadeOrderMenu);
             }
+            return preMadeOrderMenuList;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 }
