@@ -3,7 +3,10 @@ package be.mcjava.view;
 import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.dao.PreMadeOrderMenuDao;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,9 +14,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -28,11 +33,16 @@ public class MenuActionController {
     @FXML
     private VBox productsvbox;
 
+    @FXML
+    private VBox firstmenuvbox;
+
+    @FXML
+    private FlowPane flowpane;
+
     private List<PreMadeOrderMenu> preMadeOrderMenuList;
 
     @FXML
     public void initialize() throws FileNotFoundException{
-        System.out.println("init");
         try {
             getMenuData();
         } catch (SQLException e) {
@@ -57,10 +67,17 @@ public class MenuActionController {
             vBox.getChildren().add(new ImageView(new Image(new FileInputStream(path + preMadeOrderMenu.getpictureName()))));
             Label label = new Label(preMadeOrderMenu.getName());
             vBox.getChildren().add(label);
-            vBox.setOnMouseClicked(this::menusClicked);
+            vBox.setOnMouseClicked(mouseEvent -> {
+                try {
+                    menusClicked(mouseEvent);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
             vBox.setAlignment(Pos.CENTER);
             maingrid.add(vBox, columnPosition++, rowPosition);
         }
+
         Label productsLabel = new Label("Products");
         productsLabel.setTextFill(Color.web("#ffd700",1));
         productsvbox.setBackground(Background.EMPTY);
@@ -75,12 +92,19 @@ public class MenuActionController {
     }
 
     @FXML
-    private void menusClicked(MouseEvent mouseEvent) {
+    private void menusClicked(MouseEvent mouseEvent) throws IOException {
         System.out.println("menus clicked");
         System.out.println("-------------");
         VBox vBox = (VBox) mouseEvent.getSource();
         Label label = (Label) vBox.getChildren().get(1);
         System.out.println(label.getText());
+        //flowpane.getChildren().remove(0);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CustomerMenuIngredientsChoice.fxml.fxml"));
+        Parent root1 = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.show();
     }
 
     @FXML
