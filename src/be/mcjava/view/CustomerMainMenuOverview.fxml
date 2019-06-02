@@ -16,10 +16,6 @@
         <URL value="@mcjava.css"/>
     </stylesheets>
     <GridPane fx:id="maingrid">
-        <ImageView onMouseClicked="#menusClicked" scaleX="0.5" scaleY="0.5"
-                   GridPane.columnIndex="0"
-                   GridPane.rowIndex="0">
-            <Image url="@../../../../resources/menuTextAndImages/big mac menu.jpg"/>
-        </ImageView>
+
     </GridPane>
 </FlowPane>
