@@ -3,13 +3,14 @@ package be.mcjava.view;
 import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.service.MenuService;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
 import java.io.FileInputStream;
@@ -46,9 +47,9 @@ public class MenuActionController {
             VBox vBox = new VBox();
             vBox.getChildren().add(new ImageView(new Image(new FileInputStream(path + preMadeOrderMenu.getpictureName()))));
             Label label = new Label(preMadeOrderMenu.getName());
-            label.setTextAlignment(TextAlignment.CENTER);
             vBox.getChildren().add(label);
             vBox.setOnMouseClicked(this::menusClicked);
+            vBox.setAlignment(Pos.CENTER);
             maingrid.add(vBox, columnPosition++, rowPosition);
         }
     }
