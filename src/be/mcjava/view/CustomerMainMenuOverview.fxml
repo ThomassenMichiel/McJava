@@ -20,5 +20,6 @@
         <GridPane fx:id="maingrid">
 
         </GridPane>
+        <VBox fx:id="productsvbox"/>
     </VBox>
 </FlowPane>
