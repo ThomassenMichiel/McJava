@@ -40,7 +40,7 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
         setPrice(price.multiply(new BigDecimal(amount)));
     }
     
-/*    @Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PreMadeOrderMenu)) return false;
@@ -58,7 +58,7 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
         result = 31 * result + getPrice().hashCode();
         result = 31 * result + getName().hashCode();
         return result;
-    }*/
+    }
     
     public static class Builder {
         private Long id;

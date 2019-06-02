@@ -61,7 +61,7 @@ public abstract class AbstractOrderItem<T> implements OrderItem<T> {
     
     protected abstract void recalculateTotalPrice(T t, int amount);
     
-/*    @Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof AbstractOrderItem)) return false;
@@ -79,5 +79,5 @@ public abstract class AbstractOrderItem<T> implements OrderItem<T> {
         result = 31 * result + getAmount();
         result = 31 * result + getPrice().hashCode();
         return result;
-    }*/
+    }
 }

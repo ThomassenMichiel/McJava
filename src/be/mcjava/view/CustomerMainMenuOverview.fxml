@@ -16,10 +16,10 @@
         <URL value="@mcjava.css"/>
     </stylesheets>
     <VBox>
-        <VBox fx:id="headingvbox"/>
+        <VBox fx:id="headingvbox" prefHeight="40"/>
         <GridPane fx:id="maingrid">
 
         </GridPane>
-        <VBox fx:id="productsvbox"/>
+        <VBox fx:id="productsvbox" prefHeight="40"/>
     </VBox>
 </FlowPane>
