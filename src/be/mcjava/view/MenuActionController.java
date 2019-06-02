@@ -20,39 +20,49 @@ public class MenuActionController {
     @FXML
     private Button btn;
 
-    public MenuActionController() throws SQLException {
+    /*public MenuActionController() throws SQLException {
         MenuService menuService = new MenuService();
         menuService.populateMenus().forEach(p -> System.out.println(p.getName()));
+        addMenuImages();
+    }*/
 
+    @FXML
+    private void addMenuImages(){
         System.out.println();
         System.out.println("button -> " + btn.getText());
         System.out.println();
 
-        FileInputStream input = null;
+        /*FileInputStream input = null;
         try {
             input = new FileInputStream("resources/choco.png");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         Image image = new Image(input);
-        ImageView imageView = new ImageView(image);
+        ImageView imageView = new ImageView(image);*/
         //maingrid.add(imageView,1,0);
     }
 
-    public void imageClicked(MouseEvent mouseEvent) {
+    @FXML
+    private void imageClicked(MouseEvent mouseEvent) {
         System.out.println(((ImageView)mouseEvent.getSource()).imageProperty().toString());
     }
 
-    public void burgersClicked(MouseEvent mouseEvent) {
+    @FXML
+    private void burgersClicked(MouseEvent mouseEvent) {
         System.out.println("burgers");
 
     }
 
-    public void menusClicked(MouseEvent mouseEvent) {
+    @FXML
+    private void menusClicked(MouseEvent mouseEvent) throws FileNotFoundException {
+        maingrid.add(new ImageView(new Image(new FileInputStream("resources/choco.png"))),0,2);
+        maingrid.setGridLinesVisible(true);
         System.out.println("menus");
     }
 
-    public void drinksClicked(MouseEvent mouseEvent) {
+    @FXML
+    private void drinksClicked(MouseEvent mouseEvent) {
         System.out.println("drinks");
     }
 }
