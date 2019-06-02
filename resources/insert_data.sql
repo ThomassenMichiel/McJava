@@ -103,7 +103,7 @@ insert into ingredient values(85,'salad_sauce_vinegrette',500);
         insert into product_ingredient values (3,1,2);
         insert into product_ingredient values (3,4,1);
         insert into product_ingredient values (3,3,2);
-insert into premade_menu values (1,'Happy Meal',4,'happy_meal');
+insert into premade_menu values (1,'Happy Meal',4,'happy_meal.jpg');
     insert into product values (5,'McFish',4,'fishburger.png');
         insert into product_ingredient values(5,5,1);
         insert into product_ingredient values(5,6,1);

@@ -19,10 +19,7 @@
         <ImageView onMouseClicked="#menusClicked" scaleX="0.5" scaleY="0.5"
                    GridPane.columnIndex="0"
                    GridPane.rowIndex="0">
-            <Image url="@../menuTextAndImages/big mac menu.jpg"/>
+            <Image url="@../../../../resources/menuTextAndImages/big mac menu.jpg"/>
         </ImageView>
-        <Button fx:id="btn" text="click me"
-        GridPane.columnIndex="1"
-        GridPane.rowIndex="0"/>
     </GridPane>
 </FlowPane>
