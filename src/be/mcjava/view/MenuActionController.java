@@ -21,6 +21,9 @@ public class MenuActionController {
     @FXML
     private GridPane maingrid;
 
+    @FXML
+    private VBox headingvbox;
+
     private List<PreMadeOrderMenu> preMadeOrderMenuList;
 
     @FXML
@@ -38,6 +41,9 @@ public class MenuActionController {
         int columnPosition = 0;
         int rowPosition = 0;
         String path = "resources/menuTextAndImages/";
+        headingvbox.setAlignment(Pos.CENTER);
+        Label menuHeadingLabel = new Label("McMenus");
+        headingvbox.getChildren().add(menuHeadingLabel);
         for (PreMadeOrderMenu preMadeOrderMenu : preMadeOrderMenuList) {
             VBox vBox = new VBox();
             vBox.getChildren().add(new ImageView(new Image(new FileInputStream(path + preMadeOrderMenu.getpictureName()))));
