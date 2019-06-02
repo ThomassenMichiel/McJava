@@ -21,9 +21,6 @@ public class MenuActionController {
     @FXML
     private GridPane maingrid;
 
-    @FXML
-    private Button btn;
-
     private List<PreMadeOrderMenu> preMadeOrderMenuList;
 
     @FXML
