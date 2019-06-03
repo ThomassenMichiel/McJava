@@ -1,4 +1,4 @@
-package be.mcjava.view;
+package be.mcjava.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ public class CustomerScreenController {
     }
     @FXML
     private void continueFromLoginToMenuPressed(ActionEvent event) throws Exception{
-     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CustomerScreen2.fxml"));
+     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CustomerMainMenuOverview.fxml"));
      Parent root1 = fxmlLoader.load();
      Stage stage = new Stage();
      stage.setScene(new Scene(root1));

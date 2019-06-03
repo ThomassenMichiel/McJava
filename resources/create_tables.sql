@@ -7,13 +7,15 @@ CREATE TABLE IF NOT EXISTS ingredient (
 CREATE TABLE IF NOT EXISTS product (
   id    INT PRIMARY KEY AUTO_INCREMENT,
   name  VARCHAR(30) NOT NULL,
-  price DECIMAL(6, 2)
+  price DECIMAL(6, 2),
+  graphic_name varchar(30)
 );
 
 CREATE TABLE IF NOT EXISTS premade_menu (
   id    INT PRIMARY KEY AUTO_INCREMENT,
   name  VARCHAR(30),
-  price DECIMAL(6, 2)
+  price DECIMAL(6, 2),
+  graphic_name varchar(30)
 );
 
 CREATE TABLE IF NOT EXISTS premade_menu_product (
