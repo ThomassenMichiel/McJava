@@ -11,11 +11,12 @@ public class CustomerMain extends Application {
     public static void main(String[] args) {
 	    launch( args );
     }
+
     @Override
     public void start(Stage stage) throws Exception{
 
-        Parent root = FXMLLoader.load( getClass().getResource("view/CustomerLoginScreen.fxml") );
-        Scene scene = new Scene( root, 650,450 );
+        Parent root = FXMLLoader.load( getClass().getResource( "view/CustomerScreen.fxml" ) );
+        Scene scene = new Scene( root, 650, 450 );
         stage.setScene( scene );
         stage.show();
     }
