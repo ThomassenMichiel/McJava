@@ -38,3 +38,11 @@
 .pane{
     -fx-background-color: blue;
 }
+
+#ingredientsheadervbox{
+    -fx-background-color: #27742d;
+}
+
+#ingredientsheadervbox .label{
+    -fx-text-fill: #ffd700;
+    }

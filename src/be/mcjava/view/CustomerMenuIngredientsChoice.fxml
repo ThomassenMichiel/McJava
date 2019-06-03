@@ -17,21 +17,18 @@
         <URL value="@mcjava.css"/>
     </stylesheets>
     <VBox fx:id ="ingredientsvbox">
-        <HBox>
+        <HBox fx:id="ingredientsheadervbox">
             <HBox alignment="CENTER">
-                <Label text="Choose you Burger"/>
+                <Label text="Choose Burger"/>
             </HBox>
             <HBox alignment="CENTER">
-                <Label text="and on the side?"/>
+                <Label text="Fries or Salad"/>
             </HBox>
             <HBox alignment="CENTER">
-                <Label text="Fries"/>
+                <Label text="Choose Sauce"/>
             </HBox>
             <HBox alignment="CENTER">
-                <Label text="choose your sauce"/>
-            </HBox>
-            <HBox alignment="CENTER">
-                <Label text="Drinks anyone?"/>
+                <Label text="Choose Beverage"/>
             </HBox>
         </HBox>
         <VBox fx:id="headingvbox" prefHeight="40"/>
