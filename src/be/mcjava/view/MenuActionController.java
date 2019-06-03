@@ -101,9 +101,9 @@ public class MenuActionController {
         //flowpane.getChildren().remove(0);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CustomerMenuIngredientsChoice.fxml.fxml"));
-        Parent root1 = fxmlLoader.load();
+        Parent root2 = fxmlLoader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root2));
         stage.show();
     }
 
