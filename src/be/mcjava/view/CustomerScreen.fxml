@@ -6,7 +6,7 @@
 
 <?import javafx.geometry.Insets?>
 <BorderPane xmlns:fx="http://javafx.com/javafx"
-fx:controller="be.mcjava.view.CustomerScreenController">
+fx:controller="be.mcjava.controller.CustomerScreenController">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
