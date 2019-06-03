@@ -9,13 +9,14 @@ import javafx.stage.Stage;
 public class CustomerMain extends Application {
 
     public static void main(String[] args) {
-	    launch( args );
+        launch( args );
     }
+
     @Override
-    public void start(Stage stage) throws Exception{
+    public void start(Stage stage) throws Exception {
 
         Parent root = FXMLLoader.load( getClass().getResource( "view/CustomerScreen.fxml" ) );
-        Scene scene = new Scene( root, 650,450 );
+        Scene scene = new Scene( root, 650, 450 );
         stage.setScene( scene );
         stage.show();
     }
