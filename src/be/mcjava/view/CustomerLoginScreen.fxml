@@ -25,9 +25,9 @@ fx:controller="be.mcjava.controller.CustomerScreenController">
                     <Insets top="20" right="20" bottom="20" left="20"/>
                 </padding>
                 <Label text="Name: "/>
-                <TextField promptText="name"/>
+                <TextField fx:id="customername" promptText="name"/>
                 <Label text="Phone-number: "/>
-                <TextField promptText="012/3456789"/>
+                <TextField fx:id="customerphonenumber" promptText="012/3456789"/>
             </HBox>
             <Button text="Continue to the ordering menu" onAction="#continueFromLoginToMenuPressed"/>
         </VBox>

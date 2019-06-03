@@ -1,4 +1,4 @@
-package be.mcjava.view;
+package be.mcjava.controller;
 
 public class MenuIngredientsActionController {
 }

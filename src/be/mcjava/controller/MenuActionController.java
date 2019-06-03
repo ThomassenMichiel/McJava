@@ -1,4 +1,4 @@
-package be.mcjava.view;
+package be.mcjava.controller;
 
 import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.dao.PreMadeOrderMenuDao;
@@ -100,7 +100,7 @@ public class MenuActionController {
         System.out.println(label.getText());
         //flowpane.getChildren().remove(0);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CustomerMenuIngredientsChoice.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CustomerMenuIngredientsChoice.fxml"));
         Parent root2 = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root2));
