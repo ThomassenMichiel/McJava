@@ -45,16 +45,16 @@ public class MenuActionController {
     public void initialize() throws FileNotFoundException{
         try {
             getMenuData();
+            addMenusToGrid();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        addMenusToGrid();
     }
 
     private void addMenusToGrid() throws FileNotFoundException {
         int columnPosition = 0;
         int rowPosition = 0;
-        String path = "resources/menuTextAndImages/";
+        String path = "resources/menutextandimages/";
         headingvbox.setAlignment(Pos.CENTER);
         Label menuHeadingLabel = new Label("McMenus");
         menuHeadingLabel.setTextFill(Color.web("#ffd700", 1));
