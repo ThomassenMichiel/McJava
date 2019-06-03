@@ -24,7 +24,7 @@ public class CustomerScreenController {
     }
     @FXML
     private void continueFromLoginToMenuPressed(ActionEvent event) throws Exception{
-     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CustomerMainMenuOverview.fxml"));
+     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CustomerScreen2.fxml"));
      Parent root1 = fxmlLoader.load();
      Stage stage = new Stage();
      stage.setScene(new Scene(root1));
