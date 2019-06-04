@@ -7,13 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -41,6 +39,8 @@ public class MenuActionController {
 
     private List<PreMadeOrderMenu> preMadeOrderMenuList;
 
+    private String productsPicturesPath = "resources/menutextandimages/";
+
     @FXML
     public void initialize() throws FileNotFoundException{
         try {
@@ -54,11 +54,11 @@ public class MenuActionController {
     private void addMenusToGrid() throws FileNotFoundException {
         int columnPosition = 0;
         int rowPosition = 0;
-        String path = "resources/menutextandimages/";
+
 
         for (PreMadeOrderMenu preMadeOrderMenu : preMadeOrderMenuList) {
             VBox vBox = new VBox();
-            vBox.getChildren().add(new ImageView(new Image(new FileInputStream(path + preMadeOrderMenu.getpictureName()))));
+            vBox.getChildren().add(new ImageView(new Image(new FileInputStream(productsPicturesPath + preMadeOrderMenu.getpictureName()))));
             Label label = new Label(preMadeOrderMenu.getName());
             vBox.getChildren().add(label);
             vBox.setOnMouseClicked(mouseEvent -> {
