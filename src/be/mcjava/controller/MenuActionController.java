@@ -55,13 +55,7 @@ public class MenuActionController {
         int columnPosition = 0;
         int rowPosition = 0;
         String path = "resources/menutextandimages/";
-        headingvbox.setAlignment(Pos.CENTER);
-        Label menuHeadingLabel = new Label("McMenus");
-        menuHeadingLabel.setTextFill(Color.web("#ffd700", 1));
-        headingvbox.getChildren().add(menuHeadingLabel);
-        headingvbox.setBackground(Background.EMPTY);
-        String greenStyleString = "-fx-background-color: rgba(39,116,45,1);";
-        headingvbox.setStyle(greenStyleString);
+
         for (PreMadeOrderMenu preMadeOrderMenu : preMadeOrderMenuList) {
             VBox vBox = new VBox();
             vBox.getChildren().add(new ImageView(new Image(new FileInputStream(path + preMadeOrderMenu.getpictureName()))));
@@ -77,13 +71,6 @@ public class MenuActionController {
             vBox.setAlignment(Pos.CENTER);
             maingrid.add(vBox, columnPosition++, rowPosition);
         }
-
-        Label productsLabel = new Label("Products");
-        productsLabel.setTextFill(Color.web("#ffd700",1));
-        productsvbox.setBackground(Background.EMPTY);
-        productsvbox.setStyle(greenStyleString);
-        productsvbox.setAlignment(Pos.CENTER);
-        productsvbox.getChildren().add(productsLabel);
     }
 
     private void getMenuData() throws SQLException {

@@ -45,4 +45,22 @@
 
 #ingredientsheadervbox .label{
     -fx-text-fill: #ffd700;
-    }
+}
+
+#headingvbox .label{
+    -fx-text-fill: #ffd700;
+}
+
+#headingvbox {
+    -fx-background-color: rgba(39,116,45,1);
+    -fx-alignment: center;
+}
+
+#productsvbox {
+    -fx-background-color: rgba(39,116,45,1);
+    -fx-alignment: center;
+}
+
+#productsvbox .label{
+    -fx-text-fill: #ffd700;
+}

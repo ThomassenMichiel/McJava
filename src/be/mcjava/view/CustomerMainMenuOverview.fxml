@@ -17,11 +17,15 @@
         <URL value="@mcjava.css"/>
     </stylesheets>
     <VBox fx:id ="firstmenuvbox">
-        <VBox fx:id="headingvbox" prefHeight="40"/>
+        <VBox fx:id="headingvbox" prefHeight="40">
+            <Label text="McMenus"/>
+        </VBox>
         <GridPane fx:id="maingrid">
 
         </GridPane>
-        <VBox fx:id="productsvbox" prefHeight="40"/>
+        <VBox fx:id="productsvbox" prefHeight="40">
+            <Label text="Products"/>
+        </VBox>
         <HBox>
             <HBox alignment="CENTER">
                     <Label text="Burgers"/>
