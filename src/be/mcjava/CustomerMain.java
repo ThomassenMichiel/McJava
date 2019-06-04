@@ -78,7 +78,7 @@ public class CustomerMain extends Application {
                 .withProduct(happyMealMcMenu)
                 .build();
         
-        List<OrderItem> order = new ArrayList<>();
+        List<AbstractOrderItem> order = new ArrayList<>();
         order.add(singleTropicanaOrder);
         order.add(happyMeal);
         

@@ -10,7 +10,7 @@ public class CustomerOrder {
     private Long id;
     private String name;
     private String telephoneNumber;
-    private List<OrderItem> itemsToOrder;
+    private List<AbstractOrderItem> itemsToOrder;
     private boolean finishedCooking;
     private boolean ordered;
     private BigDecimal finalPrice;
@@ -43,11 +43,11 @@ public class CustomerOrder {
         this.telephoneNumber = telephoneNumber;
     }
     
-    public List<OrderItem> getItemsToOrder() {
+    public List<AbstractOrderItem> getItemsToOrder() {
         return itemsToOrder;
     }
     
-    public void setItemsToOrder(List<OrderItem> itemsToOrder) {
+    public void setItemsToOrder(List<AbstractOrderItem> itemsToOrder) {
         this.itemsToOrder = itemsToOrder;
     }
     
@@ -65,32 +65,32 @@ public class CustomerOrder {
     
     public void setFinishedCooking(boolean finished) {
         boolean actuallyFinished = getItemsToOrder().stream()
-                .allMatch(OrderItem::isFinished);
+                .allMatch(AbstractOrderItem::isFinished);
         this.finishedCooking = actuallyFinished && finished;
     }
     
     public BigDecimal getFinalPrice() {
         finalPrice = itemsToOrder.stream()
-                .map(OrderItem::getPrice)
+                .map(AbstractOrderItem::getPrice)
                 .reduce(BigDecimal.ZERO,BigDecimal::add);
         return finalPrice;
     }
     
-    public void addItem(OrderItem singleOrderItem) {
+    public void addItem(AbstractOrderItem singleOrderItem) {
         if (itemsToOrder.contains(singleOrderItem)) {
             int positionOfOrderItem = itemsToOrder.indexOf(singleOrderItem);
-            OrderItem existingOrder = itemsToOrder.get(positionOfOrderItem);
+            AbstractOrderItem existingOrder = itemsToOrder.get(positionOfOrderItem);
             existingOrder.setAmount(existingOrder.getAmount() + singleOrderItem.getAmount());
             return;
         }
         itemsToOrder.add(singleOrderItem);
     }
     
-    public void removeFromOrder(OrderItem singleOrderItem) {
+    public void removeFromOrder(AbstractOrderItem singleOrderItem) {
         itemsToOrder.remove(singleOrderItem);
     }
     
-    public void editOrder(OrderItem singleOrderItem) {
+    public void editOrder(AbstractOrderItem singleOrderItem) {
         if (itemsToOrder.contains(singleOrderItem)) {
             int positionOfOrderItem = itemsToOrder.indexOf(singleOrderItem);
             itemsToOrder.set(positionOfOrderItem, singleOrderItem);
@@ -101,7 +101,7 @@ public class CustomerOrder {
         private Long id;
         private String name;
         private String telephoneNumber;
-        private List<OrderItem> itemsToOrder;
+        private List<AbstractOrderItem> itemsToOrder;
         
         public Builder withId(Long id) {
             this.id = id;
@@ -118,7 +118,7 @@ public class CustomerOrder {
             return this;
         }
         
-        public Builder withItemsToOrder(List<OrderItem> singleOrderItems) {
+        public Builder withItemsToOrder(List<AbstractOrderItem> singleOrderItems) {
             this.itemsToOrder = singleOrderItems;
             return this;
         }
