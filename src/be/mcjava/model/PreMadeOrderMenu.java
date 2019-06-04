@@ -8,13 +8,16 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
     private String name;
     private String pictureName;
 
-
-    public String getpictureName() {
-        return pictureName;
+    private PreMadeOrderMenu() {
+        price = BigDecimal.ZERO;
     }
 
-    public void setpictureName(String pictureName) {
+    public void setPictureName(String pictureName) {
         this.pictureName = pictureName;
+    }
+    
+    public String getPictureName() {
+        return pictureName;
     }
     
     @Override
@@ -105,6 +108,7 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
             menu.setItems(product);
             menu.setPrice(price);
             menu.setAmount(amount);
+            menu.setPictureName(pictureName);
             
             return menu;
         }
