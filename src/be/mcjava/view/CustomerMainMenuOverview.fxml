@@ -26,19 +26,11 @@
         <VBox fx:id="productsvbox" prefHeight="40">
             <Label text="Products"/>
         </VBox>
-        <HBox>
-            <HBox alignment="CENTER">
+        <HBox alignment="CENTER" spacing="175">
                     <Label text="Burgers"/>
-            </HBox>
-            <HBox alignment="CENTER">
                     <Label text="Wraps"/>
-            </HBox>
-            <HBox alignment="CENTER">
                     <Label text="Fries"/>
-            </HBox>
-            <HBox alignment="CENTER">
                     <Label text="Drinks"/>
-            </HBox>
         </HBox>
     </VBox>
 </FlowPane>
