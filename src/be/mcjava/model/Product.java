@@ -15,7 +15,9 @@ public class Product {
     private BigDecimal price;
     private boolean customized;
     
-    private Product(){}
+    private Product(){
+        price = BigDecimal.ZERO;
+    }
     
     public Long getId() {
         return id;
@@ -91,6 +93,7 @@ public class Product {
         
         public Builder(String name) {
             this.name = name;
+            price = BigDecimal.ZERO;
         }
         
         public Builder withId(Long id) {
