@@ -33,10 +33,9 @@ public class CustomerScreenController {
     @FXML
     private void continueFromLoginToMenuPressed(ActionEvent event) throws Exception {
         //if(isName(customername.getText()) && isPhoneNumber(customerphonenumber.getText())) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CustomerMainMenuOverview.fxml"));
-        Parent root1 = fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
-        stage.show();
+
+        ViewManager viewManager = new ViewManager();
+        viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
+        //ViewManager.setSceneDimensions(1000.0,500.0);
     }
 }

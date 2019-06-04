@@ -1,10 +1,12 @@
 package be.mcjava;
 
+import be.mcjava.controller.ViewManager;
 import be.mcjava.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
@@ -19,9 +21,21 @@ public class CustomerMain extends Application {
     @Override
     public void start(Stage stage) throws Exception{
         dummies();
-        Parent root = FXMLLoader.load( getClass().getResource( "view/CustomerLoginScreen.fxml" ) );
+        /*Parent root = FXMLLoader.load( getClass().getResource( "view/CustomerLoginScreen.fxml" ) );
         Scene scene = new Scene( root, 650, 450 );
         stage.setScene( scene );
+        stage.show();*/
+
+        //Scene scene = new Scene(new StackPane());
+        StackPane stackPane = new StackPane();
+        Scene scene = new Scene(stackPane);
+        ViewManager viewManager = new ViewManager();
+        ViewManager.scene = scene;
+        ViewManager.stage = stage;
+        viewManager.displayFmxlScreen("../view/CustomerLoginScreen.fxml");
+        ViewManager.setSceneDimensions(650.0,450.0);
+
+        stage.setScene(scene);
         stage.show();
     }
     

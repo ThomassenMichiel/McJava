@@ -25,21 +25,11 @@ public class MenuActionController {
     @FXML
     private GridPane maingrid;
 
-    @FXML
-    private VBox headingvbox;
-
-    @FXML
-    private VBox productsvbox;
-
-    @FXML
-    private VBox firstmenuvbox;
-
-    @FXML
-    private FlowPane flowpane;
-
     private List<PreMadeOrderMenu> preMadeOrderMenuList;
 
     private String productsPicturesPath = "resources/menutextandimages/";
+
+    private double combinedImagesWidth = 0;
 
     @FXML
     public void initialize() throws FileNotFoundException{
@@ -58,7 +48,9 @@ public class MenuActionController {
 
         for (PreMadeOrderMenu preMadeOrderMenu : preMadeOrderMenuList) {
             VBox vBox = new VBox();
-            vBox.getChildren().add(new ImageView(new Image(new FileInputStream(productsPicturesPath + preMadeOrderMenu.getPictureName()))));
+            Image menuImage = new Image(new FileInputStream(productsPicturesPath + preMadeOrderMenu.getPictureName()));
+            combinedImagesWidth += menuImage.getWidth();
+            vBox.getChildren().add(new ImageView(menuImage));
             Label label = new Label(preMadeOrderMenu.getName());
             vBox.getChildren().add(label);
             vBox.setOnMouseClicked(mouseEvent -> {
@@ -71,6 +63,7 @@ public class MenuActionController {
             vBox.setAlignment(Pos.CENTER);
             maingrid.add(vBox, columnPosition++, rowPosition);
         }
+        ViewManager.setSceneWidth(combinedImagesWidth);
     }
 
     private void getMenuData() throws SQLException {
@@ -85,13 +78,9 @@ public class MenuActionController {
         VBox vBox = (VBox) mouseEvent.getSource();
         Label label = (Label) vBox.getChildren().get(1);
         System.out.println(label.getText());
-        //flowpane.getChildren().remove(0);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CustomerMenuIngredientsChoice.fxml"));
-        Parent root2 = fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root2));
-        stage.show();
+        ViewManager viewManager = new ViewManager();
+        viewManager.displayFmxlScreen("../view/CustomerMenuIngredientsChoice.fxml");
     }
 
     @FXML
