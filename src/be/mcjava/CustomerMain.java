@@ -3,8 +3,6 @@ package be.mcjava;
 import be.mcjava.controller.ViewManager;
 import be.mcjava.model.*;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -33,7 +31,7 @@ public class CustomerMain extends Application {
         ViewManager.scene = scene;
         ViewManager.stage = stage;
         viewManager.displayFmxlScreen("../view/CustomerLoginScreen.fxml");
-        ViewManager.setSceneDimensions(650.0,450.0);
+        ViewManager.setStageDimensions(650.0,450.0);
 
         stage.setScene(scene);
         stage.show();

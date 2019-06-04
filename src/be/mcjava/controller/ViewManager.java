@@ -22,7 +22,7 @@ public class ViewManager {
         }
     }
 
-    public static void setSceneDimensions (double width,double height) {
+    public static void setStageDimensions(double width, double height) {
         stage.setMinWidth(width);
         stage.setMaxWidth(width);
         stage.setWidth(width);
@@ -31,7 +31,7 @@ public class ViewManager {
         stage.setHeight(height);
     }
 
-    public static void setSceneWidth(double width){
+    public static void setStageWidth(double width){
         stage.setMinWidth(width);
         stage.setMaxWidth(width);
         stage.setWidth(width);
