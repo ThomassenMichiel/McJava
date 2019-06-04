@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.FlowPane?>
+
+<?import java.net.URL?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<FlowPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="be.mcjava.controller.MenuIngredientsActionController"
+          fx:id="flowpane"
+          prefHeight="400.0" prefWidth="600.0">
+    <stylesheets>
+        <URL value="@mcjava.css"/>
+    </stylesheets>
+    <VBox fx:id ="ingredientsvbox">
+        <HBox fx:id="ingredientsheadervbox">
+            <HBox alignment="CENTER">
+                <Label text="Choose Burger"/>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Label text="Fries or Salad"/>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Label text="Choose Sauce"/>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Label text="Choose Beverage"/>
+            </HBox>
+        </HBox>
+        <VBox fx:id="headingvbox" prefHeight="40"/>
+        <GridPane fx:id="maingrid">
+
+        </GridPane>
+        <VBox fx:id="productsvbox" prefHeight="40"/>
+    </VBox>
+</FlowPane>

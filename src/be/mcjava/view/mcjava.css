@@ -1,0 +1,48 @@
+.root {
+   -fx-font: bold 16px Tahoma;
+}
+
+.gridPane {
+	-fx-padding: 10px;
+	-fx-vgap: 5px;
+	-fx-hgap: 5px;
+}
+
+.error {
+   -fx-border-color: red;
+}
+
+.button {
+   -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
+}
+
+.label {
+   -fx-padding: 10px;
+   -fx-font-family: 'Magneto';
+   -fx-font: bold 24px Magneto;
+}
+
+.image-view {
+   -fx-border-color: red;
+   -fx-background-color: green;
+   -fx-color: orange;
+   -fx-opacity: 0.8;
+   -fx-cursor: hand;
+}
+
+.image-view:hover {
+    -fx-opacity: 1.0;
+}
+
+
+.pane{
+    -fx-background-color: blue;
+}
+
+#ingredientsheadervbox{
+    -fx-background-color: #27742d;
+}
+
+#ingredientsheadervbox .label{
+    -fx-text-fill: #ffd700;
+    }
