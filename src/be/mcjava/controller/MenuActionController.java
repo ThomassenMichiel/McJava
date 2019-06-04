@@ -64,7 +64,7 @@ public class MenuActionController {
         headingvbox.setStyle(greenStyleString);
         for (PreMadeOrderMenu preMadeOrderMenu : preMadeOrderMenuList) {
             VBox vBox = new VBox();
-            vBox.getChildren().add(new ImageView(new Image(new FileInputStream(path + preMadeOrderMenu.getpictureName()))));
+            vBox.getChildren().add(new ImageView(new Image(new FileInputStream(path + preMadeOrderMenu.getPictureName()))));
             Label label = new Label(preMadeOrderMenu.getName());
             vBox.getChildren().add(label);
             vBox.setOnMouseClicked(mouseEvent -> {
