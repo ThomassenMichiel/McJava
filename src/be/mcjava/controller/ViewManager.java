@@ -36,4 +36,10 @@ public class ViewManager {
         stage.setMaxWidth(width);
         stage.setWidth(width);
     }
+
+    public static void setStageHeight(double height) {
+        stage.setHeight(height);
+        stage.setHeight(height);
+        stage.setHeight(height);
+    }
 }

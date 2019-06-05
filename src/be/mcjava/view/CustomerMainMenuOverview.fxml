@@ -26,11 +26,9 @@
         <VBox fx:id="productsvbox" prefHeight="40">
             <Label text="Products"/>
         </VBox>
-        <HBox alignment="CENTER" spacing="175">
-                    <Label text="Burgers"/>
-                    <Label text="Wraps"/>
-                    <Label text="Fries"/>
-                    <Label text="Drinks"/>
+        <HBox fx:id="productshbox" alignment="CENTER">
+
         </HBox>
+        <GridPane fx:id="productsgrid"/>
     </VBox>
 </FlowPane>
