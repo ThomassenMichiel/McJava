@@ -19,23 +19,44 @@ public class MenuIngredientsActionController {
     @FXML
     private GridPane mainproductsgrid;
 
+    private VBox chosenVBox;
+
+    private VBox productsOverviewVBox;
+
     @FXML
     public void initialize(){
         ProductsDao productsDao = new ProductsDao();
         List<Product> productList = productsDao.getProductsByPremadeMenuTitle(ChosenProductService.preMadeMenu.getName());
-        VBox vBox = new VBox();
+        productsOverviewVBox = new VBox();
         for (Product product : productList) {
             Button button = new Button(product.getName());
             button.setOnMouseClicked(mouseEvent -> menuProductClicked(mouseEvent));
-            vBox.getChildren().add(button);
+            productsOverviewVBox.getChildren().add(button);
             System.out.println(product.getName());
         }
-        mainproductsgrid.add(vBox,0,0);
+        mainproductsgrid.add(productsOverviewVBox,0,0);
+        chosenVBox = new VBox();
+        mainproductsgrid.add(chosenVBox,1,0);
     }
 
     @FXML
     private void menuProductClicked(MouseEvent mouseEvent) {
-        Button button = (Button) mouseEvent.getSource();
-        System.out.println("clicked on -> " + button.getText());
+        Button clickedButton = (Button) mouseEvent.getSource();
+        String chosenProductName = clickedButton.getText();
+        removeProductFromOverview(clickedButton);
+        chosenVBox.getChildren().add(clickedButton);
+    }
+
+    private void removeProductFromOverview(Button buttonToRemove) {
+        buttonToRemove.setOnMouseClicked(mouseEvent -> selectMenuProductClicked(mouseEvent));
+        productsOverviewVBox.getChildren().remove(buttonToRemove);
+    }
+
+    @FXML
+    private void selectMenuProductClicked(MouseEvent mouseEvent) {
+        Button clickedButton = (Button) mouseEvent.getSource();
+        clickedButton.setOnMouseClicked(mouseEvent2 -> menuProductClicked(mouseEvent2));
+        productsOverviewVBox.getChildren().add(clickedButton);
+        chosenVBox.getChildren().remove(clickedButton);
     }
 }

@@ -35,4 +35,27 @@ public class ProductsDao {
         }
         return null;
     }
+
+    public List<Product> getProductsByName(String productName){
+        IngredientDao ingredientDao = new IngredientDao();
+        String sql = "select * from product where name like ?";
+        try(PreparedStatement preparedStatement = DaoConnector.getConnection().prepareStatement(sql)){
+            preparedStatement.setString(1,productName);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                List<Product> productList = new ArrayList<>();
+                while(resultSet.next()){
+                    Product product = new Product.Builder(resultSet.getString("name"))
+                            .withId(resultSet.getLong("id"))
+                            .withPrice(resultSet.getBigDecimal("price"))
+                            .withIngredients(ingredientDao.getIngredientsByProductId(resultSet.getLong("id")))
+                            .build();
+                    productList.add(product);
+                }
+                return productList;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
