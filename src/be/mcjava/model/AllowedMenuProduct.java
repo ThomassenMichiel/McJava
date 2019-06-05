@@ -1,25 +1,27 @@
 package be.mcjava.model;
 
 public class AllowedMenuProduct {
-    private Long premadeMenuId;
+    private String premadeMenuName;
     private Integer itemPositionInMenu;
-    private Long productId;
+    private String productName;
 
-    public AllowedMenuProduct(Long premadeMenuId, Integer itemPositionInMenu, Long productId) {
-        this.premadeMenuId = premadeMenuId;
-        this.itemPositionInMenu = itemPositionInMenu;
-        this.productId = productId;
-    }
-
-    public Long getPremadeMenuId() {
-        return premadeMenuId;
+    public String getPremadeMenuName() {
+        return premadeMenuName;
     }
 
     public Integer getItemPositionInMenu() {
         return itemPositionInMenu;
     }
 
-    public Long getProductId() {
-        return productId;
+    public String getProductName() {
+        return productName;
+    }
+
+    public AllowedMenuProduct(String premadeMenuName, Integer itemPositionInMenu, String productName) {
+        this.premadeMenuName = premadeMenuName;
+        this.itemPositionInMenu = itemPositionInMenu;
+        this.productName = productName;
+
+
     }
 }

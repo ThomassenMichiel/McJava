@@ -58,4 +58,18 @@ public class ProductsDao {
         }
         return null;
     }
+
+    public String getProductNameByProductId(Long productId){
+        String sql = "select product.name from product where id = ?";
+        try(PreparedStatement preparedStatement = DaoConnector.getConnection().prepareStatement(sql)){
+            preparedStatement.setLong(1,productId);;
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                resultSet.next();
+                return resultSet.getString("name");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
