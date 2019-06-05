@@ -21,8 +21,6 @@ public class MenuIngredientsActionController {
 
     @FXML
     public void initialize(){
-        System.out.println(ChosenProductService.preMadeMenu.getName());
-
         ProductsDao productsDao = new ProductsDao();
         List<Product> productList = productsDao.getProductsByPremadeMenuTitle(ChosenProductService.preMadeMenu.getName());
         VBox vBox = new VBox();

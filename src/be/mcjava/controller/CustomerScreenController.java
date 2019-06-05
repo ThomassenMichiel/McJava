@@ -1,5 +1,7 @@
 package be.mcjava.controller;
 
+import be.mcjava.model.CustomerOrder;
+import be.mcjava.service.OrderService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +35,9 @@ public class CustomerScreenController {
     @FXML
     private void continueFromLoginToMenuPressed(ActionEvent event) throws Exception {
         //if(isName(customername.getText()) && isPhoneNumber(customerphonenumber.getText())) {
+
+        CustomerOrder customerOrder = new CustomerOrder.Builder().name(customername.getText()).telephoneNumber(customerphonenumber.getText()).build();
+        OrderService.customerOrder = customerOrder;
 
         ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
