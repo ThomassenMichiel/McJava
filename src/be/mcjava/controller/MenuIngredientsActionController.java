@@ -6,6 +6,7 @@ import be.mcjava.service.ChosenProductService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,10 +28,17 @@ public class MenuIngredientsActionController {
         List<Product> productList = productsDao.getIngredientsByPremadeMenuTitle(ChosenProductService.preMadeMenu.getName());
         VBox vBox = new VBox();
         for (Product product : productList) {
-            Button label = new Button(product.getName());
-            vBox.getChildren().add(label);
+            Button button = new Button(product.getName());
+            button.setOnMouseClicked(mouseEvent -> menuProductClicked(mouseEvent));
+            vBox.getChildren().add(button);
             System.out.println(product.getName());
         }
         mainproductsgrid.add(vBox,0,0);
+    }
+
+    @FXML
+    private void menuProductClicked(MouseEvent mouseEvent) {
+        Button button = (Button) mouseEvent.getSource();
+        System.out.println("clicked on -> " + button.getText());
     }
 }
