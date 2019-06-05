@@ -22,7 +22,7 @@ public class AllowedMenuProductsDao {
                 while(resultSet.next()){
                     AllowedMenuProduct allowedMenuProduct = new AllowedMenuProduct(
                             resultSet.getString("name"),
-                            resultSet.getInt("menu_item_order"),
+                            resultSet.getInt("menu_item_number"),
                             resultSet.getString("product_name")
                     );
                     allowedMenuProductList.add(allowedMenuProduct);
