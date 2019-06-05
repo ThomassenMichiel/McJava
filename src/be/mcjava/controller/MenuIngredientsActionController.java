@@ -23,10 +23,12 @@ public class MenuIngredientsActionController {
 
     private VBox productsOverviewVBox;
 
+    private List<Product> productList;
+
     @FXML
     public void initialize(){
         ProductsDao productsDao = new ProductsDao();
-        List<Product> productList = productsDao.getProductsByPremadeMenuTitle(ChosenProductService.preMadeMenu.getName());
+        productList = productsDao.getProductsByPremadeMenuTitle(ChosenProductService.preMadeMenu.getName());
         productsOverviewVBox = new VBox();
         for (Product product : productList) {
             Button button = new Button(product.getName());
