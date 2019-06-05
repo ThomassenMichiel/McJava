@@ -35,11 +35,9 @@ public class IngredientDao {
                 }
                 return ingredientIntegerMap;
             }
-
         }catch (SQLException e){
             e.printStackTrace();
         }
         return null;
-
     }
 }

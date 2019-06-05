@@ -11,7 +11,7 @@ import java.util.List;
 public class ProductsDao {
     private List<Product> productList = new ArrayList<>();
 
-    public List<Product> getIngredientsByPremadeMenuTitle(String premadeMenuTitle) {
+    public List<Product> getProductsByPremadeMenuTitle(String premadeMenuTitle) {
         IngredientDao ingredientDao = new IngredientDao();
         String sql = "select * from product \n" +
                 "join allowed_menu_products on product.id = allowed_menu_products.product_id\n" +

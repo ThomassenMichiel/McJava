@@ -5,7 +5,6 @@ import be.mcjava.model.Product;
 import be.mcjava.service.ChosenProductService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -25,7 +24,7 @@ public class MenuIngredientsActionController {
         System.out.println(ChosenProductService.preMadeMenu.getName());
 
         ProductsDao productsDao = new ProductsDao();
-        List<Product> productList = productsDao.getIngredientsByPremadeMenuTitle(ChosenProductService.preMadeMenu.getName());
+        List<Product> productList = productsDao.getProductsByPremadeMenuTitle(ChosenProductService.preMadeMenu.getName());
         VBox vBox = new VBox();
         for (Product product : productList) {
             Button button = new Button(product.getName());
