@@ -1,14 +1,10 @@
 package be.mcjava.controller;
 
 import be.mcjava.model.CustomerOrder;
-import be.mcjava.service.OrderService;
+import be.mcjava.service.CustomerOrderService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,7 +33,7 @@ public class CustomerScreenController {
         //if(isName(customername.getText()) && isPhoneNumber(customerphonenumber.getText())) {
 
         CustomerOrder customerOrder = new CustomerOrder.Builder().name(customername.getText()).telephoneNumber(customerphonenumber.getText()).build();
-        OrderService.customerOrder = customerOrder;
+        CustomerOrderService.customerOrder = customerOrder;
 
         ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");

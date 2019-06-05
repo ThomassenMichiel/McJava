@@ -1,9 +1,14 @@
 package be.mcjava.controller;
 
 import be.mcjava.dao.AllowedMenuProductsDao;
+import be.mcjava.dao.ProductsDao;
 import be.mcjava.model.AllowedMenuProduct;
+import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.model.Product;
-import be.mcjava.service.ChosenProductService;
+import be.mcjava.model.SingleOrderItem;
+import be.mcjava.service.CustomerOrderService;
+import be.mcjava.service.PreMadeMenuService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -27,10 +32,16 @@ public class MenuIngredientsActionController {
 
     private List<Product> productList;
 
+    private PreMadeOrderMenu preMadeOrderMenu;
+
     @FXML
     public void initialize() {
+        //PreMadeMenuService preMadeMenuService = new PreMadeMenuService();
+        preMadeOrderMenu = PreMadeMenuService.preMadeOrderMenu;
+
         AllowedMenuProductsDao allowedMenuProductsDao = new AllowedMenuProductsDao();
-        List<AllowedMenuProduct> allowedMenuProductList = allowedMenuProductsDao.getAllowedMenuProductsByPremadeMenuName(ChosenProductService.preMadeMenu.getName());
+        List<AllowedMenuProduct> allowedMenuProductList =
+                allowedMenuProductsDao.getAllowedMenuProductsByPremadeMenuName(preMadeOrderMenu.getName());
         //productsOverviewVBox = new VBox();
         //get number of columns needed
         int columnsNeeded = 0;
@@ -69,6 +80,17 @@ public class MenuIngredientsActionController {
         VBox clickedButtonParentVBox = (VBox) clickedButton.getParent();
         Integer clickedGridPaneColumnIndex = GridPane.getColumnIndex(clickedButtonParentVBox);
         removeProductFromOverview(clickedButton, clickedButtonParentVBox, clickedGridPaneColumnIndex);
+
+
+        addProductToPremadeMenu(clickedButton.getText());
+    }
+
+    private void addProductToPremadeMenu(String productName) {
+        ProductsDao productsDao = new ProductsDao();
+        Product product = productsDao.getProductsByName(productName).get(0);
+        SingleOrderItem singleOrderItem = new SingleOrderItem();
+        singleOrderItem.setItems(product);
+        preMadeOrderMenu.getItems().add(singleOrderItem);
     }
 
     private void removeProductFromOverview(Button buttonToRemove, VBox fromVBox, Integer clickedGridPaneColumnIndex) {
@@ -87,5 +109,12 @@ public class MenuIngredientsActionController {
         Integer clickedGridPaneColumnIndex = GridPane.getColumnIndex(clickedVBox);
         VBox targetVBox = (VBox) getNodeFromGridPane(mainproductsgrid, clickedGridPaneColumnIndex, 0);
         targetVBox.getChildren().add(clickedButton);
+    }
+
+
+
+    @FXML
+    public void confirmOrderPressed(ActionEvent actionEvent) {
+        CustomerOrderService.customerOrder.addItem(preMadeOrderMenu);
     }
 }

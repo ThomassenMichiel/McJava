@@ -1,8 +1,12 @@
 package be.mcjava.controller;
 
+import be.mcjava.dao.CustomerOrderDao;
+import be.mcjava.model.CustomerOrder;
 import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.dao.PreMadeOrderMenuDao;
 import be.mcjava.service.ChosenProductService;
+import be.mcjava.service.CustomerOrderService;
+import be.mcjava.service.PreMadeMenuService;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -100,6 +104,12 @@ public class MenuActionController {
         Label label = (Label) vBox.getChildren().get(1);
         ChosenProductService.preMadeMenu = mainreMadeOrderMenuList.stream().filter(p -> p.getName().equals(label.getText())).findFirst().get();
         ViewManager viewManager = new ViewManager();
+        PreMadeOrderMenu preMadeOrderMenu = new PreMadeOrderMenu.Builder()
+                .withName(label.getText())
+                .build();
+        //CustomerOrderService.customerOrder.addItem(preMadeOrderMenu);
+        //PreMadeMenuService preMadeMenuService = new PreMadeMenuService();
+        PreMadeMenuService.preMadeOrderMenu = preMadeOrderMenu;
         viewManager.displayFmxlScreen("../view/CustomerMenuIngredientsChoice.fxml");
     }
 
@@ -110,5 +120,11 @@ public class MenuActionController {
         ChosenProductService.preMadeMenu = productsPremadeOrderMenuList.stream().filter(p -> p.getName().equals(label.getText())).findFirst().get();
         ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("../view/CustomerMenuIngredientsChoice.fxml");
+    }
+
+    private void finalizeCurrentOrder(){
+        CustomerOrder customerOrder = CustomerOrderService.customerOrder;
+        CustomerOrderDao customerOrderDao = new CustomerOrderDao();
+        CustomerOrderDao.saveCustomerOrder(customerOrder);
     }
 }
