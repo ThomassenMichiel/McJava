@@ -57,5 +57,5 @@
 }
 
 #mainproductsgrid .button{
-    fx-font: 10px Magneto;
+    -fx-font: 10px Magneto;
 }
