@@ -20,4 +20,5 @@ public class CustomerMain extends Application {
         stage.setScene( scene );
         stage.show();
     }
+
 }
