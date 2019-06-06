@@ -50,10 +50,14 @@ public class MenuActionController {
         }
     }
 
+    private void getMenuData() throws SQLException {
+        mainreMadeOrderMenuList = preMadeOrderMenuDao.populatePreMadeOrderMenuByIdRange(1,4);
+        productsPremadeOrderMenuList = preMadeOrderMenuDao.populatePreMadeOrderMenuByIdRange(5,9);
+    }
+
     private void addMenusToGrid() throws FileNotFoundException {
         int columnPosition = 0;
         int rowPosition = 0;
-
 
         for (PreMadeOrderMenu preMadeOrderMenu : mainreMadeOrderMenuList) {
             VBox vBox = new VBox();
@@ -93,16 +97,13 @@ public class MenuActionController {
         }
     }
 
-    private void getMenuData() throws SQLException {
-        mainreMadeOrderMenuList = preMadeOrderMenuDao.populatePreMadeOrderMenuByIdRange(1,4);
-        productsPremadeOrderMenuList = preMadeOrderMenuDao.populatePreMadeOrderMenuByIdRange(5,9);
-    }
-
     @FXML
     private void menusClicked(MouseEvent mouseEvent) throws IOException {
         VBox vBox = (VBox) mouseEvent.getSource();
         Label label = (Label) vBox.getChildren().get(1);
-        ChosenProductService.preMadeMenu = mainreMadeOrderMenuList.stream().filter(p -> p.getName().equals(label.getText())).findFirst().get();
+        PreMadeOrderMenu originalPremadeOrderMenu = mainreMadeOrderMenuList.stream().filter(p -> p.getName().equals(label.getText())).findFirst().get();
+
+        //ChosenProductService.preMadeMenu = ;
         ViewManager viewManager = new ViewManager();
         PreMadeOrderMenu preMadeOrderMenu = new PreMadeOrderMenu.Builder()
                 .withName(label.getText())

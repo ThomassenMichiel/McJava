@@ -2,6 +2,7 @@ package be.mcjava.dao;
 
 import be.mcjava.model.PreMadeOrderMenu;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,11 @@ public class PreMadeOrderMenuDao {
             preparedStatement.setInt(2, toId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
+                    System.out.println(resultSet.getBigDecimal("price"));
                     PreMadeOrderMenu preMadeOrderMenu = new PreMadeOrderMenu.Builder()
                             .withName(resultSet.getString("name"))
                             .withPrice(resultSet.getBigDecimal("price"))
+                            .withAmount(1)
                             .withPictureName(resultSet.getString("graphic_name"))
                             .build();
                     preMadeOrderMenuList.add(preMadeOrderMenu);

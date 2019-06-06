@@ -2,10 +2,7 @@ package be.mcjava.controller;
 
 import be.mcjava.dao.AllowedMenuProductsDao;
 import be.mcjava.dao.ProductsDao;
-import be.mcjava.model.AllowedMenuProduct;
-import be.mcjava.model.PreMadeOrderMenu;
-import be.mcjava.model.Product;
-import be.mcjava.model.SingleOrderItem;
+import be.mcjava.model.*;
 import be.mcjava.service.CustomerOrderService;
 import be.mcjava.service.PreMadeMenuService;
 import javafx.event.ActionEvent;
@@ -17,6 +14,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MenuIngredientsActionController {
@@ -33,6 +32,8 @@ public class MenuIngredientsActionController {
     private List<Product> productList;
 
     private PreMadeOrderMenu preMadeOrderMenu;
+
+    private List<SingleOrderItem> productsToOrderList = new ArrayList<>();
 
     @FXML
     public void initialize() {
@@ -82,15 +83,26 @@ public class MenuIngredientsActionController {
         removeProductFromOverview(clickedButton, clickedButtonParentVBox, clickedGridPaneColumnIndex);
 
 
-        addProductToPremadeMenu(clickedButton.getText());
+        addProductToProductsToOrderList(clickedButton.getText());
     }
 
-    private void addProductToPremadeMenu(String productName) {
+    private void addProductToProductsToOrderList(String productName){
         ProductsDao productsDao = new ProductsDao();
         Product product = productsDao.getProductsByName(productName).get(0);
         SingleOrderItem singleOrderItem = new SingleOrderItem();
         singleOrderItem.setItems(product);
-        preMadeOrderMenu.getItems().add(singleOrderItem);
+        productsToOrderList.add(singleOrderItem);
+    }
+
+    private void addProductToPreMadeMenu(List<SingleOrderItem> productList) {
+        preMadeOrderMenu.setItems(productList);
+        /*if(preMadeOrderMenu.getItems() == null){
+            preMadeOrderMenu.setItems(Arrays.asList(singleOrderItem));
+        }else {
+            List<SingleOrderItem> alreadyOrderedItems = preMadeOrderMenu.getItems();
+            System.out.println("outcome --> "+alreadyOrderedItems.add(singleOrderItem));
+            preMadeOrderMenu.setItems(alreadyOrderedItems);
+        }*/
     }
 
     private void removeProductFromOverview(Button buttonToRemove, VBox fromVBox, Integer clickedGridPaneColumnIndex) {
@@ -115,6 +127,8 @@ public class MenuIngredientsActionController {
 
     @FXML
     public void confirmOrderPressed(ActionEvent actionEvent) {
-        CustomerOrderService.customerOrder.addItem(preMadeOrderMenu);
+        addProductToPreMadeMenu(productsToOrderList);
+        CustomerOrder customerOrder = CustomerOrderService.customerOrder;
+        customerOrder.addItem(preMadeOrderMenu);
     }
 }
