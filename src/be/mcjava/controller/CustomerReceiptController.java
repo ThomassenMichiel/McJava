@@ -23,16 +23,18 @@ public class CustomerReceiptController {
     @FXML
     private GridPane items;
     
-    private int row = 0;
+    private int row = 5;
     private int column = 0;
     
     public void initialize() {
         CustomerOrder customerOrder = CustomerOrderService.customerOrder;
         setConstraints();
     
-        id.setText("== " + String.valueOf(customerOrder.getId()) + " ==");
+        id.setText("== " + customerOrder.getId() + " ==");
         id.setFont(Font.font(24));
         id.setTextAlignment(TextAlignment.CENTER);
+        GridPane.setHalignment(id,HPos.CENTER);
+        GridPane.setMargin(id,new Insets(30,0,30,0));
         customerOrder.getItemsToOrder().forEach(this::addItemsToDisplay);
         setTotalPrice(customerOrder);
     }
