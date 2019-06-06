@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
 <FlowPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="be.mcjava.controller.MenuActionController"
@@ -30,5 +31,6 @@
 
         </HBox>
         <GridPane fx:id="productsgrid"/>
+        <Button fx:id="finishorderbutton" text="Confirm Order" onAction="#finishOrderPressed"/>
     </VBox>
 </FlowPane>

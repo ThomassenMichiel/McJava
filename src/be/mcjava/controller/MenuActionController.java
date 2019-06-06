@@ -1,12 +1,15 @@
 package be.mcjava.controller;
 
 import be.mcjava.dao.CustomerOrderDao;
+import be.mcjava.model.AbstractOrderItem;
 import be.mcjava.model.CustomerOrder;
 import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.dao.PreMadeOrderMenuDao;
+import be.mcjava.model.SingleOrderItem;
 import be.mcjava.service.ChosenProductService;
 import be.mcjava.service.CustomerOrderService;
 import be.mcjava.service.PreMadeMenuService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -108,9 +111,9 @@ public class MenuActionController {
         PreMadeOrderMenu preMadeOrderMenu = new PreMadeOrderMenu.Builder()
                 .withName(label.getText())
                 .build();
+        PreMadeMenuService.preMadeOrderMenu = preMadeOrderMenu;
         //CustomerOrderService.customerOrder.addItem(preMadeOrderMenu);
         //PreMadeMenuService preMadeMenuService = new PreMadeMenuService();
-        PreMadeMenuService.preMadeOrderMenu = preMadeOrderMenu;
         viewManager.displayFmxlScreen("../view/CustomerMenuIngredientsChoice.fxml");
     }
 
@@ -127,5 +130,15 @@ public class MenuActionController {
         CustomerOrder customerOrder = CustomerOrderService.customerOrder;
         CustomerOrderDao customerOrderDao = new CustomerOrderDao();
         CustomerOrderDao.saveCustomerOrder(customerOrder);
+    }
+
+    public void finishOrderPressed(ActionEvent actionEvent) {
+        System.out.println("ordered");
+        System.out.println("-------");
+        for (AbstractOrderItem orderItem : CustomerOrderService.customerOrder.getItemsToOrder()) {
+            PreMadeOrderMenu p = (PreMadeOrderMenu) orderItem;
+            System.out.println(p.getName());
+            p.getItems().forEach(i -> System.out.println("      " + i.getItems().getName()));
+        }
     }
 }

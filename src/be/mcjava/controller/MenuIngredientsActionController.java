@@ -37,7 +37,6 @@ public class MenuIngredientsActionController {
 
     @FXML
     public void initialize() {
-        //PreMadeMenuService preMadeMenuService = new PreMadeMenuService();
         preMadeOrderMenu = PreMadeMenuService.preMadeOrderMenu;
 
         AllowedMenuProductsDao allowedMenuProductsDao = new AllowedMenuProductsDao();
@@ -128,7 +127,14 @@ public class MenuIngredientsActionController {
     @FXML
     public void confirmOrderPressed(ActionEvent actionEvent) {
         addProductToPreMadeMenu(productsToOrderList);
-        CustomerOrder customerOrder = CustomerOrderService.customerOrder;
-        customerOrder.addItem(preMadeOrderMenu);
+        if(CustomerOrderService.customerOrder.getItemsToOrder() == null){
+            List<AbstractOrderItem> orderList = new ArrayList<>();
+            orderList.add(preMadeOrderMenu);
+            CustomerOrderService.customerOrder.setItemsToOrder(orderList);
+        }else{
+            CustomerOrderService.customerOrder.addItem(preMadeOrderMenu);
+        }
+        ViewManager viewManager = new ViewManager();
+        viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
     }
 }
