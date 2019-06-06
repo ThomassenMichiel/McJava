@@ -107,13 +107,18 @@ public class MenuActionController {
         PreMadeOrderMenu originalPremadeOrderMenu = mainreMadeOrderMenuList.stream().filter(p -> p.getName().equals(label.getText())).findFirst().get();
 
         //ChosenProductService.preMadeMenu = ;
-        ViewManager viewManager = new ViewManager();
+        long id = 1L;
+        if(CustomerOrderService.customerOrder.getItemsToOrder() != null) {
+            id += CustomerOrderService.customerOrder.getItemsToOrder().size();
+        }
         PreMadeOrderMenu preMadeOrderMenu = new PreMadeOrderMenu.Builder()
+                .withId(id)
                 .withName(label.getText())
                 .build();
         PreMadeMenuService.preMadeOrderMenu = preMadeOrderMenu;
         //CustomerOrderService.customerOrder.addItem(preMadeOrderMenu);
         //PreMadeMenuService preMadeMenuService = new PreMadeMenuService();
+        ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("../view/CustomerMenuIngredientsChoice.fxml");
     }
 
@@ -140,5 +145,6 @@ public class MenuActionController {
             System.out.println(p.getName());
             p.getItems().forEach(i -> System.out.println("      " + i.getItems().getName()));
         }
+        CustomerOrderDao.saveCustomerOrder(CustomerOrderService.customerOrder);
     }
 }
