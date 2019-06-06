@@ -68,7 +68,7 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
         private String name;
         private List<SingleOrderItem> product;
         private int amount;
-        private BigDecimal price;
+        private BigDecimal price = BigDecimal.ZERO;
         private String pictureName;
         
         public Builder withId(Long id) {
