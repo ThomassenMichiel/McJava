@@ -6,62 +6,83 @@ import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.model.SingleOrderItem;
 import be.mcjava.service.CustomerOrderService;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 
 public class CustomerReceiptController {
     @FXML
-    private Label totalPriceLabel;
+    private Text id;
     @FXML
-    private VBox items;
+    private GridPane items;
+    
+    private int row = 0;
+    private int column = 0;
     
     public void initialize() {
         CustomerOrder customerOrder = CustomerOrderService.customerOrder;
+        setConstraints();
+    
+        id.setText("== " + String.valueOf(customerOrder.getId()) + " ==");
+        id.setFont(Font.font(24));
+        id.setTextAlignment(TextAlignment.CENTER);
         customerOrder.getItemsToOrder().forEach(this::addItemsToDisplay);
-        String totalPrice = makeStringFixedLength("Total:", 44);
-        totalPriceLabel.setText(String.format("%s %5.2f",totalPrice,customerOrder.getFinalPrice()));
+        setTotalPrice(customerOrder);
+    }
+    
+    private void setTotalPrice(CustomerOrder customerOrder) {
+        String formattedPrice = String.format("%5.2f", customerOrder.getFinalPrice());
+        Text totalText = new Text("Total:");
+        Text formattedPriceText = new Text(formattedPrice);
+        GridPane.setMargin(totalText,new Insets(30,0,0,0));
+        GridPane.setMargin(formattedPriceText,new Insets(30,0,0,0));
+        items.addRow(row,new Text(),totalText,formattedPriceText);
+    }
+    
+    private void setConstraints() {
+        items.getColumnConstraints().add(new ColumnConstraints(200));
+        items.getColumnConstraints().add(new ColumnConstraints(50));
+        items.getColumnConstraints().add(new ColumnConstraints(50));
+        items.getColumnConstraints().get(2).setHalignment(HPos.RIGHT);
     }
     
     private void addItemsToDisplay(AbstractOrderItem item) {
         if (item instanceof PreMadeOrderMenu) {
-            createLabels(((PreMadeOrderMenu) item));
+            createText(((PreMadeOrderMenu) item));
         }
         if (item instanceof SingleOrderItem) {
-            createLabels(((SingleOrderItem) item));
+            createText(((SingleOrderItem) item));
         }
     }
     
-    private void createLabels(SingleOrderItem item) {
-        String name = makeStringFixedLength(item.getItems().getName());
-        String firstLineString = String.format("%-30s\t%2d\t%05.2f", name, item.getAmount(), item.getPrice());
-        Label firstLineLabel = new Label(firstLineString);
-        items.getChildren().add(firstLineLabel);
+    private void createText(SingleOrderItem item) {
+        items.add(new Text(item.getItems().getName()),column++,row);
+        items.add(new Text(String.valueOf(item.getAmount())),column++,row);
+        String price = String.format("%5.2f", item.getPrice());
+        items.add(new Text(price),column++,row);
+        row++;
+        column = 0;
     }
     
-    private void createLabels(PreMadeOrderMenu menu) {
-        String name = makeStringFixedLength(menu.getName());
-        String firstLineString = String.format("%-30s\t%2d\t%05.2f", name, menu.getAmount(), menu.getPrice());
-        Label firstLineLabel = new Label(firstLineString);
-        items.getChildren().add(firstLineLabel);
-        
-        menu.getItems().forEach(this::addEachItemInAMenu);
-    }
-    
-    private String makeStringFixedLength(String stringToMakeFixedLength, int length) {
-        StringBuilder fixedLengthName = new StringBuilder(stringToMakeFixedLength);
-        for (int i = fixedLengthName.length(); i < length; i++) {
-            fixedLengthName.append(" ");
-        }
-        return fixedLengthName.toString();
-    }
-    
-    private String makeStringFixedLength(String stringToMakeFixedLength) {
-        return makeStringFixedLength(stringToMakeFixedLength,30);
+    private void createText(PreMadeOrderMenu item) {
+        items.add(new Text(item.getName()),column++,row);
+        items.add(new Text(String.valueOf(item.getAmount())),column++,row);
+        String price = String.format("%5.2f", item.getPrice());
+        items.add(new Text(price),column++,row);
+        row++;
+        item.getItems().forEach(this::addEachItemInAMenu);
+        column = 0;
     }
     
     private void addEachItemInAMenu(SingleOrderItem item) {
-        String desiredStringLayout = String.format("\t- %s", item.getItems().getName());
-        items.getChildren().add(new Label(desiredStringLayout));
+        String itemEntry = "\t- " + item.getItems().getName();
+        items.add(new Text(itemEntry),0,row++);
     }
 }
