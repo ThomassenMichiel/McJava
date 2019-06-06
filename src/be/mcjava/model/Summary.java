@@ -12,6 +12,7 @@ public class Summary {
     
     public Summary(Map<Product, Integer> madeProducts) {
         this.madeProducts = madeProducts;
+        this.dailyTotal = BigDecimal.ZERO;
         calculateDailyTotal();
     }
     

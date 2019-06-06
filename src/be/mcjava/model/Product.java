@@ -1,6 +1,7 @@
 package be.mcjava.model;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -93,7 +94,8 @@ public class Product {
         
         public Builder(String name) {
             this.name = name;
-            price = BigDecimal.ZERO;
+            this.price = BigDecimal.ZERO;
+            this.ingredients = new HashMap<>();
         }
         
         public Builder withId(Long id) {
