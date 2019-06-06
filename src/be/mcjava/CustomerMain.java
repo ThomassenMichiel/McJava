@@ -2,6 +2,7 @@ package be.mcjava;
 
 import be.mcjava.controller.ViewManager;
 import be.mcjava.model.*;
+import be.mcjava.service.CustomerOrderService;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -30,7 +31,7 @@ public class CustomerMain extends Application {
         ViewManager viewManager = new ViewManager();
         ViewManager.scene = scene;
         ViewManager.stage = stage;
-        viewManager.displayFmxlScreen("../view/CustomerLoginScreen.fxml");
+        viewManager.displayFmxlScreen("../view/CustomerReceiptScreen.fxml");
         ViewManager.setStageDimensions(650.0,450.0);
 
         stage.setScene(scene);
@@ -81,6 +82,7 @@ public class CustomerMain extends Application {
         
         ArrayList<SingleOrderItem> happyMealMcMenu = new ArrayList<>();
         happyMealMcMenu.add(happyMealOI);
+        happyMealMcMenu.add(singleTropicanaOrder);
         
         PreMadeOrderMenu happyMeal = new PreMadeOrderMenu.Builder()
                 .withId(1L)
@@ -93,8 +95,8 @@ public class CustomerMain extends Application {
         List<AbstractOrderItem> order = new ArrayList<>();
         order.add(singleTropicanaOrder);
         order.add(happyMeal);
-        
-        CustomerOrder co = new CustomerOrder.Builder()
+    
+        CustomerOrderService.customerOrder = new CustomerOrder.Builder()
                 .name("REEEEEEEEEEEEEEEEEEEEE")
                 .telephoneNumber("0123456798")
                 .withId(1L)

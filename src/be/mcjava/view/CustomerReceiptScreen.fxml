@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="be.mcjava.controller.CustomerReceiptController">
+    <Label GridPane.rowIndex="0" GridPane.columnIndex="0">McJava</Label>
+    <Label GridPane.rowIndex="1" GridPane.columnIndex="0">Thor Park 8040</Label>
+    <Label GridPane.rowIndex="2" GridPane.columnIndex="0">3600 Genk</Label>
+
+    <VBox GridPane.rowIndex="3" GridPane.columnIndex="0" fx:id="items">
+        <padding>
+            <Insets top="30" bottom="30" />
+        </padding>
+    </VBox>
+
+    <Label GridPane.rowIndex="4" GridPane.columnIndex="0" fx:id="totalPriceLabel"/>
+
+</GridPane>
