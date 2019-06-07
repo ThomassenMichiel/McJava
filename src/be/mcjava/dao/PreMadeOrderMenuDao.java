@@ -17,7 +17,6 @@ public class PreMadeOrderMenuDao {
             preparedStatement.setInt(2, toId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    System.out.println(resultSet.getBigDecimal("price"));
                     PreMadeOrderMenu preMadeOrderMenu = new PreMadeOrderMenu.Builder()
                             .withName(resultSet.getString("name"))
                             .withPrice(resultSet.getBigDecimal("price"))

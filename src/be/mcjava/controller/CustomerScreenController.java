@@ -32,8 +32,7 @@ public class CustomerScreenController {
     private void continueFromLoginToMenuPressed(ActionEvent event) throws Exception {
         //if(isName(customername.getText()) && isPhoneNumber(customerphonenumber.getText())) {
 
-        CustomerOrder customerOrder = new CustomerOrder.Builder().name(customername.getText()).telephoneNumber(customerphonenumber.getText()).build();
-        CustomerOrderService.customerOrder = customerOrder;
+        CustomerOrderService.startNewCustomerOrder(customername.getText(),customerphonenumber.getText());
 
         ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");

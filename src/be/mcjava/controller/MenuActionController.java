@@ -2,10 +2,8 @@ package be.mcjava.controller;
 
 import be.mcjava.dao.CustomerOrderDao;
 import be.mcjava.model.AbstractOrderItem;
-import be.mcjava.model.CustomerOrder;
 import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.dao.PreMadeOrderMenuDao;
-import be.mcjava.model.SingleOrderItem;
 import be.mcjava.service.ChosenProductService;
 import be.mcjava.service.CustomerOrderService;
 import be.mcjava.service.PreMadeMenuService;
@@ -34,7 +32,7 @@ public class MenuActionController {
 
     @FXML HBox productshbox;
 
-    private List<PreMadeOrderMenu> mainreMadeOrderMenuList;
+    private List<PreMadeOrderMenu> mainPreMadeOrderMenuList;
     private List<PreMadeOrderMenu> productsPremadeOrderMenuList;
     private PreMadeOrderMenuDao preMadeOrderMenuDao;
 
@@ -54,7 +52,7 @@ public class MenuActionController {
     }
 
     private void getMenuData() throws SQLException {
-        mainreMadeOrderMenuList = preMadeOrderMenuDao.populatePreMadeOrderMenuByIdRange(1,4);
+        mainPreMadeOrderMenuList = preMadeOrderMenuDao.populatePreMadeOrderMenuByIdRange(1,4);
         productsPremadeOrderMenuList = preMadeOrderMenuDao.populatePreMadeOrderMenuByIdRange(5,9);
     }
 
@@ -62,7 +60,7 @@ public class MenuActionController {
         int columnPosition = 0;
         int rowPosition = 0;
 
-        for (PreMadeOrderMenu preMadeOrderMenu : mainreMadeOrderMenuList) {
+        for (PreMadeOrderMenu preMadeOrderMenu : mainPreMadeOrderMenuList) {
             VBox vBox = new VBox();
             Image menuImage = new Image(new FileInputStream(productsPicturesPath + preMadeOrderMenu.getPictureName()));
             combinedImagesWidth += menuImage.getWidth();
@@ -104,18 +102,20 @@ public class MenuActionController {
     private void menusClicked(MouseEvent mouseEvent) throws IOException {
         VBox vBox = (VBox) mouseEvent.getSource();
         Label label = (Label) vBox.getChildren().get(1);
-        PreMadeOrderMenu originalPremadeOrderMenu = mainreMadeOrderMenuList.stream().filter(p -> p.getName().equals(label.getText())).findFirst().get();
+        PreMadeOrderMenu originalPreMadeOrderMenu = mainPreMadeOrderMenuList.stream().filter(p -> p.getName().equals(label.getText())).findFirst().get();
 
-        //ChosenProductService.preMadeMenu = ;
-        long id = 1L;
+        CustomerOrderService.createNewOrderItem(label.getText(),originalPreMadeOrderMenu);
+        /*long id = 1L;
         if(CustomerOrderService.customerOrder.getItemsToOrder() != null) {
             id += CustomerOrderService.customerOrder.getItemsToOrder().size();
         }
         PreMadeOrderMenu preMadeOrderMenu = new PreMadeOrderMenu.Builder()
                 .withId(id)
                 .withName(label.getText())
+                .withPrice(originalPreMadeOrderMenu.getPrice())
+                .withAmount(1)
                 .build();
-        PreMadeMenuService.preMadeOrderMenu = preMadeOrderMenu;
+        PreMadeMenuService.preMadeOrderMenu = preMadeOrderMenu;*/
         //CustomerOrderService.customerOrder.addItem(preMadeOrderMenu);
         //PreMadeMenuService preMadeMenuService = new PreMadeMenuService();
         ViewManager viewManager = new ViewManager();
@@ -131,20 +131,17 @@ public class MenuActionController {
         viewManager.displayFmxlScreen("../view/CustomerMenuIngredientsChoice.fxml");
     }
 
-    private void finalizeCurrentOrder(){
-        CustomerOrder customerOrder = CustomerOrderService.customerOrder;
-        CustomerOrderDao customerOrderDao = new CustomerOrderDao();
-        CustomerOrderDao.saveCustomerOrder(customerOrder);
-    }
-
     public void finishOrderPressed(ActionEvent actionEvent) {
         System.out.println("ordered");
         System.out.println("-------");
         for (AbstractOrderItem orderItem : CustomerOrderService.customerOrder.getItemsToOrder()) {
             PreMadeOrderMenu p = (PreMadeOrderMenu) orderItem;
             System.out.println(p.getName());
+            System.out.println(p.getPrice());
             p.getItems().forEach(i -> System.out.println("      " + i.getItems().getName()));
         }
+        System.out.println("---------------------");
+        System.out.println(CustomerOrderService.customerOrder.getFinalPrice());
         CustomerOrderDao.saveCustomerOrder(CustomerOrderService.customerOrder);
     }
 }
