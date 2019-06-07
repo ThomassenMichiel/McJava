@@ -115,8 +115,8 @@ public class MenuActionController {
     }
 
     public void finishOrderPressed(ActionEvent actionEvent) {
-        System.out.println(CustomerOrderService.customerOrder);
         CustomerOrderService.saveCustomerOrder();
-        System.out.println("ordered");
+        ViewManager viewManager = new ViewManager();
+        viewManager.displayFmxlScreen("/be/mcjava/view/CustomerReceiptScreen.fxml");
     }
 }

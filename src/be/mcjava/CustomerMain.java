@@ -66,16 +66,14 @@ public class CustomerMain extends Application {
                 .withPrice(BigDecimal.valueOf(Double.MAX_VALUE))
                 .build();
         
-        SingleOrderItem singleTropicanaOrder = new SingleOrderItem.Builder()
+        SingleOrderItem singleTropicanaOrder = new SingleOrderItem.Builder(tropicanaProduct)
                 .withId(1L)
-                .withProduct(tropicanaProduct)
                 .withAmount(1)
                 .withPrice(tropicanaProduct.getPrice())
                 .build();
         
-        SingleOrderItem happyMealOI = new SingleOrderItem.Builder()
+        SingleOrderItem happyMealOI = new SingleOrderItem.Builder(happyMealProduct)
                 .withId(1L)
-                .withProduct(happyMealProduct)
                 .withAmount(1)
                 .withPrice(tropicanaProduct.getPrice())
                 .build();
