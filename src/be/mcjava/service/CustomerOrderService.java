@@ -1,11 +1,14 @@
 package be.mcjava.service;
 
 
+import be.mcjava.dao.CustomerOrderDao;
 import be.mcjava.model.CustomerOrder;
 import be.mcjava.model.PreMadeOrderMenu;
 
 public class CustomerOrderService {
     public static CustomerOrder customerOrder;
+
+    private static CustomerOrderDao customerOrderDao = new CustomerOrderDao();
 
     /***
      * creates a new empty CustomerOrder object to store all entered data
@@ -49,5 +52,13 @@ public class CustomerOrderService {
             id += customerOrder.getItemsToOrder().size();
         }
         return id;
+    }
+
+    /***
+     * this saves the current order into the database
+     * by using the CustomerOrderDao
+     */
+    public static void saveCustomerOrder() {
+        customerOrderDao.saveCustomerOrder(customerOrder);
     }
 }
