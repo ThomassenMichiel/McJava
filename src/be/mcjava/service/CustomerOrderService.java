@@ -58,7 +58,7 @@ public class CustomerOrderService {
     }
 
     /***
-     * this saves the current order into the database
+     * this saves the current CustomerOrder into the database
      * by using the CustomerOrderDao
      */
     public static void saveCustomerOrder() {
@@ -75,7 +75,7 @@ public class CustomerOrderService {
     }
 
     /***
-     * this removes the currentCustomerOrder
+     * this removes the current CustomerOrder
      */
     public static void cancelCustomerOrder() {
         customerOrder = null;

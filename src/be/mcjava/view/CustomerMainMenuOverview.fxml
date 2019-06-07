@@ -13,11 +13,11 @@
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="be.mcjava.controller.MenuActionController"
           fx:id="flowpane">
-          <!--prefHeight="400.0" prefWidth="600.0"-->
+    <!--prefHeight="400.0" prefWidth="600.0"-->
     <stylesheets>
         <URL value="@mcjava.css"/>
     </stylesheets>
-    <VBox fx:id ="firstmenuvbox">
+    <VBox fx:id="firstmenuvbox">
         <VBox fx:id="headingvbox" prefHeight="40">
             <Label text="McMenus"/>
         </VBox>
@@ -31,7 +31,9 @@
 
         </HBox>
         <GridPane fx:id="productsgrid"/>
-        <Button fx:id="finishorderbutton" text="Confirm Order" onAction="#finishOrderPressed"/>
-        <Button fx:id="cancelorderbutton" text="Cancel Order" onAction="#cancelOrderPressed"/>
+        <HBox>
+            <Button fx:id="finishorderbutton" text="Confirm Order" onAction="#finishOrderPressed"/>
+            <Button fx:id="cancelorderbutton" text="Cancel Order" onAction="#cancelOrderPressed"/>
+        </HBox>
     </VBox>
 </FlowPane>

@@ -27,6 +27,9 @@
 
         </GridPane>
         <VBox fx:id="productsvbox" prefHeight="40"/>
+        <HBox>
         <Button fx:id="confirmorderbutton" text="Confirm Order" onAction="#confirmOrderPressed"/>
+        <Button fx:id="cancelorderbutton" text="Cancel Order" onAction="#cancelOrderPressed"/>
+        </HBox>
     </VBox>
 </FlowPane>

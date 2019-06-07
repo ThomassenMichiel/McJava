@@ -135,4 +135,9 @@ public class MenuIngredientsActionController {
         ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
     }
+
+    public void cancelOrderPressed(ActionEvent actionEvent) {
+        //Todo: check if all needed items are chosen
+        //Todo: cencel current menu-creation, remove already created obj
+    }
 }
