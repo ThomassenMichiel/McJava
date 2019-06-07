@@ -41,7 +41,6 @@ public class CustomerReceiptController {
         setTotalPrice(customerOrder);
         
         GridPane.setRowIndex(closingButton,row);
-        GridPane.setColumnIndex(closingButton,2);
     }
     
     private void setTotalPrice(CustomerOrder customerOrder) {
@@ -50,7 +49,7 @@ public class CustomerReceiptController {
         Text formattedPriceText = new Text(formattedPrice);
         GridPane.setMargin(totalText,new Insets(30,0,0,0));
         GridPane.setMargin(formattedPriceText,new Insets(30,0,0,0));
-        items.addRow(row,new Text(),totalText,formattedPriceText);
+        items.addRow(row++,new Text(),totalText,formattedPriceText);
     }
     
     private void setConstraints() {
@@ -95,6 +94,6 @@ public class CustomerReceiptController {
     
     public void returnToMainMenu(ActionEvent actionEvent) {
         ViewManager viewManager = new ViewManager();
-        viewManager.displayFmxlScreen("/be/mcjava/view/CustomerLoginScreen.fxml");
+        viewManager.displayFmxlScreen("../view/CustomerLoginScreen.fxml");
     }
 }
