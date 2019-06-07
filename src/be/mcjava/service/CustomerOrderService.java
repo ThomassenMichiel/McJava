@@ -61,4 +61,12 @@ public class CustomerOrderService {
     public static void saveCustomerOrder() {
         customerOrderDao.saveCustomerOrder(customerOrder);
     }
+
+    /***
+     * returns if an order has OrderItems present or not
+     * @return
+     */
+    public static boolean isOrderValid() {
+        return customerOrder.getItemsToOrder().size() > 0;
+    }
 }
