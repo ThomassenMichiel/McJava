@@ -389,3 +389,60 @@ insert into allowed_menu_products values (4,3,60);
 insert into allowed_menu_products values (4,3,61);
 insert into allowed_menu_products values (4,3,62);
 insert into allowed_menu_products values (4,3,63);
+
+#	menu for burgers only with zero menu-price
+
+insert into premade_menu values (5,'Burgers Menu',0,'bigmac.png');
+	insert into allowed_menu_products values (5,1,5);
+	insert into allowed_menu_products values (5,1,5);
+	insert into allowed_menu_products values (5,1,6);
+	insert into allowed_menu_products values (5,1,7);
+	insert into allowed_menu_products values (5,1,51);
+	insert into allowed_menu_products values (5,1,52);
+	insert into allowed_menu_products values (5,1,53);
+	insert into allowed_menu_products values (5,1,54);
+	insert into allowed_menu_products values (5,1,55);
+
+#	menu for drinks, zero menu-price
+
+insert into premade_menu values (6,'Drinks Menu',0,'cola.png');
+	insert into allowed_menu_products values (6,1,12);
+	insert into allowed_menu_products values (6,1,13);
+	insert into allowed_menu_products values (6,1,14);
+	insert into allowed_menu_products values (6,1,15);
+	insert into allowed_menu_products values (6,1,16);
+	insert into allowed_menu_products values (6,1,17);
+	insert into allowed_menu_products values (6,1,18);
+	insert into allowed_menu_products values (6,1,19);
+	insert into allowed_menu_products values (6,1,20);
+	insert into allowed_menu_products values (6,1,21);
+	insert into allowed_menu_products values (6,1,30);
+	insert into allowed_menu_products values (6,1,31);
+	insert into allowed_menu_products values (6,1,32);
+	insert into allowed_menu_products values (6,1,33);
+	insert into allowed_menu_products values (6,1,34);
+	insert into allowed_menu_products values (6,1,35);
+	insert into allowed_menu_products values (6,1,36);
+	insert into allowed_menu_products values (6,1,37);
+	insert into allowed_menu_products values (6,1,40);
+	insert into allowed_menu_products values (6,1,41);
+	insert into allowed_menu_products values (6,1,42);
+	insert into allowed_menu_products values (6,1,43);
+	insert into allowed_menu_products values (6,1,44);
+	insert into allowed_menu_products values (6,1,45);
+	insert into allowed_menu_products values (6,1,46);
+	insert into allowed_menu_products values (6,1,47);
+
+#	menu for fries, zero menu-price
+
+insert into premade_menu values (7,'Fries Menu',0,'medium-fries.png');
+	insert into allowed_menu_products values (7,1,10);
+	insert into allowed_menu_products values (7,1,28);
+	insert into allowed_menu_products values (7,1,38);
+
+#	menu for wraps, zero menu-price
+
+insert into premade_menu values (8,'Wraps Menu',0,'wrap_chicken.jpg');
+	insert into allowed_menu_products values (8,1,1);
+	insert into allowed_menu_products values (8,1,2);
+	insert into allowed_menu_products values (8,1,3);

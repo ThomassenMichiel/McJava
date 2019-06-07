@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
 <FlowPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="be.mcjava.controller.MenuActionController"
@@ -26,11 +27,10 @@
         <VBox fx:id="productsvbox" prefHeight="40">
             <Label text="Products"/>
         </VBox>
-        <HBox alignment="CENTER" spacing="175">
-                    <Label text="Burgers"/>
-                    <Label text="Wraps"/>
-                    <Label text="Fries"/>
-                    <Label text="Drinks"/>
+        <HBox fx:id="productshbox" alignment="CENTER">
+
         </HBox>
+        <GridPane fx:id="productsgrid"/>
+        <Button fx:id="finishorderbutton" text="Confirm Order" onAction="#finishOrderPressed"/>
     </VBox>
 </FlowPane>

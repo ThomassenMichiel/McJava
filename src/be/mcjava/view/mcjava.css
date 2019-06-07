@@ -39,21 +39,12 @@
     -fx-background-color: blue;
 }
 
-#ingredientsheadervbox{
+#headerhbox{
     -fx-background-color: #27742d;
 }
 
-#ingredientsheadervbox .label{
+#headerhbox .label{
     -fx-text-fill: #ffd700;
-}
-
-#headingvbox .label{
-    -fx-text-fill: #ffd700;
-}
-
-#headingvbox {
-    -fx-background-color: rgba(39,116,45,1);
-    -fx-alignment: center;
 }
 
 #productsvbox {
@@ -63,4 +54,8 @@
 
 #productsvbox .label{
     -fx-text-fill: #ffd700;
+}
+
+#mainproductsgrid .button{
+    -fx-font: 10px Magneto;
 }
