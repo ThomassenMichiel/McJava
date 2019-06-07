@@ -1,6 +1,7 @@
 package be.mcjava.controller;
 
 import be.mcjava.dao.PreMadeOrderMenuDao;
+import be.mcjava.model.CustomerOrder;
 import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.service.CustomerOrderService;
 import be.mcjava.service.PreMadeOrderMenuService;
@@ -29,7 +30,7 @@ public class MenuActionController {
     private GridPane productsgrid;
 
     @FXML
-    HBox productshbox;
+    private HBox productshbox;
 
     private List<PreMadeOrderMenu> mainPreMadeOrderMenuList;
     private List<PreMadeOrderMenu> productsPreMadeOrderMenuList;
@@ -114,6 +115,8 @@ public class MenuActionController {
     }
 
     public void finishOrderPressed(ActionEvent actionEvent) {
+        System.out.println(CustomerOrderService.customerOrder);
         CustomerOrderService.saveCustomerOrder();
+        System.out.println("ordered");
     }
 }

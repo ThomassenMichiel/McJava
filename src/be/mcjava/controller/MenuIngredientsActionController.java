@@ -84,7 +84,7 @@ public class MenuIngredientsActionController {
         addProductToProductsToOrderList(clickedButton.getText());
     }
 
-    private void addProductToProductsToOrderList(String productName){
+    private void addProductToProductsToOrderList(String productName) {
         ProductsDao productsDao = new ProductsDao();
         Product product = productsDao.getProductsByName(productName).get(0);
         SingleOrderItem singleOrderItem = new SingleOrderItem();
@@ -121,16 +121,14 @@ public class MenuIngredientsActionController {
         targetVBox.getChildren().add(clickedButton);
     }
 
-
-
     @FXML
     public void confirmOrderPressed(ActionEvent actionEvent) {
         addProductToPreMadeMenu(productsToOrderList);
-        if(CustomerOrderService.customerOrder.getItemsToOrder() == null){
+        if (CustomerOrderService.customerOrder.getItemsToOrder() == null) {
             List<AbstractOrderItem> orderList = new ArrayList<>();
             orderList.add(preMadeOrderMenu);
             CustomerOrderService.customerOrder.setItemsToOrder(orderList);
-        }else{
+        } else {
             CustomerOrderService.customerOrder.addItem(preMadeOrderMenu);
         }
         ViewManager viewManager = new ViewManager();

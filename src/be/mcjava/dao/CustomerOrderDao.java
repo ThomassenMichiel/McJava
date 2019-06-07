@@ -1,11 +1,14 @@
 package be.mcjava.dao;
 
+import be.mcjava.model.AbstractOrderItem;
 import be.mcjava.model.CustomerOrder;
+import be.mcjava.model.SingleOrderItem;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class CustomerOrderDao {
 
@@ -23,7 +26,9 @@ public class CustomerOrderDao {
                     generatedKey = resultSet.getLong(1);
                 }
             }
-            OrderItemDao.saveOrderItems(customerOrder.getItemsToOrder(),generatedKey);
+            AbstractOrderItem abstractOrderItem = customerOrder.getItemsToOrder().get(0);
+            List<SingleOrderItem> singleOrderItemList = (List<SingleOrderItem>) abstractOrderItem.getItems();
+            OrderItemDao.saveOrderItems(singleOrderItemList,generatedKey);
         } catch (SQLException e) {
             e.printStackTrace();
         }
