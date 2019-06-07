@@ -1,12 +1,12 @@
 package be.mcjava.model;
 
 public class AllowedMenuProduct {
-    private String premadeMenuName;
+    private String preMadeMenuName;
     private Integer itemPositionInMenu;
     private String productName;
 
-    public String getPremadeMenuName() {
-        return premadeMenuName;
+    public String getPreMadeMenuName() {
+        return preMadeMenuName;
     }
 
     public Integer getItemPositionInMenu() {
@@ -17,8 +17,8 @@ public class AllowedMenuProduct {
         return productName;
     }
 
-    public AllowedMenuProduct(String premadeMenuName, Integer itemPositionInMenu, String productName) {
-        this.premadeMenuName = premadeMenuName;
+    public AllowedMenuProduct(String preMadeMenuName, Integer itemPositionInMenu, String productName) {
+        this.preMadeMenuName = preMadeMenuName;
         this.itemPositionInMenu = itemPositionInMenu;
         this.productName = productName;
 

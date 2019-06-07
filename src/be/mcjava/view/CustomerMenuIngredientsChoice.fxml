@@ -26,7 +26,7 @@
         <GridPane fx:id="mainproductsgrid">
 
         </GridPane>
-        <VBox fx:id="productsvbox" prefHeight="40"/>
+        <HBox fx:id="productshbox"/>
         <HBox>
         <Button fx:id="confirmorderbutton" text="Confirm Order" onAction="#confirmOrderPressed"/>
         <Button fx:id="cancelorderbutton" text="Cancel Order" onAction="#cancelOrderPressed"/>
