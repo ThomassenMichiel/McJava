@@ -26,12 +26,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class MenuIngredientsActionController {
-    @FXML
-    private HBox headerhbox;
-
-    @FXML
-    private GridPane mainproductsgrid;
-
     private VBox chosenVBox;
 
     private VBox productsOverviewVBox;
@@ -58,32 +52,13 @@ public class MenuIngredientsActionController {
     }
 
     @FXML
-    private void menuProductClicked(MouseEvent mouseEvent) {
-        Button clickedButton = (Button) mouseEvent.getSource();
-        VBox clickedButtonParentVBox = (VBox) clickedButton.getParent();
-        Integer clickedGridPaneColumnIndex = GridPane.getColumnIndex(clickedButtonParentVBox);
-        removeProductFromOverview(clickedButton, clickedButtonParentVBox, clickedGridPaneColumnIndex);
-
-        addProductToProductsToOrderList(clickedButton.getText());
-    }
-
-    @FXML
-    private void chosenMenuProductClicked(MouseEvent mouseEvent) {
-        Button clickedButton = (Button) mouseEvent.getSource();
-        clickedButton.setOnMouseClicked(mouseEvent2 -> menuProductClicked(mouseEvent2));
-        VBox clickedVBox = (VBox) clickedButton.getParent();
-        clickedVBox.getChildren().remove(clickedButton);
-        Integer clickedGridPaneColumnIndex = GridPane.getColumnIndex(clickedVBox);
-        VBox targetVBox = (VBox) getNodeFromGridPane(mainproductsgrid, clickedGridPaneColumnIndex, 0);
-        targetVBox.getChildren().add(clickedButton);
-    }
-
-    @FXML
     public void confirmOrderPressed(ActionEvent actionEvent) {
+        List<String> productToOrderNamesList = new ArrayList<>();
         for (ListView listView : listViewList) {
-            addProductToProductsToOrderList((String) listView.getSelectionModel().getSelectedItems().get(0));
+            String chosenProductName = (String) listView.getSelectionModel().getSelectedItems().get(0);
+            productToOrderNamesList.add(chosenProductName);
         }
-        PreMadeOrderMenuService.addProductsListToPreMadeOrderMenu(productsToOrderList);
+        PreMadeOrderMenuService.addProductsToCurrentPreMadeMenuOrder(productToOrderNamesList);
         CustomerOrderService.addCurrentPreMadeMenu();
         viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
     }
@@ -92,31 +67,6 @@ public class MenuIngredientsActionController {
         //Todo: check if all needed items are chosen
         //Todo: cancel current menu-creation, remove already created obj
         viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
-    }
-
-    private void addProductToProductsToOrderList(String productName) {
-        ProductsDao productsDao = new ProductsDao();
-        Product product = productsDao.getProductsByName(productName).get(0);
-        SingleOrderItem singleOrderItem = new SingleOrderItem();
-        singleOrderItem.setItems(product);
-        singleOrderItem.setAmount(1);
-        productsToOrderList.add(singleOrderItem);
-    }
-
-    private void removeProductFromOverview(Button buttonToRemove, VBox fromVBox, Integer clickedGridPaneColumnIndex) {
-        buttonToRemove.setOnMouseClicked(mouseEvent -> chosenMenuProductClicked(mouseEvent));
-        VBox targetVBox = (VBox) getNodeFromGridPane(mainproductsgrid, clickedGridPaneColumnIndex, 1);
-        targetVBox.getChildren().add(buttonToRemove);
-        fromVBox.getChildren().remove(buttonToRemove);
-    }
-
-    private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
-        for (Node node : gridPane.getChildren()) {
-            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-                return node;
-            }
-        }
-        return null;
     }
 
     private void buildPreMadeMenuAllowedItemsOverview() {
@@ -134,28 +84,5 @@ public class MenuIngredientsActionController {
             listViewList.add(productsListView);
             productshbox.getChildren().add(productsListView);
         }
-
-/*
-        //get number of columns needed
-        int columnsNeeded = 0;
-        for (AllowedMenuProduct allowedMenuProduct : allowedMenuProductList) {
-            if (allowedMenuProduct.getItemPositionInMenu() > columnsNeeded) {
-                columnsNeeded = allowedMenuProduct.getItemPositionInMenu();
-            }
-        }
-        //create vboxes inside all needed columns on the gridPane and one row lower for chosen products
-        for (int i = 0; i < columnsNeeded; i++) {
-            VBox vBox = new VBox();
-            mainproductsgrid.add(vBox, i, 0);
-            VBox vBox2 = new VBox();
-            mainproductsgrid.add(vBox2, i, 1);
-        }
-        for (AllowedMenuProduct allowedMenuProduct : allowedMenuProductList) {
-            Button button = new Button(allowedMenuProduct.getProductName());
-            button.setOnMouseClicked(mouseEvent -> menuProductClicked(mouseEvent));
-            VBox vBox = (VBox) getNodeFromGridPane(mainproductsgrid, allowedMenuProduct.getItemPositionInMenu() - 1, 0);
-            vBox.getChildren().add(button);
-        }
-        */
     }
 }

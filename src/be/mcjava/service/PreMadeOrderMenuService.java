@@ -2,11 +2,15 @@ package be.mcjava.service;
 
 import be.mcjava.dao.PreMadeOrderMenuDao;
 import be.mcjava.model.PreMadeOrderMenu;
+import be.mcjava.model.Product;
 import be.mcjava.model.SingleOrderItem;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import static be.mcjava.service.ProductService.getProductByName;
 
 public class PreMadeOrderMenuService {
     private static PreMadeOrderMenuDao preMadeOrderMenuDao = new PreMadeOrderMenuDao();
@@ -52,17 +56,25 @@ public class PreMadeOrderMenuService {
     }
 
     /***
-     * adds to select choices as a list of SingleOrderItems to the current PreMadeOrderMenu
-     * @param productsToOrderList
-     */
-    public static void addProductsListToPreMadeOrderMenu(List<SingleOrderItem> productsToOrderList) {
-        preMadeOrderMenu.setItems(productsToOrderList);
-    }
-
-    /***
      * resets current PreMadeMenu
      */
     public static void resetCurrentPreMadeOrderMenu() {
         preMadeOrderMenu = null;
+    }
+
+    /***
+     * adds a list of Products as SingleOrderItems to the current PreMadeOrderMenu
+     * @param productToOrderNamesList
+     */
+    public static void addProductsToCurrentPreMadeMenuOrder(List<String> productToOrderNamesList) {
+        List<SingleOrderItem> singleOrderItemList = new ArrayList<>();
+        for (String productName : productToOrderNamesList) {
+            Product product = ProductService.getProductByName(productName);
+            SingleOrderItem singleOrderItem = new SingleOrderItem();
+            singleOrderItem.setItems(product);
+            singleOrderItem.setAmount(1);
+            singleOrderItemList.add(singleOrderItem);
+        }
+        preMadeOrderMenu.setItems(singleOrderItemList);
     }
 }
