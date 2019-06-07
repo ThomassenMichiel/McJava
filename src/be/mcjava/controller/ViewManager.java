@@ -16,7 +16,6 @@ public class ViewManager {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlName));
             scene.setRoot(loader.load());
-
         } catch (IOException e) {
             e.printStackTrace();
         }
