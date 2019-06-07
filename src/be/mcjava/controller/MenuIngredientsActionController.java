@@ -2,7 +2,11 @@ package be.mcjava.controller;
 
 import be.mcjava.dao.AllowedMenuProductsDao;
 import be.mcjava.dao.ProductsDao;
-import be.mcjava.model.*;
+import be.mcjava.model.AllowedMenuProduct;
+import be.mcjava.model.PreMadeOrderMenu;
+import be.mcjava.model.Product;
+import be.mcjava.model.SingleOrderItem;
+import be.mcjava.service.AllowedMenuProductService;
 import be.mcjava.service.CustomerOrderService;
 import be.mcjava.service.PreMadeOrderMenuService;
 import javafx.event.ActionEvent;
@@ -28,20 +32,82 @@ public class MenuIngredientsActionController {
 
     private VBox productsOverviewVBox;
 
+    private ViewManager viewManager = new ViewManager();
+
     private List<Product> productList;
 
     private PreMadeOrderMenu preMadeOrderMenu;
 
     private List<SingleOrderItem> productsToOrderList = new ArrayList<>();
 
+    private List<AllowedMenuProduct> allowedMenuProductList;
+
     @FXML
     public void initialize() {
-        preMadeOrderMenu = PreMadeOrderMenuService.preMadeOrderMenu;
+        allowedMenuProductList = AllowedMenuProductService.getAllowedMenuProductsByPremadeMenuName();
+        buildPreMadeMenuAllowedItemsOverrview();
+    }
 
-        AllowedMenuProductsDao allowedMenuProductsDao = new AllowedMenuProductsDao();
-        List<AllowedMenuProduct> allowedMenuProductList =
-                allowedMenuProductsDao.getAllowedMenuProductsByPremadeMenuName(preMadeOrderMenu.getName());
-        //productsOverviewVBox = new VBox();
+    @FXML
+    private void chosenMenuProductClicked(MouseEvent mouseEvent) {
+        Button clickedButton = (Button) mouseEvent.getSource();
+        clickedButton.setOnMouseClicked(mouseEvent2 -> menuProductClicked(mouseEvent2));
+        VBox clickedVBox = (VBox) clickedButton.getParent();
+        clickedVBox.getChildren().remove(clickedButton);
+        Integer clickedGridPaneColumnIndex = GridPane.getColumnIndex(clickedVBox);
+        VBox targetVBox = (VBox) getNodeFromGridPane(mainproductsgrid, clickedGridPaneColumnIndex, 0);
+        targetVBox.getChildren().add(clickedButton);
+    }
+
+    @FXML
+    private void menuProductClicked(MouseEvent mouseEvent) {
+        Button clickedButton = (Button) mouseEvent.getSource();
+        VBox clickedButtonParentVBox = (VBox) clickedButton.getParent();
+        Integer clickedGridPaneColumnIndex = GridPane.getColumnIndex(clickedButtonParentVBox);
+        removeProductFromOverview(clickedButton, clickedButtonParentVBox, clickedGridPaneColumnIndex);
+
+        addProductToProductsToOrderList(clickedButton.getText());
+    }
+
+    @FXML
+    public void confirmOrderPressed(ActionEvent actionEvent) {
+        PreMadeOrderMenuService.addProductsListToPreMadeOrderMenu(productsToOrderList);
+        CustomerOrderService.addCurrentPreMadeMenu();
+        viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
+    }
+
+    public void cancelOrderPressed(ActionEvent actionEvent) {
+        //Todo: check if all needed items are chosen
+        //Todo: cencel current menu-creation, remove already created obj
+        viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
+    }
+
+    private void addProductToProductsToOrderList(String productName) {
+        ProductsDao productsDao = new ProductsDao();
+        Product product = productsDao.getProductsByName(productName).get(0);
+        SingleOrderItem singleOrderItem = new SingleOrderItem();
+        singleOrderItem.setItems(product);
+        singleOrderItem.setAmount(1);
+        productsToOrderList.add(singleOrderItem);
+    }
+
+    private void removeProductFromOverview(Button buttonToRemove, VBox fromVBox, Integer clickedGridPaneColumnIndex) {
+        buttonToRemove.setOnMouseClicked(mouseEvent -> chosenMenuProductClicked(mouseEvent));
+        VBox targetVBox = (VBox) getNodeFromGridPane(mainproductsgrid, clickedGridPaneColumnIndex, 1);
+        targetVBox.getChildren().add(buttonToRemove);
+        fromVBox.getChildren().remove(buttonToRemove);
+    }
+
+    private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+        for (Node node : gridPane.getChildren()) {
+            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+                return node;
+            }
+        }
+        return null;
+    }
+
+    private void buildPreMadeMenuAllowedItemsOverrview() {
         //get number of columns needed
         int columnsNeeded = 0;
         for (AllowedMenuProduct allowedMenuProduct : allowedMenuProductList) {
@@ -62,82 +128,5 @@ public class MenuIngredientsActionController {
             VBox vBox = (VBox) getNodeFromGridPane(mainproductsgrid, allowedMenuProduct.getItemPositionInMenu() - 1, 0);
             vBox.getChildren().add(button);
         }
-    }
-
-    private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
-        for (Node node : gridPane.getChildren()) {
-            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-                return node;
-            }
-        }
-        return null;
-    }
-
-    @FXML
-    private void menuProductClicked(MouseEvent mouseEvent) {
-        Button clickedButton = (Button) mouseEvent.getSource();
-        VBox clickedButtonParentVBox = (VBox) clickedButton.getParent();
-        Integer clickedGridPaneColumnIndex = GridPane.getColumnIndex(clickedButtonParentVBox);
-        removeProductFromOverview(clickedButton, clickedButtonParentVBox, clickedGridPaneColumnIndex);
-
-
-        addProductToProductsToOrderList(clickedButton.getText());
-    }
-
-    private void addProductToProductsToOrderList(String productName) {
-        ProductsDao productsDao = new ProductsDao();
-        Product product = productsDao.getProductsByName(productName).get(0);
-        SingleOrderItem singleOrderItem = new SingleOrderItem();
-        singleOrderItem.setItems(product);
-        singleOrderItem.setAmount(1);
-        productsToOrderList.add(singleOrderItem);
-    }
-
-    private void addProductToPreMadeMenu(List<SingleOrderItem> productList) {
-        preMadeOrderMenu.setItems(productList);
-        /*if(preMadeOrderMenu.getItems() == null){
-            preMadeOrderMenu.setItems(Arrays.asList(singleOrderItem));
-        }else {
-            List<SingleOrderItem> alreadyOrderedItems = preMadeOrderMenu.getItems();
-            System.out.println("outcome --> "+alreadyOrderedItems.add(singleOrderItem));
-            preMadeOrderMenu.setItems(alreadyOrderedItems);
-        }*/
-    }
-
-    private void removeProductFromOverview(Button buttonToRemove, VBox fromVBox, Integer clickedGridPaneColumnIndex) {
-        buttonToRemove.setOnMouseClicked(mouseEvent -> chosenMenuProductClicked(mouseEvent));
-        VBox targetVBox = (VBox) getNodeFromGridPane(mainproductsgrid, clickedGridPaneColumnIndex, 1);
-        targetVBox.getChildren().add(buttonToRemove);
-        fromVBox.getChildren().remove(buttonToRemove);
-    }
-
-    @FXML
-    private void chosenMenuProductClicked(MouseEvent mouseEvent) {
-        Button clickedButton = (Button) mouseEvent.getSource();
-        clickedButton.setOnMouseClicked(mouseEvent2 -> menuProductClicked(mouseEvent2));
-        VBox clickedVBox = (VBox) clickedButton.getParent();
-        clickedVBox.getChildren().remove(clickedButton);
-        Integer clickedGridPaneColumnIndex = GridPane.getColumnIndex(clickedVBox);
-        VBox targetVBox = (VBox) getNodeFromGridPane(mainproductsgrid, clickedGridPaneColumnIndex, 0);
-        targetVBox.getChildren().add(clickedButton);
-    }
-
-    @FXML
-    public void confirmOrderPressed(ActionEvent actionEvent) {
-        addProductToPreMadeMenu(productsToOrderList);
-        if (CustomerOrderService.customerOrder.getItemsToOrder() == null) {
-            List<AbstractOrderItem> orderList = new ArrayList<>();
-            orderList.add(preMadeOrderMenu);
-            CustomerOrderService.customerOrder.setItemsToOrder(orderList);
-        } else {
-            CustomerOrderService.customerOrder.addItem(preMadeOrderMenu);
-        }
-        ViewManager viewManager = new ViewManager();
-        viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
-    }
-
-    public void cancelOrderPressed(ActionEvent actionEvent) {
-        //Todo: check if all needed items are chosen
-        //Todo: cencel current menu-creation, remove already created obj
     }
 }

@@ -2,6 +2,7 @@ package be.mcjava.service;
 
 import be.mcjava.dao.PreMadeOrderMenuDao;
 import be.mcjava.model.PreMadeOrderMenu;
+import be.mcjava.model.SingleOrderItem;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -48,5 +49,20 @@ public class PreMadeOrderMenuService {
      */
     public static PreMadeOrderMenu getOriginalPremadeOrderByMenuName(List<PreMadeOrderMenu> preMadeOrderMenuList, String menuName) {
         return preMadeOrderMenuList.stream().filter(p -> p.getName().equals(menuName)).findFirst().get();
+    }
+
+    /***
+     * adds to select choices as a list of SingleOrderItems to the current PreMadeOrderMenu
+     * @param productsToOrderList
+     */
+    public static void addProductsListToPreMadeOrderMenu(List<SingleOrderItem> productsToOrderList) {
+        preMadeOrderMenu.setItems(productsToOrderList);
+    }
+
+    /***
+     * resets current PreMadeMenu
+     */
+    public static void resetCurrentPreMadeOrderMenu() {
+        preMadeOrderMenu = null;
     }
 }

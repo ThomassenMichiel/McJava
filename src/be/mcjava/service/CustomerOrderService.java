@@ -80,4 +80,13 @@ public class CustomerOrderService {
     public static void cancelCustomerOrder() {
         customerOrder = null;
     }
+
+    /***
+     * adds the current PreMadeMenu to the current CustomerOrder
+     * and then resets current PreMadeMenu
+     */
+    public static void addCurrentPreMadeMenu() {
+        customerOrder.addItem(PreMadeOrderMenuService.preMadeOrderMenu);
+        PreMadeOrderMenuService.resetCurrentPreMadeOrderMenu();
+    }
 }
