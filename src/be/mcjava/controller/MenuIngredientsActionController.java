@@ -89,6 +89,7 @@ public class MenuIngredientsActionController {
         Product product = productsDao.getProductsByName(productName).get(0);
         SingleOrderItem singleOrderItem = new SingleOrderItem();
         singleOrderItem.setItems(product);
+        singleOrderItem.setAmount(1);
         productsToOrderList.add(singleOrderItem);
     }
 

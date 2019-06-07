@@ -36,6 +36,8 @@ public class MenuActionController {
     @FXML
     private Button finishorderbutton;
 
+    private ViewManager viewManager = new ViewManager();
+
     private List<PreMadeOrderMenu> mainPreMadeOrderMenuList;
     private List<PreMadeOrderMenu> productsPreMadeOrderMenuList;
     private PreMadeOrderMenuDao preMadeOrderMenuDao;
@@ -119,11 +121,17 @@ public class MenuActionController {
     }
 
     private void displayMenuItemsChoiceView() {
-        ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("../view/CustomerMenuIngredientsChoice.fxml");
     }
 
     public void finishOrderPressed(ActionEvent actionEvent) {
         CustomerOrderService.saveCustomerOrder();
+        viewManager.displayFmxlScreen("../view/CustomerLoginScreen.fxml");
+    }
+
+    public void cancelOrderPressed(ActionEvent actionEvent) {
+        CustomerOrder c = CustomerOrderService.customerOrder;
+        CustomerOrderService.cancelCustomerOrder();
+        viewManager.displayFmxlScreen("../view/CustomerLoginScreen.fxml");
     }
 }

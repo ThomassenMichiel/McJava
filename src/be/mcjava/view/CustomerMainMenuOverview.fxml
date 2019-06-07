@@ -32,5 +32,6 @@
         </HBox>
         <GridPane fx:id="productsgrid"/>
         <Button fx:id="finishorderbutton" text="Confirm Order" onAction="#finishOrderPressed"/>
+        <Button fx:id="cancelorderbutton" text="Cancel Order" onAction="#cancelOrderPressed"/>
     </VBox>
 </FlowPane>

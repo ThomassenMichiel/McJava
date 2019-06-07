@@ -2,8 +2,11 @@ package be.mcjava.service;
 
 
 import be.mcjava.dao.CustomerOrderDao;
+import be.mcjava.model.AbstractOrderItem;
 import be.mcjava.model.CustomerOrder;
 import be.mcjava.model.PreMadeOrderMenu;
+
+import java.util.LinkedList;
 
 public class CustomerOrderService {
     public static CustomerOrder customerOrder;
@@ -60,6 +63,7 @@ public class CustomerOrderService {
      */
     public static void saveCustomerOrder() {
         customerOrderDao.saveCustomerOrder(customerOrder);
+        customerOrder = null;
     }
 
     /***
@@ -68,5 +72,12 @@ public class CustomerOrderService {
      */
     public static boolean isOrderValid() {
         return customerOrder.getItemsToOrder().size() > 0;
+    }
+
+    /***
+     * this removes the currentCustomerOrder
+     */
+    public static void cancelCustomerOrder() {
+        customerOrder = null;
     }
 }
