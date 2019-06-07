@@ -6,7 +6,6 @@ import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.dao.PreMadeOrderMenuDao;
 import be.mcjava.service.ChosenProductService;
 import be.mcjava.service.CustomerOrderService;
-import be.mcjava.service.PreMadeMenuService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -102,22 +101,10 @@ public class MenuActionController {
     private void menusClicked(MouseEvent mouseEvent) throws IOException {
         VBox vBox = (VBox) mouseEvent.getSource();
         Label label = (Label) vBox.getChildren().get(1);
-        PreMadeOrderMenu originalPreMadeOrderMenu = mainPreMadeOrderMenuList.stream().filter(p -> p.getName().equals(label.getText())).findFirst().get();
 
+        PreMadeOrderMenu originalPreMadeOrderMenu = mainPreMadeOrderMenuList.stream().filter(p -> p.getName().equals(label.getText())).findFirst().get();
         CustomerOrderService.createNewOrderItem(label.getText(),originalPreMadeOrderMenu);
-        /*long id = 1L;
-        if(CustomerOrderService.customerOrder.getItemsToOrder() != null) {
-            id += CustomerOrderService.customerOrder.getItemsToOrder().size();
-        }
-        PreMadeOrderMenu preMadeOrderMenu = new PreMadeOrderMenu.Builder()
-                .withId(id)
-                .withName(label.getText())
-                .withPrice(originalPreMadeOrderMenu.getPrice())
-                .withAmount(1)
-                .build();
-        PreMadeMenuService.preMadeOrderMenu = preMadeOrderMenu;*/
-        //CustomerOrderService.customerOrder.addItem(preMadeOrderMenu);
-        //PreMadeMenuService preMadeMenuService = new PreMadeMenuService();
+
         ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("../view/CustomerMenuIngredientsChoice.fxml");
     }

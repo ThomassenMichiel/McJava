@@ -4,7 +4,7 @@ import be.mcjava.model.PreMadeOrderMenu;
 
 import java.math.BigDecimal;
 
-public class PreMadeMenuService {
+public class PreMadeOrderMenuService {
     public static PreMadeOrderMenu preMadeOrderMenu;
 
     /***

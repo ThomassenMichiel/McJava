@@ -4,8 +4,6 @@ package be.mcjava.service;
 import be.mcjava.model.CustomerOrder;
 import be.mcjava.model.PreMadeOrderMenu;
 
-import java.math.BigDecimal;
-
 public class CustomerOrderService {
     public static CustomerOrder customerOrder;
 
@@ -35,7 +33,7 @@ public class CustomerOrderService {
      * @param orginalOrderItem)
      */
     public static void createNewOrderItem(String orderItemName, PreMadeOrderMenu orginalOrderItem) {
-        PreMadeMenuService.createPreMadeOrderMenu(getNextOrderItemId(),orderItemName,orginalOrderItem.getPrice());
+        PreMadeOrderMenuService.createPreMadeOrderMenu(getNextOrderItemId(),orderItemName,orginalOrderItem.getPrice());
     }
 
     /***

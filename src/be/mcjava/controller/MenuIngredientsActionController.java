@@ -4,7 +4,7 @@ import be.mcjava.dao.AllowedMenuProductsDao;
 import be.mcjava.dao.ProductsDao;
 import be.mcjava.model.*;
 import be.mcjava.service.CustomerOrderService;
-import be.mcjava.service.PreMadeMenuService;
+import be.mcjava.service.PreMadeOrderMenuService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -15,7 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MenuIngredientsActionController {
@@ -37,7 +36,7 @@ public class MenuIngredientsActionController {
 
     @FXML
     public void initialize() {
-        preMadeOrderMenu = PreMadeMenuService.preMadeOrderMenu;
+        preMadeOrderMenu = PreMadeOrderMenuService.preMadeOrderMenu;
 
         AllowedMenuProductsDao allowedMenuProductsDao = new AllowedMenuProductsDao();
         List<AllowedMenuProduct> allowedMenuProductList =
