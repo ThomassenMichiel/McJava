@@ -17,6 +17,11 @@ public class SingleOrderItem extends AbstractOrderItem<Product> {
         private int amount;
         private BigDecimal price;
         
+        public Builder(Product product) {
+            this.product = product;
+            this.price = BigDecimal.ZERO;
+        }
+        
         public Builder withId(Long id) {
             this.id = id;
             return this;

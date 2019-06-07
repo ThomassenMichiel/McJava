@@ -1,5 +1,6 @@
 package be.mcjava.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,6 +8,10 @@ import java.util.List;
  */
 public class Menu {
     private List<Product> products;
+    
+    public Menu() {
+        products = new ArrayList<>();
+    }
     
     public List<Product> getProducts() {
         return products;

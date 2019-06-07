@@ -1,6 +1,7 @@
 package be.mcjava.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -102,7 +103,11 @@ public class CustomerOrder {
         private String name;
         private String telephoneNumber;
         private List<AbstractOrderItem> itemsToOrder;
-        
+    
+        public Builder() {
+            this.itemsToOrder = new ArrayList<>();
+        }
+    
         public Builder withId(Long id) {
             this.id = id;
             return this;
