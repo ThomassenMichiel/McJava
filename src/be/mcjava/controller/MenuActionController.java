@@ -8,6 +8,7 @@ import be.mcjava.service.PreMadeOrderMenuService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,6 +33,11 @@ public class MenuActionController {
     @FXML
     private HBox productshbox;
 
+    @FXML
+    private Button finishorderbutton;
+
+    private ViewManager viewManager = new ViewManager();
+
     private List<PreMadeOrderMenu> mainPreMadeOrderMenuList;
     private List<PreMadeOrderMenu> productsPreMadeOrderMenuList;
     private PreMadeOrderMenuDao preMadeOrderMenuDao;
@@ -44,6 +50,11 @@ public class MenuActionController {
     public void initialize() throws FileNotFoundException, SQLException {
         getMenuData();
         addMenusToGrid();
+        if (CustomerOrderService.isOrderValid()) {
+            finishorderbutton.setDisable(false);
+        } else {
+            finishorderbutton.setDisable(true);
+        }
     }
 
     private void getMenuData() throws SQLException {
@@ -110,13 +121,17 @@ public class MenuActionController {
     }
 
     private void displayMenuItemsChoiceView() {
-        ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("../view/CustomerMenuIngredientsChoice.fxml");
     }
 
     public void finishOrderPressed(ActionEvent actionEvent) {
         CustomerOrderService.saveCustomerOrder();
-        ViewManager viewManager = new ViewManager();
-        viewManager.displayFmxlScreen("/be/mcjava/view/CustomerReceiptScreen.fxml");
+        viewManager.displayFmxlScreen("../view/CustomerReceiptScreen.fxml");
+    }
+
+    public void cancelOrderPressed(ActionEvent actionEvent) {
+        CustomerOrder c = CustomerOrderService.customerOrder;
+        CustomerOrderService.cancelCustomerOrder();
+        viewManager.displayFmxlScreen("../view/CustomerLoginScreen.fxml");
     }
 }

@@ -2,8 +2,10 @@ package be.mcjava.service;
 
 
 import be.mcjava.dao.CustomerOrderDao;
-import be.mcjava.model.CustomerOrder;
-import be.mcjava.model.PreMadeOrderMenu;
+import be.mcjava.model.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerOrderService {
     public static CustomerOrder customerOrder;
@@ -55,10 +57,53 @@ public class CustomerOrderService {
     }
 
     /***
-     * this saves the current order into the database
+     * this saves the current CustomerOrder into the database
      * by using the CustomerOrderDao
      */
     public static void saveCustomerOrder() {
         customerOrderDao.saveCustomerOrder(customerOrder);
+        adjustStock();
+    }
+
+    /***
+     * when a CustomerOrder is saved to the DB the stock of the ingredients of the items
+     * or products in that order need to be adjusted
+     * We get a list of all products and send it to the ProductService to adjust
+     * the stock for them
+     */
+    private static void adjustStock() {
+        List<Product> allProductsInACustomerOrder = new ArrayList<>();
+        List<AbstractOrderItem> abstractOrderItemList = customerOrder.getItemsToOrder();
+        for (AbstractOrderItem abstractOrderItem : abstractOrderItemList) {
+            List<SingleOrderItem> singleOrderItemList = (List<SingleOrderItem>) abstractOrderItem.getItems();
+            for (SingleOrderItem singleOrderItem : singleOrderItemList) {
+                allProductsInACustomerOrder.add(singleOrderItem.getItems());
+            }
+        }
+        ProductService.removeIngredientsFromStock(allProductsInACustomerOrder);
+    }
+
+    /***
+     * returns if an order has OrderItems present or not
+     * @return
+     */
+    public static boolean isOrderValid() {
+        return customerOrder.getItemsToOrder().size() > 0;
+    }
+
+    /***
+     * this removes the current CustomerOrder
+     */
+    public static void cancelCustomerOrder() {
+        customerOrder = null;
+    }
+
+    /***
+     * adds the current PreMadeMenu to the current CustomerOrder
+     * and then resets current PreMadeMenu
+     */
+    public static void addCurrentPreMadeMenu() {
+        customerOrder.addItem(PreMadeOrderMenuService.preMadeOrderMenu);
+        PreMadeOrderMenuService.resetCurrentPreMadeOrderMenu();
     }
 }
