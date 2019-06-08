@@ -2,11 +2,10 @@ package be.mcjava.service;
 
 
 import be.mcjava.dao.CustomerOrderDao;
-import be.mcjava.model.AbstractOrderItem;
-import be.mcjava.model.CustomerOrder;
-import be.mcjava.model.PreMadeOrderMenu;
+import be.mcjava.model.*;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerOrderService {
     public static CustomerOrder customerOrder;
@@ -63,7 +62,26 @@ public class CustomerOrderService {
      */
     public static void saveCustomerOrder() {
         customerOrderDao.saveCustomerOrder(customerOrder);
+        adjustStock();
         customerOrder = null;
+    }
+
+    /***
+     * when a CustomerOrder is saved to the DB the stock of the ingredients of the items
+     * or products in that order need to be adjusted
+     * We get a list of all products and send it to the ProductDao to adjust
+     * the stock for them
+     */
+    private static void adjustStock() {
+        List<Product> allProductsInACustomerOrder = new ArrayList<>();
+        List<AbstractOrderItem> abstractOrderItemList = customerOrder.getItemsToOrder();
+        for (AbstractOrderItem abstractOrderItem : abstractOrderItemList) {
+            List<SingleOrderItem> singleOrderItemList = (List<SingleOrderItem>) abstractOrderItem.getItems();
+            for (SingleOrderItem singleOrderItem : singleOrderItemList) {
+                allProductsInACustomerOrder.add(singleOrderItem.getItems());
+            }
+        }
+
     }
 
     /***
