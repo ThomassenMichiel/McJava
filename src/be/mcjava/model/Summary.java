@@ -1,26 +1,27 @@
 package be.mcjava.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 /**
  * The model class for the end-of-day report, containing all sales and made products
  */
 public class Summary {
-    private Map<Product, Integer> madeProducts;
+    private List<AbstractOrderItem> madeProducts;
     private BigDecimal dailyTotal;
     
-    public Summary(Map<Product, Integer> madeProducts) {
+    public Summary(List<AbstractOrderItem> madeProducts) {
         this.madeProducts = madeProducts;
         this.dailyTotal = BigDecimal.ZERO;
         calculateDailyTotal();
     }
     
-    public Map<Product, Integer> getMadeProducts() {
+    public List<AbstractOrderItem> getMadeProducts() {
         return madeProducts;
     }
     
-    public void setMadeProducts(Map<Product, Integer> madeProducts) {
+    public void setMadeProducts(List<AbstractOrderItem> madeProducts) {
         this.madeProducts = madeProducts;
     }
     
@@ -33,16 +34,9 @@ public class Summary {
     }
     
     public void calculateDailyTotal() {
-        BigDecimal total = madeProducts.entrySet()
-                .stream()
-                .map(this::getTotalOfSingleProduct)
+        BigDecimal total = madeProducts.stream()
+                .map(AbstractOrderItem::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         setDailyTotal(total);
-    }
-    
-    private BigDecimal getTotalOfSingleProduct(Map.Entry<Product, Integer> entry) {
-        return entry.getKey()
-                .getPrice()
-                .multiply(new BigDecimal(entry.getValue()));
     }
 }
