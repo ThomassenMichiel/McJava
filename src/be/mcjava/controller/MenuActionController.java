@@ -36,6 +36,9 @@ public class MenuActionController {
     @FXML
     private Button finishorderbutton;
 
+    @FXML
+    private Label totalOrderedLabel;
+
     private ViewManager viewManager = new ViewManager();
 
     private List<PreMadeOrderMenu> mainPreMadeOrderMenuList;
@@ -55,6 +58,7 @@ public class MenuActionController {
         } else {
             finishorderbutton.setDisable(true);
         }
+        totalOrderedLabel.setText(CustomerOrderService.customerOrder.getFinalPrice().toString() + " €");
     }
 
     private void getMenuData() throws SQLException {
