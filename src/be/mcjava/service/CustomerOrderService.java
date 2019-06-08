@@ -63,7 +63,6 @@ public class CustomerOrderService {
     public static void saveCustomerOrder() {
         customerOrderDao.saveCustomerOrder(customerOrder);
         adjustStock();
-        customerOrder = null;
     }
 
     /***
