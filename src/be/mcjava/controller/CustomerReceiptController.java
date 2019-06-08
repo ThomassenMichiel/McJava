@@ -5,19 +5,21 @@ import be.mcjava.model.CustomerOrder;
 import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.model.SingleOrderItem;
 import be.mcjava.service.CustomerOrderService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 
 public class CustomerReceiptController {
+    @FXML
+    private Button closingButton;
     @FXML
     private Text id;
     @FXML
@@ -37,6 +39,8 @@ public class CustomerReceiptController {
         GridPane.setMargin(id,new Insets(30,0,30,0));
         customerOrder.getItemsToOrder().forEach(this::addItemsToDisplay);
         setTotalPrice(customerOrder);
+        
+        GridPane.setRowIndex(closingButton,row);
     }
     
     private void setTotalPrice(CustomerOrder customerOrder) {
@@ -45,7 +49,7 @@ public class CustomerReceiptController {
         Text formattedPriceText = new Text(formattedPrice);
         GridPane.setMargin(totalText,new Insets(30,0,0,0));
         GridPane.setMargin(formattedPriceText,new Insets(30,0,0,0));
-        items.addRow(row,new Text(),totalText,formattedPriceText);
+        items.addRow(row++,new Text(),totalText,formattedPriceText);
     }
     
     private void setConstraints() {
@@ -86,5 +90,10 @@ public class CustomerReceiptController {
     private void addEachItemInAMenu(SingleOrderItem item) {
         String itemEntry = "\t- " + item.getItems().getName();
         items.add(new Text(itemEntry),0,row++);
+    }
+    
+    public void returnToMainMenu(ActionEvent actionEvent) {
+        ViewManager viewManager = new ViewManager();
+        viewManager.displayFmxlScreen("../view/CustomerLoginScreen.fxml");
     }
 }

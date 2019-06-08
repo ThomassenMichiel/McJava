@@ -4,6 +4,7 @@ import be.mcjava.model.AbstractOrderItem;
 import be.mcjava.model.CustomerOrder;
 import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.model.SingleOrderItem;
+import be.mcjava.service.CustomerOrderService;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +26,7 @@ public class CustomerOrderDao {
             try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
                 if (resultSet.next()) {
                     generatedKey = resultSet.getLong(1);
+                    CustomerOrderService.customerOrder.setId(generatedKey);
                 }
             }
             List<AbstractOrderItem> abstractOrderItemList = customerOrder.getItemsToOrder();

@@ -126,7 +126,7 @@ public class MenuActionController {
 
     public void finishOrderPressed(ActionEvent actionEvent) {
         CustomerOrderService.saveCustomerOrder();
-        viewManager.displayFmxlScreen("../view/CustomerLoginScreen.fxml");
+        viewManager.displayFmxlScreen("../view/CustomerReceiptScreen.fxml");
     }
 
     public void cancelOrderPressed(ActionEvent actionEvent) {
