@@ -2,7 +2,7 @@ package be.mcjava.dao;
 
 import be.mcjava.model.AbstractOrderItem;
 import be.mcjava.model.CustomerOrder;
-import be.mcjava.model.PreMadeOrderMenu;
+import be.mcjava.model.Product;
 import be.mcjava.model.SingleOrderItem;
 import be.mcjava.service.CustomerOrderService;
 
@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerOrderDao {
@@ -37,5 +38,33 @@ public class CustomerOrderDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<AbstractOrderItem> getOrderSummary() {
+        String sql = "select p.name, count(p.name) as count, p.id as productId, p.price as price, sum(p.price) as total\n" +
+                "from customer_order co\n" +
+                "       join customer_order_items coi on co.id = coi.customer_order_id\n" +
+                "       join order_item o on coi.order_item_id = o.id\n" +
+                "       join product p on o.product_id = p.id\n" +
+                "group by o.product_id\n";
+        try (PreparedStatement preparedStatement = DaoConnector.getConnection().prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            List<AbstractOrderItem> results = new ArrayList<>();
+            while (resultSet.next()) {
+                Product product = new Product.Builder(resultSet.getString("name"))
+                        .withId(resultSet.getLong("productId"))
+                        .withPrice(resultSet.getBigDecimal("price"))
+                        .build();
+                SingleOrderItem singleOrderItem = new SingleOrderItem.Builder(product)
+                        .withAmount(resultSet.getInt("count"))
+                        .withPrice(resultSet.getBigDecimal("total"))
+                        .build();
+                results.add(singleOrderItem);
+            }
+            return results;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
