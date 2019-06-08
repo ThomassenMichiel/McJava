@@ -69,7 +69,7 @@ public class CustomerOrderService {
     /***
      * when a CustomerOrder is saved to the DB the stock of the ingredients of the items
      * or products in that order need to be adjusted
-     * We get a list of all products and send it to the ProductDao to adjust
+     * We get a list of all products and send it to the ProductService to adjust
      * the stock for them
      */
     private static void adjustStock() {
@@ -81,7 +81,7 @@ public class CustomerOrderService {
                 allProductsInACustomerOrder.add(singleOrderItem.getItems());
             }
         }
-
+        ProductService.removeIngredientsFromStock(allProductsInACustomerOrder);
     }
 
     /***
