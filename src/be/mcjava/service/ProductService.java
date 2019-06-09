@@ -39,7 +39,8 @@ public class ProductService {
     }
 
     /***
-     * returns a list of all ingredients from all products in the list that are out of stock
+     * returns a list of all ingredients from all products in the list that don't have
+     * enough stock to make the products
      * @param productList
      */
     public static List<Ingredient> getOutOfStockIngredientsList(List<Product> productList) {
@@ -47,7 +48,7 @@ public class ProductService {
         return usedIngredientsStock
                 .entrySet()
                 .stream()
-                .filter(ingredient -> ingredient.getValue()<=0)
+                .filter(ingredient -> ingredient.getKey().getCurrentStock() - ingredient.getValue().intValue() < 0)
                 .map(ingredient -> ingredient.getKey())
                 .collect(Collectors.toList());
     }
