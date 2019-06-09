@@ -5,9 +5,10 @@ import be.mcjava.dao.ProductsDao;
 import be.mcjava.model.Ingredient;
 import be.mcjava.model.Product;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ProductService {
     private static ProductsDao productsDao = new ProductsDao();
@@ -22,8 +23,13 @@ public class ProductService {
         return productsDao.getProductsByName(chosenProductName).get(0);
     }
 
+    public static List<Product> getProductsListByNameList(List<String> productToOrderNamesList) {
+       List<Product> productList = productToOrderNamesList.stream().map(ProductService::getProductByName).collect(Collectors.toList());
+       return productList;
+    }
+
     /***
-     * remove the ingredients that are used in a product from the stock of each ingredient
+     * removes the ingredients that are used in a product from the stock of each ingredient
      * first gets a list of all needed ingredients and amounts of them
      * then uses the IngredientDao to update the stock
      * @param allProductsInACustomerOrder
@@ -31,5 +37,38 @@ public class ProductService {
     public static void removeIngredientsFromStock(List<Product> allProductsInACustomerOrder) {
         Map<Ingredient,Integer> usedIngredientsStock = IngredientService.getAllUsedIngredients(allProductsInACustomerOrder);
         IngredientDao.removeIngredientsFromStock(usedIngredientsStock);
+    }
+
+    /***
+     * returns a list of all ingredients from all products in the list that don't have
+     * enough stock to make the products
+     * @param productList
+     */
+    public static List<Ingredient> getOutOfStockIngredientsList(List<Product> productList) {
+        Map<Ingredient,Integer> usedIngredientsStock = IngredientService.getAllUsedIngredients(productList);
+        return usedIngredientsStock
+                .entrySet()
+                .stream()
+                .filter(ingredient -> ingredient.getKey().getCurrentStock() - ingredient.getValue().intValue() < 0)
+                .map(ingredient -> ingredient.getKey())
+                .collect(Collectors.toList());
+    }
+
+    /***
+     * returns a list of Products that contain Ingredients that are out of stock
+     * @param productList
+     * @return
+     */
+    public static List<Product> getOutOfStockProductList(List<Product> productList){
+        List<Ingredient> ingredientsOutOfStockList = getOutOfStockIngredientsList(productList);
+        List<Product> impossibleToMakeProductsList = new ArrayList<>();
+        for (Product product : productList) {
+            for (Ingredient ingredient : ingredientsOutOfStockList) {
+                if(product.getIngredients().containsKey(ingredient)){
+                    impossibleToMakeProductsList.add(product);
+                }
+            }
+        }
+        return impossibleToMakeProductsList;
     }
 }

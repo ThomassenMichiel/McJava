@@ -36,7 +36,7 @@
             <Button fx:id="cancelorderbutton" text="Cancel Order" onAction="#cancelOrderPressed"/>
         </HBox>
         <HBox>
-            <Label text="Total ordered: "/>
+            <Label text="Order Total: "/>
             <Label fx:id="totalOrderedLabel"/>
         </HBox>
     </VBox>
