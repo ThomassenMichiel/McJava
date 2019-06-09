@@ -1,12 +1,10 @@
 package be.mcjava.controller;
 
+import be.mcjava.model.CustomerOrder;
+import be.mcjava.service.CustomerOrderService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,10 +29,11 @@ public class CustomerScreenController {
     @FXML
     private void continueFromLoginToMenuPressed(ActionEvent event) throws Exception {
         //if(isName(customername.getText()) && isPhoneNumber(customerphonenumber.getText())) {
-        FXMLLoader fxmlLoader = new FXMLLoader( getClass().getResource( "../view/CustomerMainMenuOverview.fxml" ) );
-        Parent root1 = fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene( new Scene( root1 ) );
-        stage.show();
+
+        CustomerOrderService.startNewCustomerOrder(customername.getText(),customerphonenumber.getText());
+
+        ViewManager viewManager = new ViewManager();
+        viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
+        //ViewManager.setStageDimensions(1000.0,500.0);
     }
 }

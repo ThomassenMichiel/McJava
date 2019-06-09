@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="be.mcjava.controller.CustomerReceiptController"
+          fx:id="items">
+    <stylesheets>
+        <URL value="@receipt.css"/>
+    </stylesheets>
+
+    <Label GridPane.rowIndex="0" GridPane.columnIndex="0">McJava</Label>
+    <Label GridPane.rowIndex="1" GridPane.columnIndex="0">Thor Park 8040</Label>
+    <Label GridPane.rowIndex="2" GridPane.columnIndex="0">3600 Genk</Label>
+
+    <Text fx:id="id" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="3"/>
+
+    <Button fx:id="closingButton" onAction="#returnToMainMenu">Return to main menu</Button>
+</GridPane>

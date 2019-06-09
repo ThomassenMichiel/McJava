@@ -1,6 +1,7 @@
 package be.mcjava.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  {
@@ -8,13 +9,16 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
     private String name;
     private String pictureName;
 
-
-    public String getpictureName() {
-        return pictureName;
+    private PreMadeOrderMenu() {
+        price = BigDecimal.ZERO;
     }
 
-    public void setpictureName(String pictureName) {
+    public void setPictureName(String pictureName) {
         this.pictureName = pictureName;
+    }
+    
+    public String getPictureName() {
+        return pictureName;
     }
     
     @Override
@@ -67,7 +71,12 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
         private int amount;
         private BigDecimal price;
         private String pictureName;
-        
+    
+        public Builder() {
+            this.product = new ArrayList<>();
+            this.price = BigDecimal.ZERO;
+        }
+    
         public Builder withId(Long id) {
             this.id = id;
             return this;
@@ -105,6 +114,7 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
             menu.setItems(product);
             menu.setPrice(price);
             menu.setAmount(amount);
+            menu.setPictureName(pictureName);
             
             return menu;
         }
