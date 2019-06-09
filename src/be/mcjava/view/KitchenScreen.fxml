@@ -3,10 +3,15 @@
 
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="be.mcjava.controller.KitchenController">
-<VBox fx:id="contentvbox">
 
-</VBox>
-</BorderPane>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ListView?>
+<FlowPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="400.0" prefWidth="600.0"
+          fx:id="contentPane"
+            fx:controller="be.mcjava.controller.KitchenController">
+    <VBox>
+
+    </VBox>
+</FlowPane>

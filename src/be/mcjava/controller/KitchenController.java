@@ -1,76 +1,76 @@
 package be.mcjava.controller;
 
+import be.mcjava.dao.CookingOrderDao;
+import be.mcjava.model.AbstractOrderItem;
 import be.mcjava.model.CookingOrders;
+import be.mcjava.model.CustomerOrder;
+import be.mcjava.model.SingleOrderItem;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
+import javafx.util.Duration;
 
-import java.io.FileNotFoundException;
-import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.*;
 
 public class KitchenController {
-    private List<CookingOrders> cookingOrdersList;
-
     @FXML
-    private GridPane contentgrid;
-
-    /**   @FXML
-    private void initialize() throws FileNotFoundException {
-    try {
-    getOrderData();
-    addOrderToGrid();
-    } catch (Exception e) {
-    e.printStackTrace();
+    private FlowPane contentPane;
+    private List<CookingOrders> ordersToCook = new ArrayList<>();
+    
+    public void initialize() {
+        getOrderData();
     }
-    }
-
+    
     private void getOrderData() {
-    CookingOrderDao cookingOrderDao = new CookingOrderDao();
-    ExecutorService executorService = Executors.newFixedThreadPool( 5 );
-
-    Future<List<CookingOrders>> futureCookingOrder = executorService.submit( cookingOrderDao::getOrdersToCook );
-    try {
-    cookingOrdersList = futureCookingOrder.get( 30, TimeUnit.SECONDS );
-    } catch (InterruptedException e) {
-    e.printStackTrace();
-    } catch (ExecutionException e) {
-    e.printStackTrace();
-    } catch (TimeoutException e) {
-    e.printStackTrace();
+        getOrders();
+        pollDatabase();
     }
-    }
-
+    
     private void addOrderToGrid() {
-    for (CookingOrders cookingOrders : cookingOrdersList) {
-    VBox vBox = new VBox();
-    TextFlow textFlow = new TextFlow( );
-    Text orderItem = new Text(  );
-    cookingOrders.getOrdersToCook();// all products in 1 column.
-    // creates a text version of the order in the view.
-    Button button = new Button( "Finish" );
-    button.setOnMouseClicked(  mouseEvent ->
-    finishedIsPressed( mouseEvent ));
-    vBox.getChildren().add( button);
-
+        for (CookingOrders order : ordersToCook) {
+            for (CustomerOrder customerOrder : order.getOrdersToCook()) {
+                VBox pane = new VBox();
+                pane.setPadding(new Insets(15));
+                pane.setStyle("-fx-border-color: black");
+                for (AbstractOrderItem abstractOrderItem : customerOrder.getItemsToOrder()) {
+                    if (abstractOrderItem instanceof SingleOrderItem) {
+                        SingleOrderItem orderItem = (SingleOrderItem) abstractOrderItem;
+                        pane.getChildren().add(new Text(orderItem.getAmount() + "\t" + orderItem.getItems().getName()));
+                    }
+                }
+                contentPane.getChildren().add(pane);
+            }
+        }
     }
-    // with every order comes a "finished" button.
-    // the finished button has onAction = "#finishedIsPressed".
-    }*/
+    
+    private void pollDatabase() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(30), event -> getOrders()));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+    
+    private void getOrders() {
+        CookingOrderDao cookingOrderDao = new CookingOrderDao();
+        ordersToCook = cookingOrderDao.getOrdersToCook();
+        addOrderToGrid();
+    }
+    
     @FXML
     private void finishedIsPressed(MouseEvent event) {
         // add order to list finished orders.
         // when pressed initialize remove order.
         // when pressed
     }
-
+    
     private void removeOrder() {
         // removes order initialized trough an action event method.
     }
-
+    
 }

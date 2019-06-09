@@ -29,27 +29,26 @@ public class CustomerReceiptController {
     private int column = 0;
     
     public void initialize() {
-        CustomerOrder customerOrder = CustomerOrderService.customerOrder;
         setConstraints();
-    
-        id.setText("== " + customerOrder.getId() + " ==");
+        
+        id.setText("== " + CustomerOrderService.customerOrder.getId() + " ==");
         id.setFont(Font.font(24));
         id.setTextAlignment(TextAlignment.CENTER);
-        GridPane.setHalignment(id,HPos.CENTER);
-        GridPane.setMargin(id,new Insets(30,0,30,0));
-        customerOrder.getItemsToOrder().forEach(this::addItemsToDisplay);
-        setTotalPrice(customerOrder);
+        GridPane.setHalignment(id, HPos.CENTER);
+        GridPane.setMargin(id, new Insets(30, 0, 30, 0));
+        CustomerOrderService.customerOrder.getItemsToOrder().forEach(this::addItemsToDisplay);
+        setTotalPrice(CustomerOrderService.customerOrder);
         
-        GridPane.setRowIndex(closingButton,row);
+        GridPane.setRowIndex(closingButton, row);
     }
     
     private void setTotalPrice(CustomerOrder customerOrder) {
         String formattedPrice = String.format("%5.2f", customerOrder.getFinalPrice());
         Text totalText = new Text("Total:");
         Text formattedPriceText = new Text(formattedPrice);
-        GridPane.setMargin(totalText,new Insets(30,0,0,0));
-        GridPane.setMargin(formattedPriceText,new Insets(30,0,0,0));
-        items.addRow(row++,new Text(),totalText,formattedPriceText);
+        GridPane.setMargin(totalText, new Insets(30, 0, 0, 0));
+        GridPane.setMargin(formattedPriceText, new Insets(30, 0, 0, 0));
+        items.addRow(row++, new Text(), totalText, formattedPriceText);
     }
     
     private void setConstraints() {
@@ -69,19 +68,19 @@ public class CustomerReceiptController {
     }
     
     private void createText(SingleOrderItem item) {
-        items.add(new Text(item.getItems().getName()),column++,row);
-        items.add(new Text(String.valueOf(item.getAmount())),column++,row);
+        items.add(new Text(item.getItems().getName()), column++, row);
+        items.add(new Text(String.valueOf(item.getAmount())), column++, row);
         String price = String.format("%5.2f", item.getPrice());
-        items.add(new Text(price),column++,row);
+        items.add(new Text(price), column++, row);
         row++;
         column = 0;
     }
     
     private void createText(PreMadeOrderMenu item) {
-        items.add(new Text(item.getName()),column++,row);
-        items.add(new Text(String.valueOf(item.getAmount())),column++,row);
+        items.add(new Text(item.getName()), column++, row);
+        items.add(new Text(String.valueOf(item.getAmount())), column++, row);
         String price = String.format("%5.2f", item.getPrice());
-        items.add(new Text(price),column++,row);
+        items.add(new Text(price), column++, row);
         row++;
         item.getItems().forEach(this::addEachItemInAMenu);
         column = 0;
@@ -89,7 +88,7 @@ public class CustomerReceiptController {
     
     private void addEachItemInAMenu(SingleOrderItem item) {
         String itemEntry = "\t- " + item.getItems().getName();
-        items.add(new Text(itemEntry),0,row++);
+        items.add(new Text(itemEntry), 0, row++);
     }
     
     public void returnToMainMenu(ActionEvent actionEvent) {
