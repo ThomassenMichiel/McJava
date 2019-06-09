@@ -108,7 +108,7 @@ public class MenuIngredientsActionController {
         if(outOfStockProductsList.size() > 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Not enough stock");
-            alert.setHeaderText("We cannot complete your order because there is not enough stock of the following ingredients");
+            alert.setHeaderText("We cannot complete your order because the ingredients are out of stock for");
             for (Product product : outOfStockProductsList) {
                 alert.setContentText(alert.getContentText()+product.getName()+"\n");
             }
