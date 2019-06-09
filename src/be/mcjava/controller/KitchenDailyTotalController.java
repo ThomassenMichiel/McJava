@@ -24,6 +24,8 @@ public class KitchenDailyTotalController {
     private TableColumn<SingleOrderItem,String> productColumn;
     @FXML
     private TableColumn<AbstractOrderItem,Integer> amountColumn;
+    @FXML
+    private Button switchView;
     
     public void initialize() {
         List<AbstractOrderItem> orderSummary = CustomerOrderDao.getOrderSummary();
@@ -39,6 +41,6 @@ public class KitchenDailyTotalController {
     
     public void goToIncomingOrders(ActionEvent actionEvent) {
         ViewManager viewManager = new ViewManager();
-        viewManager.displayFmxlScreen("../view/KitchenScreen.fxml");
+        viewManager.displayFmxlScreen("/be/mcjava/view/KitchenScreen.fxml");
     }
 }

@@ -11,12 +11,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CustomerOrderDao {
 
     public static void saveCustomerOrder(CustomerOrder customerOrder) {
         Long generatedKey = -1L;
+        List<SingleOrderItem> singleOrderItemList;
         String sql = "insert into customer_order (name,telephone_number,finished_cooking,ordered) values (?,?,?,?)";
         try (PreparedStatement preparedStatement = DaoConnector.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, customerOrder.getName());
@@ -32,7 +34,12 @@ public class CustomerOrderDao {
             }
             List<AbstractOrderItem> abstractOrderItemList = customerOrder.getItemsToOrder();
             for (AbstractOrderItem abstractOrderItem : abstractOrderItemList) {
-                List<SingleOrderItem> singleOrderItemList = (List<SingleOrderItem>) abstractOrderItem.getItems();
+                if (abstractOrderItem instanceof SingleOrderItem){
+                    singleOrderItemList = new ArrayList<>();
+                    singleOrderItemList.add((SingleOrderItem) abstractOrderItem);
+                }else {
+                    singleOrderItemList = (List<SingleOrderItem>) abstractOrderItem.getItems();
+                }
                 OrderItemDao.saveOrderItems(singleOrderItemList,generatedKey);
             }
         } catch (SQLException e) {

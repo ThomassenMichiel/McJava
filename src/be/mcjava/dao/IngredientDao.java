@@ -36,10 +36,11 @@ public class IngredientDao {
                             resultSet.getString("name"),
                             resultSet.getInt("current_stock")
                     );
-                    String sql_amount = "select amount from product_ingredient where product_id = ?";
+                    String sqlAmountPerIngredient = "select amount from product_ingredient where product_id = ? and ingredient_id = ?";
                     int amount = 0;
-                    try (PreparedStatement ps = DaoConnector.getConnection().prepareStatement(sql_amount)) {
+                    try (PreparedStatement ps = DaoConnector.getConnection().prepareStatement(sqlAmountPerIngredient)) {
                         ps.setLong(1, productId);
+                        ps.setLong(2, ingredient.getId());
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
                                 amount = rs.getInt("amount");

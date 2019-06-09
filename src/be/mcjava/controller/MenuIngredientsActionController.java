@@ -1,29 +1,22 @@
 package be.mcjava.controller;
 
-import be.mcjava.dao.ProductsDao;
-import be.mcjava.model.AllowedMenuProduct;
-import be.mcjava.model.PreMadeOrderMenu;
-import be.mcjava.model.Product;
-import be.mcjava.model.SingleOrderItem;
-import be.mcjava.service.AllowedMenuProductService;
-import be.mcjava.service.CustomerOrderService;
-import be.mcjava.service.PreMadeOrderMenuService;
+import be.mcjava.fxentensions.MultiSelectListView;
+import be.mcjava.model.*;
+import be.mcjava.service.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class MenuIngredientsActionController {
     private VBox chosenVBox;
@@ -45,44 +38,85 @@ public class MenuIngredientsActionController {
 
     private List<ListView> listViewList;
 
+    private List<String> productToOrderNamesList = new ArrayList<>();
+
     @FXML
     public void initialize() {
         allowedMenuProductList = AllowedMenuProductService.getAllowedMenuProductsByPremadeMenuName();
-        buildPreMadeMenuAllowedItemsOverview();
+        buildAllowedItemChoicesOverview();
     }
 
     @FXML
     public void confirmOrderPressed(ActionEvent actionEvent) {
-        List<String> productToOrderNamesList = new ArrayList<>();
-        for (ListView listView : listViewList) {
-            String chosenProductName = (String) listView.getSelectionModel().getSelectedItems().get(0);
-            productToOrderNamesList.add(chosenProductName);
+        if (onlyOneProductTypeInMenu()) {
+            for (ListView listView : listViewList) {
+                listView.getSelectionModel().getSelectedItems().forEach(s -> productToOrderNamesList.add((String) s));
+            }
+        } else {
+            for (ListView listView : listViewList) {
+                String chosenProductName = (String) listView.getSelectionModel().getSelectedItems().get(0);
+                productToOrderNamesList.add(chosenProductName);
+            }
         }
-        PreMadeOrderMenuService.addProductsToCurrentPreMadeMenuOrder(productToOrderNamesList);
-        CustomerOrderService.addCurrentPreMadeMenu();
-        viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
+        if (isThereSufficientStock()) {
+            if (onlyOneProductTypeInMenu()) {
+                SingleOrderItemService.addProductsAsSingleOrderItems(productToOrderNamesList);
+            } else {
+                PreMadeOrderMenuService.addProductsToCurrentPreMadeMenuOrder(productToOrderNamesList);
+                CustomerOrderService.addCurrentPreMadeMenu();
+            }
+            viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
+        }
     }
 
     public void cancelOrderPressed(ActionEvent actionEvent) {
-        //Todo: check if all needed items are chosen
-        //Todo: cancel current menu-creation, remove already created obj
         viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
     }
 
-    private void buildPreMadeMenuAllowedItemsOverview() {
+    private void buildAllowedItemChoicesOverview() {
         listViewList = new ArrayList<>();
         List<Integer> itemPositionsNeeded = allowedMenuProductList.stream().map(AllowedMenuProduct::getItemPositionInMenu).distinct().collect(Collectors.toCollection(ArrayList::new));
         for (Integer integer : itemPositionsNeeded) {
             List<String> list = allowedMenuProductList.stream()
-                    .filter(s -> s.getItemPositionInMenu().equals( integer))
+                    .filter(s -> s.getItemPositionInMenu() == integer)
                     .map(AllowedMenuProduct::getProductName)
                     .collect(Collectors.toCollection(ArrayList::new));
-            ListView productsListView = new ListView();
+            ListView productsListView = onlyOneProductTypeInMenu() ? new MultiSelectListView() : new ListView();
             ObservableList<String> observableList = FXCollections.observableList(list);
             productsListView.setItems(observableList);
-            //mainproductsgrid.add(productsListView,  integer,1);
             listViewList.add(productsListView);
             productshbox.getChildren().add(productsListView);
         }
     }
+
+    /***
+     * returns true if the allowedMenuProductList has only 1 item allowed, to indicate it is not a real PreMadeMenu
+     * but a collection of products eg: drinks, burgers, wraps...
+     * @return
+     */
+    private boolean onlyOneProductTypeInMenu() {
+        return allowedMenuProductList.stream().mapToInt(AllowedMenuProduct::getItemPositionInMenu).max().getAsInt() == 1;
+    }
+
+    /***
+     * checks if there's enough stock to complete the current order
+     * and displays a message with the ingredients that don't have enough stock
+     * @return
+     */
+    private boolean isThereSufficientStock() {
+        List<Product> outOfStockProductsList = ProductService.getOutOfStockProductList(ProductService.getProductsListByNameList(productToOrderNamesList));
+        if(outOfStockProductsList.size() > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Not enough stock");
+            alert.setHeaderText("We cannot complete your order because there is not enough stock of the following ingredients");
+            for (Product product : outOfStockProductsList) {
+                alert.setContentText(alert.getContentText()+product.getName()+"\n");
+            }
+            Optional<ButtonType> result = alert.showAndWait();
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 }

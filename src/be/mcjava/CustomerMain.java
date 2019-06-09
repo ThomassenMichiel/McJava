@@ -37,51 +37,51 @@ public class CustomerMain extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+    
     private static void dummies() {
         Ingredient tomato = new Ingredient(1L, "Tomato", 5);
         Ingredient patty = new Ingredient(2L, "Patty", 20);
         Ingredient bun = new Ingredient(3L, "Bun", 20);
         Ingredient fries = new Ingredient(3L, "Fries", 20);
         Ingredient tropicana = new Ingredient(4L, "Tropicana", 20);
-
+        
         Map<Ingredient, Integer> tropicanaIngredient = new HashMap<>();
         tropicanaIngredient.put(tropicana, 1);
-
+        
         Map<Ingredient, Integer> happyMealMenu = new HashMap<>();
         happyMealMenu.put(tomato, 1);
         happyMealMenu.put(patty, 1);
         happyMealMenu.put(bun, 1);
         happyMealMenu.put(fries, 1);
-
+        
         Product tropicanaProduct = new Product.Builder("Tropicana")
                 .withId(1L)
                 .withPrice(new BigDecimal("3.33"))
                 .withIngredients(tropicanaIngredient)
                 .build();
-
+        
         Product happyMealProduct = new Product.Builder("Happy Meal")
                 .withId(2L)
                 .withIngredients(happyMealMenu)
                 .withPrice(BigDecimal.valueOf(Double.MAX_VALUE))
                 .build();
-
+        
         SingleOrderItem singleTropicanaOrder = new SingleOrderItem.Builder(tropicanaProduct)
                 .withId(1L)
                 .withAmount(1)
                 .withPrice(tropicanaProduct.getPrice())
                 .build();
-
+        
         SingleOrderItem happyMealOI = new SingleOrderItem.Builder(happyMealProduct)
                 .withId(1L)
                 .withAmount(1)
                 .withPrice(tropicanaProduct.getPrice())
                 .build();
-
+        
         ArrayList<SingleOrderItem> happyMealMcMenu = new ArrayList<>();
         happyMealMcMenu.add(happyMealOI);
         happyMealMcMenu.add(singleTropicanaOrder);
-
+        
         PreMadeOrderMenu happyMeal = new PreMadeOrderMenu.Builder()
                 .withId(1L)
                 .withAmount(1)
@@ -89,11 +89,11 @@ public class CustomerMain extends Application {
                 .withName("Happy Meal")
                 .withProduct(happyMealMcMenu)
                 .build();
-
+        
         List<AbstractOrderItem> order = new ArrayList<>();
         order.add(singleTropicanaOrder);
         order.add(happyMeal);
-
+    
         CustomerOrderService.customerOrder = new CustomerOrder.Builder()
                 .name("REEEEEEEEEEEEEEEEEEEEE")
                 .telephoneNumber("0123456798")
