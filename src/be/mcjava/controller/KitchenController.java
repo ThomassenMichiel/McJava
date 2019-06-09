@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,11 +30,13 @@ public class KitchenController {
     }
     
     private void getOrderData() {
-        getOrders();
-        pollDatabase();
+        CookingOrderDao cookingOrderDao = new CookingOrderDao();
+        getOrders(cookingOrderDao);
+        pollDatabase(cookingOrderDao);
     }
     
     private void addOrderToGrid() {
+        contentPane.getChildren().clear();
         for (CookingOrders order : ordersToCook) {
             for (CustomerOrder customerOrder : order.getOrdersToCook()) {
                 VBox pane = new VBox();
@@ -50,14 +53,14 @@ public class KitchenController {
         }
     }
     
-    private void pollDatabase() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(30), event -> getOrders()));
+    private void pollDatabase(CookingOrderDao cookingOrderDao) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(30), event -> getOrders(cookingOrderDao)));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
     }
     
-    private void getOrders() {
-        CookingOrderDao cookingOrderDao = new CookingOrderDao();
+    private void getOrders(CookingOrderDao cookingOrderDao) {
+        System.out.println(LocalDateTime.now());
         ordersToCook = cookingOrderDao.getOrdersToCook();
         addOrderToGrid();
     }
