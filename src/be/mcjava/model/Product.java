@@ -73,16 +73,19 @@ public class Product {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Product)) return false;
         
         Product product = (Product) o;
         
-        return getIngredients().equals(product.getIngredients());
+        if (!getName().equals(product.getName())) return false;
+        return getIngredients() != null ? getIngredients().equals(product.getIngredients()) : product.getIngredients() == null;
     }
     
     @Override
     public int hashCode() {
-        return 29 * ingredients.hashCode();
+        int result = getName().hashCode();
+        result = 31 * result + (getIngredients() != null ? getIngredients().hashCode() : 0);
+        return result;
     }
     
     public static class Builder {

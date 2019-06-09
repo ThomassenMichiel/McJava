@@ -67,7 +67,6 @@ public abstract class AbstractOrderItem<T> {
         
         AbstractOrderItem<?> that = (AbstractOrderItem<?>) o;
         
-        if (getAmount() != that.getAmount()) return false;
         if (!product.equals(that.product)) return false;
         return getPrice().equals(that.getPrice());
     }
@@ -75,7 +74,6 @@ public abstract class AbstractOrderItem<T> {
     
     public int hashCode() {
         int result = product.hashCode();
-        result = 31 * result + getAmount();
         result = 31 * result + getPrice().hashCode();
         return result;
     }

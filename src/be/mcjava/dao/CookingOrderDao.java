@@ -1,10 +1,7 @@
 package be.mcjava.dao;
 
 
-import be.mcjava.model.CookingOrders;
-import be.mcjava.model.CustomerOrder;
-import be.mcjava.model.Product;
-import be.mcjava.model.SingleOrderItem;
+import be.mcjava.model.*;
 
 import java.sql.*;
 import java.util.ArrayList;

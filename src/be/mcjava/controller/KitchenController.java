@@ -1,10 +1,7 @@
 package be.mcjava.controller;
 
 import be.mcjava.dao.CookingOrderDao;
-import be.mcjava.model.AbstractOrderItem;
-import be.mcjava.model.CookingOrders;
-import be.mcjava.model.CustomerOrder;
-import be.mcjava.model.SingleOrderItem;
+import be.mcjava.model.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,7 +13,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,10 +39,9 @@ public class KitchenController {
                 pane.setPadding(new Insets(15));
                 pane.setStyle("-fx-border-color: black");
                 for (AbstractOrderItem abstractOrderItem : customerOrder.getItemsToOrder()) {
-                    if (abstractOrderItem instanceof SingleOrderItem) {
-                        SingleOrderItem orderItem = (SingleOrderItem) abstractOrderItem;
-                        pane.getChildren().add(new Text(orderItem.getAmount() + "\t" + orderItem.getItems().getName()));
-                    }
+                    String productName = ((SingleOrderItem) abstractOrderItem).getItems().getName();
+                    String formattedEntry = String.format("%d\t%s", abstractOrderItem.getAmount(), productName);
+                    pane.getChildren().add(new Text(formattedEntry));
                 }
                 contentPane.getChildren().add(pane);
             }
@@ -60,7 +55,6 @@ public class KitchenController {
     }
     
     private void getOrders(CookingOrderDao cookingOrderDao) {
-        System.out.println(LocalDateTime.now());
         ordersToCook = cookingOrderDao.getOrdersToCook();
         addOrderToGrid();
     }
