@@ -74,8 +74,14 @@ public class CustomerOrderService {
     private static void adjustStock() {
         List<Product> allProductsInACustomerOrder = new ArrayList<>();
         List<AbstractOrderItem> abstractOrderItemList = customerOrder.getItemsToOrder();
+        List<SingleOrderItem> singleOrderItemList;
         for (AbstractOrderItem abstractOrderItem : abstractOrderItemList) {
-            List<SingleOrderItem> singleOrderItemList = (List<SingleOrderItem>) abstractOrderItem.getItems();
+            if(abstractOrderItem instanceof SingleOrderItem){
+                singleOrderItemList = new ArrayList<>();
+                singleOrderItemList.add((SingleOrderItem) abstractOrderItem);
+            }else {
+                singleOrderItemList = (List<SingleOrderItem>) abstractOrderItem.getItems();
+            }
             for (SingleOrderItem singleOrderItem : singleOrderItemList) {
                 allProductsInACustomerOrder.add(singleOrderItem.getItems());
             }

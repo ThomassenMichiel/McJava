@@ -35,5 +35,9 @@
             <Button fx:id="finishorderbutton" text="Confirm Order" onAction="#finishOrderPressed"/>
             <Button fx:id="cancelorderbutton" text="Cancel Order" onAction="#cancelOrderPressed"/>
         </HBox>
+        <HBox>
+            <Label text="Total ordered: "/>
+            <Label fx:id="totalOrderedLabel"/>
+        </HBox>
     </VBox>
 </FlowPane>
