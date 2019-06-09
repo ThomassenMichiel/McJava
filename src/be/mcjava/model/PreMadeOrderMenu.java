@@ -51,15 +51,13 @@ public class PreMadeOrderMenu extends AbstractOrderItem<List<SingleOrderItem>>  
         if (!super.equals(o)) return false;
         
         PreMadeOrderMenu that = (PreMadeOrderMenu) o;
-        
-        if (!getPrice().equals(that.getPrice())) return false;
+    
         return getName().equals(that.getName());
     }
     
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + getPrice().hashCode();
         result = 31 * result + getName().hashCode();
         return result;
     }
