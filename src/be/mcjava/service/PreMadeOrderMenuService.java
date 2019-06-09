@@ -68,8 +68,8 @@ public class PreMadeOrderMenuService {
      */
     public static void addProductsToCurrentPreMadeMenuOrder(List<String> productToOrderNamesList) {
         List<SingleOrderItem> singleOrderItemList = new ArrayList<>();
-        for (String productName : productToOrderNamesList) {
-            Product product = ProductService.getProductByName(productName);
+        List<Product> productList = ProductService.getProductsListByNameList(productToOrderNamesList);
+        for (Product product : productList) {
             SingleOrderItem singleOrderItem = new SingleOrderItem();
             singleOrderItem.setItems(product);
             singleOrderItem.setAmount(1);

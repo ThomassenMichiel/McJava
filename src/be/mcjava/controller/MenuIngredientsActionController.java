@@ -5,10 +5,7 @@ import be.mcjava.model.AllowedMenuProduct;
 import be.mcjava.model.PreMadeOrderMenu;
 import be.mcjava.model.Product;
 import be.mcjava.model.SingleOrderItem;
-import be.mcjava.service.AllowedMenuProductService;
-import be.mcjava.service.CustomerOrderService;
-import be.mcjava.service.PreMadeOrderMenuService;
-import be.mcjava.service.SingleOrderItemService;
+import be.mcjava.service.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,6 +38,8 @@ public class MenuIngredientsActionController {
 
     private List<ListView> listViewList;
 
+    private List<String> productToOrderNamesList = new ArrayList<>();
+
     @FXML
     public void initialize() {
         allowedMenuProductList = AllowedMenuProductService.getAllowedMenuProductsByPremadeMenuName();
@@ -49,12 +48,11 @@ public class MenuIngredientsActionController {
 
     @FXML
     public void confirmOrderPressed(ActionEvent actionEvent) {
-        List<String> productToOrderNamesList = new ArrayList<>();
         if(onlyOneProductTypeInMenu()){
             for (ListView listView : listViewList) {
                 listView.getSelectionModel().getSelectedItems().forEach(s -> productToOrderNamesList.add((String) s));
             }
-            SingleOrderItemService.addProductsAssSingleOrderItems(productToOrderNamesList);
+            SingleOrderItemService.addProductsAsSingleOrderItems(productToOrderNamesList);
         }else {
             for (ListView listView : listViewList) {
                 String chosenProductName = (String) listView.getSelectionModel().getSelectedItems().get(0);
@@ -63,6 +61,7 @@ public class MenuIngredientsActionController {
             PreMadeOrderMenuService.addProductsToCurrentPreMadeMenuOrder(productToOrderNamesList);
             CustomerOrderService.addCurrentPreMadeMenu();
         }
+
         viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
     }
 

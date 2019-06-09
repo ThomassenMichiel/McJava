@@ -72,6 +72,14 @@ public class CustomerOrderService {
      * the stock for them
      */
     private static void adjustStock() {
+        ProductService.removeIngredientsFromStock(getAllProductsInACustomerOrder());
+    }
+
+    /***
+     * returns a list of products that make up the current CustomerOrder
+     * @return
+     */
+    private static List<Product> getAllProductsInACustomerOrder() {
         List<Product> allProductsInACustomerOrder = new ArrayList<>();
         List<AbstractOrderItem> abstractOrderItemList = customerOrder.getItemsToOrder();
         List<SingleOrderItem> singleOrderItemList;
@@ -86,7 +94,7 @@ public class CustomerOrderService {
                 allProductsInACustomerOrder.add(singleOrderItem.getItems());
             }
         }
-        ProductService.removeIngredientsFromStock(allProductsInACustomerOrder);
+        return allProductsInACustomerOrder;
     }
 
     /***

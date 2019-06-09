@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SingleOrderItemService {
-    public static void addProductsAssSingleOrderItems(List<String> productToOrderNamesList) {
+    public static void addProductsAsSingleOrderItems(List<String> productToOrderNamesList) {
         List<SingleOrderItem> singleOrderItemList = new ArrayList<>();
-        for (String productName : productToOrderNamesList) {
-            Product product = ProductService.getProductByName(productName);
+        List<Product> productList = ProductService.getProductsListByNameList(productToOrderNamesList);
+        for (Product product : productList) {
             SingleOrderItem singleOrderItem = new SingleOrderItem();
             singleOrderItem.setItems(product);
             singleOrderItem.setPrice(product.getPrice());
