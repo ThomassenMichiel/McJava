@@ -5,6 +5,7 @@ import be.mcjava.dao.ProductsDao;
 import be.mcjava.model.Ingredient;
 import be.mcjava.model.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -51,5 +52,23 @@ public class ProductService {
                 .filter(ingredient -> ingredient.getKey().getCurrentStock() - ingredient.getValue().intValue() < 0)
                 .map(ingredient -> ingredient.getKey())
                 .collect(Collectors.toList());
+    }
+
+    /***
+     * returns a list of Products that contain Ingredients that are out of stock
+     * @param productList
+     * @return
+     */
+    public static List<Product> getOutOfStockProductList(List<Product> productList){
+        List<Ingredient> ingredientsOutOfStockList = getOutOfStockIngredientsList(productList);
+        List<Product> impossibleToMakeProductsList = new ArrayList<>();
+        for (Product product : productList) {
+            for (Ingredient ingredient : ingredientsOutOfStockList) {
+                if(product.getIngredients().containsKey(ingredient)){
+                    impossibleToMakeProductsList.add(product);
+                }
+            }
+        }
+        return impossibleToMakeProductsList;
     }
 }

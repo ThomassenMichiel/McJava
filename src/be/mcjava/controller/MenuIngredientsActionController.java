@@ -104,13 +104,13 @@ public class MenuIngredientsActionController {
      * @return
      */
     private boolean isThereSufficientStock() {
-        List<Ingredient> outOfStockIngredientsList = ProductService.getOutOfStockIngredientsList(ProductService.getProductsListByNameList(productToOrderNamesList));
-        if(outOfStockIngredientsList.size() > 0) {
+        List<Product> outOfStockProductsList = ProductService.getOutOfStockProductList(ProductService.getProductsListByNameList(productToOrderNamesList));
+        if(outOfStockProductsList.size() > 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Not enough stock");
             alert.setHeaderText("We cannot complete your order because there is not enough stock of the following ingredients");
-            for (Ingredient ingredient : outOfStockIngredientsList) {
-                alert.setContentText(ingredient.getName()+"\n");
+            for (Product product : outOfStockProductsList) {
+                alert.setContentText(alert.getContentText()+product.getName()+"\n");
             }
             Optional<ButtonType> result = alert.showAndWait();
             return false;
