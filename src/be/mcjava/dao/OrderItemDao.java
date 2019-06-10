@@ -1,5 +1,7 @@
 package be.mcjava.dao;
 
+import be.mcjava.model.AbstractOrderItem;
+import be.mcjava.model.CustomerOrder;
 import be.mcjava.model.Product;
 import be.mcjava.model.SingleOrderItem;
 
@@ -34,6 +36,32 @@ public class OrderItemDao {
                     customerOrderItemsPreparedStatement.executeUpdate();
                 }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void updateOrderStatus(AbstractOrderItem abstractOrderItem) {
+        String sql = "update order_item " +
+                "set finished = ? " +
+                "where order_item.id = ?";
+        try (PreparedStatement preparedStatement = DaoConnector.getConnection().prepareStatement(sql)) {
+            preparedStatement.setBoolean(1,abstractOrderItem.isFinished());
+            preparedStatement.setLong(2,abstractOrderItem.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void updateOrderStatus(CustomerOrder customerOrder) {
+        String sql = "update customer_order\n" +
+                "set finished_cooking = ?\n" +
+                "where customer_order.id = ?";
+        try (PreparedStatement preparedStatement = DaoConnector.getConnection().prepareStatement(sql)) {
+            preparedStatement.setBoolean(1,customerOrder.isFinishedCooking());
+            preparedStatement.setLong(2,customerOrder.getId());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

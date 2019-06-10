@@ -1,6 +1,7 @@
 package be.mcjava.controller;
 
 import be.mcjava.dao.CookingOrderDao;
+import be.mcjava.dao.OrderItemDao;
 import be.mcjava.model.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -9,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -49,11 +49,12 @@ public class KitchenController {
                         text.strikethroughProperty().setValue(true);
                     }
                     Button finish = new Button("Done");
-                    finish.setOnMouseClicked(this::finishedIsPressed);
+                    finish.setOnMouseClicked(event -> setOrderItemStatus(abstractOrderItem));
                     HBox hBox = new HBox(15,finish,text);
                     pane.getChildren().add(hBox);
                 }
                 Button complete = new Button("Complete order");
+                complete.setOnMouseClicked(event -> setCustomerOrderStatus(customerOrder));
                 Separator separator = new Separator();
                 VBox.setMargin(complete,new Insets(10,0,0,0));
                 VBox.setMargin(separator,new Insets(10,0,0,0));
@@ -74,15 +75,15 @@ public class KitchenController {
         addOrderToGrid();
     }
     
-    @FXML
-    private void finishedIsPressed(MouseEvent event) {
-        // add order to list finished orders.
-        // when pressed initialize remove order.
-        // when pressed
+    private void setOrderItemStatus(AbstractOrderItem item) {
+        item.setFinished(!item.isFinished());
+        OrderItemDao.updateOrderStatus(item);
+        addOrderToGrid();
     }
     
-    private void removeOrder() {
-        // removes order initialized trough an action event method.
+    private void setCustomerOrderStatus(CustomerOrder customerOrder) {
+        customerOrder.setFinishedCooking(true);
+        OrderItemDao.updateOrderStatus(customerOrder);
+        addOrderToGrid();
     }
-    
 }
