@@ -81,4 +81,13 @@
     -fx-text-fill: #ffd700;
 }
 
+#footerHBox .text{
+    -fx-font: 12px Magneto;
+}
+
+#itemChoicesFooterHBox{
+    -fx-background-color: rgba(39,116,45,1);
+    -fx-padding: 5px;
+}
+
 

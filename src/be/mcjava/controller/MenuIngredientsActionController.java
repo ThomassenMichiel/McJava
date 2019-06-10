@@ -6,10 +6,14 @@ import be.mcjava.service.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -25,6 +29,9 @@ public class MenuIngredientsActionController {
 
     @FXML
     private HBox productItemsHBox;
+
+    @FXML
+    private Button confirmorderbutton;
 
     private ViewManager viewManager = new ViewManager();
 
@@ -44,6 +51,7 @@ public class MenuIngredientsActionController {
     public void initialize() {
         allowedMenuProductList = AllowedMenuProductService.getAllowedMenuProductsByPremadeMenuName();
         buildAllowedItemChoicesOverview();
+        confirmorderbutton.setDisable(true);
     }
 
     @FXML
@@ -84,10 +92,26 @@ public class MenuIngredientsActionController {
             ListView productsListView = onlyOneProductTypeInMenu() ? new MultiSelectListView() : new ListView();
             ObservableList<String> observableList = FXCollections.observableList(list);
             productsListView.setItems(observableList);
-            productsListView.setPrefWidth(175);
+            productsListView.setOnMouseClicked(mouseEvent -> listViewClicked(mouseEvent));
+            if (itemPositionsNeeded.size() > 4) {
+                productsListView.setPrefWidth(175);
+            }
             productsListView.setPrefHeight(375);
             listViewList.add(productsListView);
             productItemsHBox.getChildren().add(productsListView);
+        }
+    }
+
+    @FXML
+    private void listViewClicked(MouseEvent mouseEvent){
+        int selectedListViews = 0;
+        for (ListView listView : listViewList) {
+            if(listView.getSelectionModel().getSelectedItems().size() == 1){
+                selectedListViews++;
+            }
+        }
+        if(selectedListViews == listViewList.size()){
+            confirmorderbutton.setDisable(false);
         }
     }
 
@@ -107,18 +131,17 @@ public class MenuIngredientsActionController {
      */
     private boolean isThereSufficientStock() {
         List<Product> outOfStockProductsList = ProductService.getOutOfStockProductList(ProductService.getProductsListByNameList(productToOrderNamesList));
-        if(outOfStockProductsList.size() > 0) {
+        if (outOfStockProductsList.size() > 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Not enough stock");
             alert.setHeaderText("We cannot complete your order because the ingredients are out of stock for");
             for (Product product : outOfStockProductsList) {
-                alert.setContentText(alert.getContentText()+product.getName()+"\n");
+                alert.setContentText(alert.getContentText() + product.getName() + "\n");
             }
             Optional<ButtonType> result = alert.showAndWait();
             return false;
-        }else{
+        } else {
             return true;
         }
     }
-
 }

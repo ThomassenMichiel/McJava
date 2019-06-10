@@ -58,7 +58,7 @@ public class MenuActionController {
         } else {
             finishorderbutton.setDisable(true);
         }
-        totalOrderedLabel.setText(CustomerOrderService.customerOrder.getFinalPrice().toString() + " €");
+        totalOrderedLabel.setText(CustomerOrderService.customerOrder.getFinalPrice().toString());
     }
 
     private void getMenuData() throws SQLException {

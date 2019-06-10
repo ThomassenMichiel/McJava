@@ -18,7 +18,7 @@
         <URL value="@mcjava.css"/>
     </stylesheets>
     <VBox fx:id="firstmenuvbox">
-        <VBox fx:id="headingvbox" prefHeight="40">
+        <VBox fx:id="headingvbox" prefHeight="40" prefWidth="896">
             <Label text="McMenus"/>
         </VBox>
         <GridPane fx:id="maingrid">
@@ -35,8 +35,9 @@
             <Button fx:id="finishorderbutton" text="Confirm Order" onAction="#finishOrderPressed"/>
             <Button fx:id="cancelorderbutton" text="Cancel Order" onAction="#cancelOrderPressed"/>
             <Region prefWidth="50.0" HBox.hgrow="ALWAYS" />
-            <Label fx:id="totalOrderedText" text="Order Total: "/>
+            <Label fx:id="totalOrderedText" text="Order Total: €"/>
             <Label fx:id="totalOrderedLabel"/>
+            <Region prefWidth="20.0"/>
         </HBox>
     </VBox>
 </FlowPane>
