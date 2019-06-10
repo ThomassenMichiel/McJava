@@ -96,6 +96,6 @@ public class KitchenController {
     @FXML
     private void goToDailyTotals(MouseEvent mouseEvent) {
         ViewManager viewManager = new ViewManager();
-        viewManager.displayFmxlScreen("../view/KitchenDailyTotalScreen.fxml");
+        viewManager.displayFmxlScreen("/be/mcjava/view/KitchenDailyTotalScreen.fxml");
     }
 }
