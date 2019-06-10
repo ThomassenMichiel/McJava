@@ -6,11 +6,11 @@ import be.mcjava.model.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -37,11 +37,7 @@ public class KitchenController {
     
     private void addOrderToGrid() {
         contentPane.getChildren().clear();
-        Button button = new Button("Daily totals");
-        button.setPrefSize(200,200);
-        button.setOnMouseClicked(this::goToDailyTotals);
-        VBox derp = new VBox(button);
-        contentPane.getChildren().add(derp);
+        HBox contentHBox = new HBox();
         for (CookingOrders order : ordersToCook) {
             for (CustomerOrder customerOrder : order.getOrdersToCook()) {
                 VBox pane = new VBox();
@@ -65,9 +61,10 @@ public class KitchenController {
                 VBox.setMargin(complete,new Insets(10,0,0,0));
                 VBox.setMargin(separator,new Insets(10,0,0,0));
                 pane.getChildren().addAll(separator,complete);
-                contentPane.getChildren().add(pane);
+                contentHBox.getChildren().add(pane);
             }
         }
+        contentPane.getChildren().add(contentHBox);
     }
     
     private void pollDatabase(CookingOrderDao cookingOrderDao) {
@@ -94,7 +91,7 @@ public class KitchenController {
     }
     
     @FXML
-    private void goToDailyTotals(MouseEvent mouseEvent) {
+    private void goToDailyTotals(ActionEvent actionEvent) {
         ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("/be/mcjava/view/KitchenDailyTotalScreen.fxml");
         ViewManager.setStageDimensions(1280,720,1680,1050,1920,1080);

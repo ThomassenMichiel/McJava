@@ -3,18 +3,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="be.mcjava.controller.KitchenDailyTotalController"
             prefHeight="400.0" prefWidth="600.0">
 
-    <TableView fx:id="itemsTable" GridPane.rowIndex="0" GridPane.columnIndex="0">
-        <columns>
-            <TableColumn text="Product" fx:id="productColumn"/>
-            <TableColumn text="Amount" fx:id="amountColumn"/>
-            <TableColumn text="Total" fx:id="totalColumn"/>
-        </columns>
-    </TableView>
-
-    <Button fx:id="switchView" GridPane.rowIndex="1" GridPane.columnIndex="0" onAction="#goToIncomingOrders">Current orders</Button>
-</GridPane>
+    <center>
+        <TableView fx:id="itemsTable">
+            <columns>
+                <TableColumn text="Product" fx:id="productColumn"/>
+                <TableColumn text="Amount" fx:id="amountColumn"/>
+                <TableColumn text="Total" fx:id="totalColumn"/>
+            </columns>
+        </TableView>
+    </center>
+    <bottom>
+        <Button fx:id="switchView" onAction="#goToIncomingOrders">Current orders</Button>
+    </bottom>
+</BorderPane>
