@@ -72,8 +72,10 @@ public class MenuActionController {
 
         for (PreMadeOrderMenu preMadeOrderMenu : mainPreMadeOrderMenuList) {
             VBox vBox = new VBox();
-            Image menuImage = new Image(new FileInputStream(productsPicturesPath + preMadeOrderMenu.getPictureName()));
-            combinedImagesWidth += menuImage.getWidth();
+            Image menuImage = new Image(new FileInputStream(productsPicturesPath + preMadeOrderMenu.getPictureName()),250,100,true,true);
+            vBox.setAlignment(Pos.CENTER);
+            //combinedImagesWidth += menuImage.getWidth();
+            combinedImagesWidth += 250;
             vBox.getChildren().add(new ImageView(menuImage));
             Label label = new Label(preMadeOrderMenu.getName());
             vBox.getChildren().add(label);
@@ -83,7 +85,7 @@ public class MenuActionController {
         }
 
         ViewManager.setStageWidth(combinedImagesWidth);
-        ViewManager.setStageHeight(600);
+        ViewManager.setStageHeight(650);
         for (PreMadeOrderMenu preMadeOrderMenu : productsPreMadeOrderMenuList) {
             VBox vBox = new VBox();
             Image menuImage = new Image(new FileInputStream(productsPicturesPath + preMadeOrderMenu.getPictureName()));
