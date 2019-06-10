@@ -41,6 +41,15 @@
 
 #headingvbox{
     -fx-background-color: #27742d;
+    -fx-alignment: center;
+}
+
+#headingvbox .label{
+    -fx-text-fill: #ffd700;
+}
+
+#headerhbox{
+    -fx-background-color: rgba(39,116,45,1);
 }
 
 #headerhbox .label{
@@ -56,6 +65,20 @@
     -fx-text-fill: #ffd700;
 }
 
+#productItemsHBox .text{
+    -fx-font: 13px Magneto;
+}
+
 #mainproductsgrid .button{
     -fx-font: 10px Magneto;
 }
+#footerHBox {
+    -fx-background-color: rgba(39,116,45,1);
+    -fx-padding: 5px;
+}
+
+#footerHBox .label{
+    -fx-text-fill: #ffd700;
+}
+
+

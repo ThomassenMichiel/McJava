@@ -17,16 +17,13 @@
         <URL value="@mcjava.css"/>
     </stylesheets>
     <VBox fx:id ="productsvchoicesbox">
-        <HBox fx:id="headerhbox">
-                <Label text="Choose Burger"/>
-                <Label text="Fries or Salad"/>
-                <Label text="Choose Sauce"/>
-                <Label text="Choose Beverage"/>
+        <HBox fx:id="headerhbox" alignment="CENTER">
+                <Label text="Make your product choices"/>
         </HBox>
         <GridPane fx:id="mainproductsgrid">
 
         </GridPane>
-        <HBox fx:id="productshbox"/>
+        <HBox fx:id="productItemsHBox"/>
         <HBox>
         <Button fx:id="confirmorderbutton" text="Confirm Order" onAction="#confirmOrderPressed"/>
         <Button fx:id="cancelorderbutton" text="Cancel Order" onAction="#cancelOrderPressed"/>

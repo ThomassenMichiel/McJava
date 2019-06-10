@@ -88,7 +88,7 @@ public class MenuActionController {
         ViewManager.setStageHeight(650);
         for (PreMadeOrderMenu preMadeOrderMenu : productsPreMadeOrderMenuList) {
             VBox vBox = new VBox();
-            Image menuImage = new Image(new FileInputStream(productsPicturesPath + preMadeOrderMenu.getPictureName()));
+            Image menuImage = new Image(new FileInputStream(productsPicturesPath + preMadeOrderMenu.getPictureName()),250,100,true,true);
             ImageView imageView = new ImageView(menuImage);
             imageView.setScaleX(0.4);
             imageView.setScaleY(0.4);

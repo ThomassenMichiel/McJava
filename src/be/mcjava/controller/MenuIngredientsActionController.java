@@ -24,7 +24,7 @@ public class MenuIngredientsActionController {
     private VBox productsOverviewVBox;
 
     @FXML
-    private HBox productshbox;
+    private HBox productItemsHBox;
 
     private ViewManager viewManager = new ViewManager();
 
@@ -84,8 +84,10 @@ public class MenuIngredientsActionController {
             ListView productsListView = onlyOneProductTypeInMenu() ? new MultiSelectListView() : new ListView();
             ObservableList<String> observableList = FXCollections.observableList(list);
             productsListView.setItems(observableList);
+            productsListView.setPrefWidth(175);
+            productsListView.setPrefHeight(375);
             listViewList.add(productsListView);
-            productshbox.getChildren().add(productsListView);
+            productItemsHBox.getChildren().add(productsListView);
         }
     }
 
