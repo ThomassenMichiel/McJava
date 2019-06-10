@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -36,6 +37,11 @@ public class KitchenController {
     
     private void addOrderToGrid() {
         contentPane.getChildren().clear();
+        Button button = new Button("Daily totals");
+        button.setPrefSize(200,200);
+        button.setOnMouseClicked(this::goToDailyTotals);
+        VBox derp = new VBox(button);
+        contentPane.getChildren().add(derp);
         for (CookingOrders order : ordersToCook) {
             for (CustomerOrder customerOrder : order.getOrdersToCook()) {
                 VBox pane = new VBox();
@@ -85,5 +91,11 @@ public class KitchenController {
         customerOrder.setFinishedCooking(true);
         OrderItemDao.updateOrderStatus(customerOrder);
         addOrderToGrid();
+    }
+    
+    @FXML
+    private void goToDailyTotals(MouseEvent mouseEvent) {
+        ViewManager viewManager = new ViewManager();
+        viewManager.displayFmxlScreen("../view/KitchenDailyTotalScreen.fxml");
     }
 }
