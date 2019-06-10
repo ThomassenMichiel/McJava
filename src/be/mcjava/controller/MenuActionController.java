@@ -125,17 +125,17 @@ public class MenuActionController {
     }
 
     private void displayMenuItemsChoiceView() {
-        viewManager.displayFmxlScreen("../view/CustomerMenuIngredientsChoice.fxml");
+        viewManager.displayFmxlScreen("/be/mcjava/view/CustomerMenuIngredientsChoice.fxml");
     }
 
     public void finishOrderPressed(ActionEvent actionEvent) {
         CustomerOrderService.saveCustomerOrder();
-        viewManager.displayFmxlScreen("../view/CustomerReceiptScreen.fxml");
+        viewManager.displayFmxlScreen("/be/mcjava/view/CustomerReceiptScreen.fxml");
     }
 
     public void cancelOrderPressed(ActionEvent actionEvent) {
         CustomerOrder c = CustomerOrderService.customerOrder;
         CustomerOrderService.cancelCustomerOrder();
-        viewManager.displayFmxlScreen("../view/CustomerLoginScreen.fxml");
+        viewManager.displayFmxlScreen("/be/mcjava/view/CustomerLoginScreen.fxml");
     }
 }

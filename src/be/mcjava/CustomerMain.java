@@ -31,7 +31,7 @@ public class CustomerMain extends Application {
         ViewManager viewManager = new ViewManager();
         ViewManager.scene = scene;
         ViewManager.stage = stage;
-        viewManager.displayFmxlScreen("../view/CustomerLoginScreen.fxml");
+        viewManager.displayFmxlScreen("/be/mcjava/view/CustomerLoginScreen.fxml");
         ViewManager.setStageDimensions(650.0,450.0);
 
         stage.setScene(scene);

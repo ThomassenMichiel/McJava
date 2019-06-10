@@ -94,6 +94,6 @@ public class CustomerReceiptController {
     
     public void returnToMainMenu(ActionEvent actionEvent) {
         ViewManager viewManager = new ViewManager();
-        viewManager.displayFmxlScreen("../view/CustomerLoginScreen.fxml");
+        viewManager.displayFmxlScreen("/be/mcjava/view/CustomerLoginScreen.fxml");
     }
 }

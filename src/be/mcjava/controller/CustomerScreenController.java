@@ -33,7 +33,7 @@ public class CustomerScreenController {
         CustomerOrderService.startNewCustomerOrder(customername.getText(),customerphonenumber.getText());
 
         ViewManager viewManager = new ViewManager();
-        viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
+        viewManager.displayFmxlScreen("/be/mcjava/view/CustomerMainMenuOverview.fxml");
         //ViewManager.setStageDimensions(1000.0,500.0);
     }
 }
