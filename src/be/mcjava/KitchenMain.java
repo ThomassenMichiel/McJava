@@ -21,7 +21,7 @@ public class KitchenMain extends Application {
         ViewManager.scene = scene;
         ViewManager.stage = stage;
         viewManager.displayFmxlScreen("/be/mcjava/view/KitchenScreen.fxml");
-        ViewManager.setStageDimensions(650.0, 450.0);
+        ViewManager.setStageDimensions(1280,720,1680,1050,1920,1080);
         
         stage.setScene(scene);
         stage.show();
