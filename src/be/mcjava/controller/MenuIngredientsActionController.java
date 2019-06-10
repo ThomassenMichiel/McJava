@@ -1,13 +1,14 @@
 package be.mcjava.controller;
 
 import be.mcjava.fxentensions.MultiSelectListView;
-import be.mcjava.model.*;
+import be.mcjava.model.AllowedMenuProduct;
+import be.mcjava.model.PreMadeOrderMenu;
+import be.mcjava.model.Product;
+import be.mcjava.model.SingleOrderItem;
 import be.mcjava.service.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -23,8 +24,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MenuIngredientsActionController {
-    private VBox chosenVBox;
-
     private VBox productsOverviewVBox;
 
     @FXML
@@ -102,16 +101,25 @@ public class MenuIngredientsActionController {
         }
     }
 
+    /***
+     * this method enables/diables to confirm order button
+     * each time a ListView is clicked, if the items are all chosen
+     * it is enabled, disabling it again for multiSelectLiestview
+     * where you can un-choose an item
+     * @param mouseEvent
+     */
     @FXML
     private void listViewClicked(MouseEvent mouseEvent){
-        int selectedListViews = 0;
+        int selectedListItems = 0;
         for (ListView listView : listViewList) {
-            if(listView.getSelectionModel().getSelectedItems().size() == 1){
-                selectedListViews++;
+            if(listView.getSelectionModel().getSelectedItems().size() >= 1){
+                selectedListItems++;
             }
         }
-        if(selectedListViews == listViewList.size()){
+        if(selectedListItems >= listViewList.size()){
             confirmorderbutton.setDisable(false);
+        }else{
+            confirmorderbutton.setDisable(true);
         }
     }
 
