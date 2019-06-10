@@ -23,9 +23,10 @@ public class CookingOrderDao {
                 "  and co.finished_cooking = false\n" +
                 "order by co.id";
         
-        try (PreparedStatement getIdPS = DaoConnector.getConnection().prepareStatement(getIds);
-             PreparedStatement getOrdersPS = DaoConnector.getConnection().prepareStatement(getOrders);
-             ResultSet idResultSet = getIdPS.executeQuery();) {
+        try (Connection connection = DaoConnector.getConnection();
+             PreparedStatement getIdPS = connection.prepareStatement(getIds);
+             PreparedStatement getOrdersPS = connection.prepareStatement(getOrders);
+             ResultSet idResultSet = getIdPS.executeQuery()) {
             List<CookingOrders> cookingOrders = new ArrayList<>();
             while (idResultSet.next()) {
                 getOrdersPS.setLong(1, idResultSet.getLong("id"));
