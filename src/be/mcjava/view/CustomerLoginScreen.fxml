@@ -16,7 +16,7 @@ fx:controller="be.mcjava.controller.CustomerScreenController">
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
             <ImageView>
-                <Image url ="@../menutextandimages/mcdoLogo.png" />
+                <Image url ="@/be/mcjava/menuTextAndImages/mcdoLogo.png" />
             </ImageView>
             <Label text="Welcome to Mc Donalds." />
             <Label text="Please list your name and phone-number in the designated fields." />

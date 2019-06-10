@@ -72,12 +72,12 @@ public class MenuIngredientsActionController {
                 PreMadeOrderMenuService.addProductsToCurrentPreMadeMenuOrder(productToOrderNamesList);
                 CustomerOrderService.addCurrentPreMadeMenu();
             }
-            viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
+            viewManager.displayFmxlScreen("/be/mcjava/view/CustomerMainMenuOverview.fxml");
         }
     }
 
     public void cancelOrderPressed(ActionEvent actionEvent) {
-        viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
+        viewManager.displayFmxlScreen("/be/mcjava/view/CustomerMainMenuOverview.fxml");
     }
 
     private void buildAllowedItemChoicesOverview() {

@@ -18,14 +18,12 @@ public class CustomerScreenController {
 
     //checks if it is a string with only letters.
     public boolean isName(String name) {
-        return name.chars().allMatch(Character::isLetter);
+        return Pattern.matches( "[a-zA-Z]+", name );
     }
 
     //checks valid phone-number
     public boolean isPhoneNumber(String customerPhoneNumber) {
-        Pattern p = Pattern.compile("(0/91)?[7-9][0-9]{9}");
-        Matcher m = p.matcher(customerPhoneNumber);
-        return (m.find() && m.group().equals(customerPhoneNumber));
+        return Pattern.matches( "0[0-9]{8,9}", customerPhoneNumber );
     }
 
     @FXML
@@ -35,6 +33,6 @@ public class CustomerScreenController {
         CustomerOrderService.startNewCustomerOrder(customername.getText(),customerphonenumber.getText());
 
         ViewManager viewManager = new ViewManager();
-        viewManager.displayFmxlScreen("../view/CustomerMainMenuOverview.fxml");
+        viewManager.displayFmxlScreen("/be/mcjava/view/CustomerMainMenuOverview.fxml");
     }
 }

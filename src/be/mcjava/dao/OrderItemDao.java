@@ -1,19 +1,19 @@
 package be.mcjava.dao;
 
+import be.mcjava.model.AbstractOrderItem;
+import be.mcjava.model.CustomerOrder;
 import be.mcjava.model.Product;
 import be.mcjava.model.SingleOrderItem;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 public class OrderItemDao {
     public static void saveOrderItems(List<SingleOrderItem> singleOrderItemList, Long customerOrderGeneratedId) {
         Long generatedKey = -1L;
         String sql = "insert into order_item (product_id,amount,total_price,finished) values (?,?,?,?)";
-        try (PreparedStatement preparedStatement = DaoConnector.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = DaoConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             for (SingleOrderItem singleOrderItem : singleOrderItemList) {
                 Product product = singleOrderItem.getItems();
                 preparedStatement.setLong(1, product.getId());
@@ -34,6 +34,34 @@ public class OrderItemDao {
                     customerOrderItemsPreparedStatement.executeUpdate();
                 }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void updateOrderStatus(AbstractOrderItem abstractOrderItem) {
+        String sql = "update order_item " +
+                "set finished = ? " +
+                "where order_item.id = ?";
+        try (Connection connection = DaoConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setBoolean(1, abstractOrderItem.isFinished());
+            preparedStatement.setLong(2, abstractOrderItem.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void updateOrderStatus(CustomerOrder customerOrder) {
+        String sql = "update customer_order\n" +
+                "set finished_cooking = ?\n" +
+                "where customer_order.id = ?";
+        try (Connection connection = DaoConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setBoolean(1, customerOrder.isFinishedCooking());
+            preparedStatement.setLong(2, customerOrder.getId());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

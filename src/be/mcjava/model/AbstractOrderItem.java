@@ -61,22 +61,18 @@ public abstract class AbstractOrderItem<T> {
     protected abstract void recalculateTotalPrice(T t, int amount);
     
     
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof AbstractOrderItem)) return false;
         
         AbstractOrderItem<?> that = (AbstractOrderItem<?>) o;
-        
-        if (getAmount() != that.getAmount()) return false;
-        if (!product.equals(that.product)) return false;
-        return getPrice().equals(that.getPrice());
+    
+        return product.equals(that.product);
     }
     
-    
+    @Override
     public int hashCode() {
-        int result = product.hashCode();
-        result = 31 * result + getAmount();
-        result = 31 * result + getPrice().hashCode();
-        return result;
+        return product.hashCode();
     }
 }
