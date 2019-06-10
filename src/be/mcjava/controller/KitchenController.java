@@ -7,8 +7,11 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -41,8 +44,20 @@ public class KitchenController {
                 for (AbstractOrderItem abstractOrderItem : customerOrder.getItemsToOrder()) {
                     String productName = ((SingleOrderItem) abstractOrderItem).getItems().getName();
                     String formattedEntry = String.format("%d\t%s", abstractOrderItem.getAmount(), productName);
-                    pane.getChildren().add(new Text(formattedEntry));
+                    Text text = new Text(formattedEntry);
+                    if (abstractOrderItem.isFinished()) {
+                        text.strikethroughProperty().setValue(true);
+                    }
+                    Button finish = new Button("Done");
+                    finish.setOnMouseClicked(this::finishedIsPressed);
+                    HBox hBox = new HBox(15,finish,text);
+                    pane.getChildren().add(hBox);
                 }
+                Button complete = new Button("Complete order");
+                Separator separator = new Separator();
+                VBox.setMargin(complete,new Insets(10,0,0,0));
+                VBox.setMargin(separator,new Insets(10,0,0,0));
+                pane.getChildren().addAll(separator,complete);
                 contentPane.getChildren().add(pane);
             }
         }
