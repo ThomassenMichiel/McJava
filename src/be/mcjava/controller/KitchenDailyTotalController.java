@@ -42,5 +42,6 @@ public class KitchenDailyTotalController {
     public void goToIncomingOrders(ActionEvent actionEvent) {
         ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("/be/mcjava/view/KitchenScreen.fxml");
+        ViewManager.setStageDimensions(1280,720,1680,1050,1920,1080);
     }
 }
