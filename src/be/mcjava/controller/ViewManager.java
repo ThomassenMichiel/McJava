@@ -19,6 +19,7 @@ public class ViewManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+            setStageDimensions(900.0, 510.0);
     }
 
     public static void setStageDimensions(double width, double height) {

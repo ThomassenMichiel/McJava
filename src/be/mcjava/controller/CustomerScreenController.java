@@ -34,6 +34,5 @@ public class CustomerScreenController {
 
         ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("/be/mcjava/view/CustomerMainMenuOverview.fxml");
-        //ViewManager.setStageDimensions(1000.0,500.0);
     }
 }

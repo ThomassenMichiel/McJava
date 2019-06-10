@@ -1,15 +1,20 @@
 package be.mcjava.controller;
 
 import be.mcjava.fxentensions.MultiSelectListView;
-import be.mcjava.model.*;
+import be.mcjava.model.AllowedMenuProduct;
+import be.mcjava.model.PreMadeOrderMenu;
+import be.mcjava.model.Product;
+import be.mcjava.model.SingleOrderItem;
 import be.mcjava.service.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -19,12 +24,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MenuIngredientsActionController {
-    private VBox chosenVBox;
-
     private VBox productsOverviewVBox;
 
     @FXML
-    private HBox productshbox;
+    private HBox productItemsHBox;
+
+    @FXML
+    private Button confirmorderbutton;
 
     private ViewManager viewManager = new ViewManager();
 
@@ -44,6 +50,7 @@ public class MenuIngredientsActionController {
     public void initialize() {
         allowedMenuProductList = AllowedMenuProductService.getAllowedMenuProductsByPremadeMenuName();
         buildAllowedItemChoicesOverview();
+        confirmorderbutton.setDisable(true);
     }
 
     @FXML
@@ -84,8 +91,35 @@ public class MenuIngredientsActionController {
             ListView productsListView = onlyOneProductTypeInMenu() ? new MultiSelectListView() : new ListView();
             ObservableList<String> observableList = FXCollections.observableList(list);
             productsListView.setItems(observableList);
+            productsListView.setOnMouseClicked(mouseEvent -> listViewClicked(mouseEvent));
+            if (itemPositionsNeeded.size() > 4) {
+                productsListView.setPrefWidth(175);
+            }
+            productsListView.setPrefHeight(375);
             listViewList.add(productsListView);
-            productshbox.getChildren().add(productsListView);
+            productItemsHBox.getChildren().add(productsListView);
+        }
+    }
+
+    /***
+     * this method enables/diables to confirm order button
+     * each time a ListView is clicked, if the items are all chosen
+     * it is enabled, disabling it again for multiSelectLiestview
+     * where you can un-choose an item
+     * @param mouseEvent
+     */
+    @FXML
+    private void listViewClicked(MouseEvent mouseEvent){
+        int selectedListItems = 0;
+        for (ListView listView : listViewList) {
+            if(listView.getSelectionModel().getSelectedItems().size() >= 1){
+                selectedListItems++;
+            }
+        }
+        if(selectedListItems >= listViewList.size()){
+            confirmorderbutton.setDisable(false);
+        }else{
+            confirmorderbutton.setDisable(true);
         }
     }
 
@@ -105,18 +139,17 @@ public class MenuIngredientsActionController {
      */
     private boolean isThereSufficientStock() {
         List<Product> outOfStockProductsList = ProductService.getOutOfStockProductList(ProductService.getProductsListByNameList(productToOrderNamesList));
-        if(outOfStockProductsList.size() > 0) {
+        if (outOfStockProductsList.size() > 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Not enough stock");
-            alert.setHeaderText("We cannot complete your order because there is not enough stock of the following ingredients");
+            alert.setHeaderText("We cannot complete your order because the ingredients are out of stock for");
             for (Product product : outOfStockProductsList) {
-                alert.setContentText(alert.getContentText()+product.getName()+"\n");
+                alert.setContentText(alert.getContentText() + product.getName() + "\n");
             }
             Optional<ButtonType> result = alert.showAndWait();
             return false;
-        }else{
+        } else {
             return true;
         }
     }
-
 }
