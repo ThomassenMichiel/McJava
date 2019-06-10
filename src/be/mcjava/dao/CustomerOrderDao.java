@@ -6,16 +6,12 @@ import be.mcjava.model.Product;
 import be.mcjava.model.SingleOrderItem;
 import be.mcjava.service.CustomerOrderService;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CustomerOrderDao {
-
+    
     public static void saveCustomerOrder(CustomerOrder customerOrder) {
         Long generatedKey = -1L;
         List<SingleOrderItem> singleOrderItemList;
@@ -34,19 +30,19 @@ public class CustomerOrderDao {
             }
             List<AbstractOrderItem> abstractOrderItemList = customerOrder.getItemsToOrder();
             for (AbstractOrderItem abstractOrderItem : abstractOrderItemList) {
-                if (abstractOrderItem instanceof SingleOrderItem){
+                if (abstractOrderItem instanceof SingleOrderItem) {
                     singleOrderItemList = new ArrayList<>();
                     singleOrderItemList.add((SingleOrderItem) abstractOrderItem);
-                }else {
+                } else {
                     singleOrderItemList = (List<SingleOrderItem>) abstractOrderItem.getItems();
                 }
-                OrderItemDao.saveOrderItems(singleOrderItemList,generatedKey);
+                OrderItemDao.saveOrderItems(singleOrderItemList, generatedKey);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
     public static List<AbstractOrderItem> getOrderSummary() {
         String sql = "select p.name, count(p.name) as count, p.id as productId, p.price as price, sum(p.price) as total\n" +
                 "from customer_order co\n" +
@@ -54,7 +50,8 @@ public class CustomerOrderDao {
                 "       join order_item o on coi.order_item_id = o.id\n" +
                 "       join product p on o.product_id = p.id\n" +
                 "group by o.product_id\n";
-        try (PreparedStatement preparedStatement = DaoConnector.getConnection().prepareStatement(sql);
+        try (Connection connection = DaoConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             List<AbstractOrderItem> results = new ArrayList<>();
             while (resultSet.next()) {
