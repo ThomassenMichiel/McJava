@@ -14,13 +14,14 @@ public class CookingOrderDao {
                 "from customer_order co\n" +
                 "where co.ordered = true\n" +
                 "  and co.finished_cooking = false;";
-        String getOrders = "select co.id, p.name, p.price, o.amount\n" +
+        String getOrders = "select co.id, p.name, p.price, o.amount, o.id as orderId, o.finished\n" +
                 "from customer_order co\n" +
                 "       join customer_order_items coi on co.id = coi.customer_order_id\n" +
                 "       join order_item o on coi.order_item_id = o.id\n" +
                 "       join product p on o.product_id = p.id\n" +
                 "where co.id = ?\n" +
-                "order by co.id ";
+                "  and co.finished_cooking = false\n" +
+                "order by co.id";
         
         try (PreparedStatement getIdPS = DaoConnector.getConnection().prepareStatement(getIds);
              PreparedStatement getOrdersPS = DaoConnector.getConnection().prepareStatement(getOrders);
@@ -36,7 +37,9 @@ public class CookingOrderDao {
                                 .build();
                         SingleOrderItem singleOrderItem = new SingleOrderItem.Builder(product)
                                 .withAmount(orderResultSet.getInt("amount"))
+                                .withId(orderResultSet.getLong("orderId"))
                                 .build();
+                        singleOrderItem.setFinished(orderResultSet.getBoolean("finished"));
                         customerOrder.setId(orderResultSet.getLong("id"));
                         customerOrder.addItem(singleOrderItem);
                     }
