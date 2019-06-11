@@ -34,7 +34,9 @@
         <HBox fx:id="footerHBox" >
             <Button fx:id="finishorderbutton" text="Confirm Order" onAction="#finishOrderPressed"/>
             <Button fx:id="cancelorderbutton" text="Cancel Order" onAction="#cancelOrderPressed"/>
-            <Region prefWidth="50.0" HBox.hgrow="ALWAYS" />
+            <Region prefWidth="10.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="displayORderOverviewButton" text="Order Overview" onAction="#displayCustomerOverviewPressed"/>
+            <Region prefWidth="10.0" HBox.hgrow="ALWAYS" />
             <Label fx:id="totalOrderedText" text="Order Total: €"/>
             <Label fx:id="totalOrderedLabel"/>
             <Region prefWidth="20.0"/>

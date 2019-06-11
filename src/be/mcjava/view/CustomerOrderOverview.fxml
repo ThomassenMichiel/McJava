@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="be.mcjava.controller.CustomerOrderOverviewController">
+    <stylesheets>
+        <URL value="@mcjava.css"/>
+    </stylesheets>
+    <top>
+        <HBox fx:id="overviewHeaderHBox" alignment="CENTER">
+            <Label text="Overview of your order"/>
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane>
+            <FlowPane fx:id="overviewFlowPane"/>
+        </ScrollPane>
+    </center>
+    <bottom>
+        <HBox fx:id="overviewFooterHBox" alignment="CENTER">
+            <Button fx:id="closeCustomerOverView" onAction="#closeCustomerOverview">Close</Button>
+        </HBox>
+    </bottom>
+</BorderPane>

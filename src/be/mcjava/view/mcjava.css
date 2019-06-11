@@ -90,4 +90,26 @@
     -fx-padding: 5px;
 }
 
+#overviewHeaderHBox{
+    -fx-background-color: rgba(39,116,45,1);
+}
+
+#overviewHeaderHBox .label{
+    -fx-text-fill: #ffd700;
+}
+
+#overviewFooterHBox{
+    -fx-background-color: rgba(39,116,45,1);
+    -fx-padding: 5px;
+}
+
+#overviewFlowPane .text{
+    -fx-font: 14px Magneto;
+}
+
+#overviewFooterHBox .text{
+    -fx-text-fill: #ffd700;
+    -fx-font: 12px Magneto;
+}
+
 

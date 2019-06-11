@@ -140,4 +140,8 @@ public class MenuActionController {
         CustomerOrderService.cancelCustomerOrder();
         viewManager.displayFmxlScreen("/be/mcjava/view/CustomerLoginScreen.fxml");
     }
+
+    public void displayCustomerOverviewPressed(ActionEvent actionEvent) {
+        viewManager.displayFmxlScreen("/be/mcjava/view/CustomerOrderOverview.fxml");
+    }
 }
