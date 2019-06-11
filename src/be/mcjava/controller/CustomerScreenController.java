@@ -26,7 +26,7 @@ public class CustomerScreenController {
 
     @FXML
     private void continueFromLoginToMenuPressed(ActionEvent event) {
-        String telephoneNumbersOnly = customerphonenumber.getText().replaceAll("\\w+", "");
+        String telephoneNumbersOnly = customerphonenumber.getText().replaceAll("\\D+", "");
         if(isName(customername.getText()) && isPhoneNumber(telephoneNumbersOnly)) {
     
             CustomerOrderService.startNewCustomerOrder(customername.getText(), customerphonenumber.getText());
