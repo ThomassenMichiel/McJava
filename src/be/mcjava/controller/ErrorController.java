@@ -11,15 +11,11 @@ import java.io.StringWriter;
 
 public class ErrorController {
     public static void showError(Exception ex, String headerText, String contentText) {
-        
-        
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Exception Dialog");
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
-
-
-// Create expandable Exception.
+        
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         ex.printStackTrace(pw);
@@ -41,10 +37,8 @@ public class ErrorController {
         expContent.add(label, 0, 0);
         expContent.add(textArea, 0, 1);
 
-// Set expandable Exception into the dialog pane.
         alert.getDialogPane().setExpandableContent(expContent);
         
         alert.showAndWait();
-        
     }
 }

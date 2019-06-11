@@ -43,7 +43,6 @@ public class MenuActionController {
 
     private List<PreMadeOrderMenu> mainPreMadeOrderMenuList;
     private List<PreMadeOrderMenu> productsPreMadeOrderMenuList;
-    private PreMadeOrderMenuDao preMadeOrderMenuDao;
 
     private String productsPicturesPath = "resources/menutextandimages/";
 
@@ -130,18 +129,17 @@ public class MenuActionController {
         viewManager.displayFmxlScreen("/be/mcjava/view/CustomerMenuIngredientsChoice.fxml");
     }
 
-    public void finishOrderPressed(ActionEvent actionEvent) {
+    public void finishOrderPressed() {
         CustomerOrderService.saveCustomerOrder();
         viewManager.displayFmxlScreen("/be/mcjava/view/CustomerReceiptScreen.fxml");
     }
 
-    public void cancelOrderPressed(ActionEvent actionEvent) {
-        CustomerOrder c = CustomerOrderService.customerOrder;
+    public void cancelOrderPressed() {
         CustomerOrderService.cancelCustomerOrder();
         viewManager.displayFmxlScreen("/be/mcjava/view/CustomerLoginScreen.fxml");
     }
 
-    public void displayCustomerOverviewPressed(ActionEvent actionEvent) {
+    public void displayCustomerOverviewPressed() {
         viewManager.displayFmxlScreen("/be/mcjava/view/CustomerOrderOverview.fxml");
     }
 }
