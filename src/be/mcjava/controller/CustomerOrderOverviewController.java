@@ -22,19 +22,7 @@ public class CustomerOrderOverviewController {
         for (AbstractOrderItem abstractOrderItem : CustomerOrderService.customerOrder.getItemsToOrder()) {
             if (abstractOrderItem instanceof SingleOrderItem) {
                 SingleOrderItem singleOrderItem = ((SingleOrderItem) abstractOrderItem);
-                Label amountLabel = new Label(Integer.toString(singleOrderItem.getAmount()));
-                Label label = new Label(singleOrderItem.getItems().getName());
-                Button button = new Button("Remove product ");
-                button.setOnMouseClicked(mouseEvent -> removeItemFromOrderHandler(mouseEvent));
-                HBox hBox = new HBox();
-                Region region = new Region();
-                HBox.setHgrow(region, Priority.ALWAYS);
-                hBox.setPrefWidth(796);
-                hBox.getChildren().add(amountLabel);
-                hBox.getChildren().add(label);
-                hBox.getChildren().add(region);
-                hBox.getChildren().add(button);
-                overviewFlowPane.getChildren().add(hBox);
+                overviewFlowPane.getChildren().add(createProductHBoxLine(singleOrderItem));
             }
             if (abstractOrderItem instanceof PreMadeOrderMenu) {
                 List<SingleOrderItem> singleOrderItemList = ((PreMadeOrderMenu) abstractOrderItem).getItems();
@@ -47,30 +35,42 @@ public class CustomerOrderOverviewController {
                 region.setMinWidth(10);
                 HBox.setHgrow(region, Priority.ALWAYS);
                 hBox.setPrefWidth(796);
-                hBox.getChildren().add(amountLabel);
-                hBox.getChildren().add(label);
-                hBox.getChildren().add(region);
-                hBox.getChildren().add(button);
+                hBox.getChildren().addAll(amountLabel,label,region,button);
                 VBox preMadeMenuVBox = new VBox();
-                //overviewFlowPane.getChildren().add(hBox);
                 preMadeMenuVBox.getChildren().add(hBox);
                 for (SingleOrderItem singleOrderItem : singleOrderItemList) {
                     Region indentRegion = new Region();
                     indentRegion.setMinWidth(50);
                     Label itemLabel = new Label(singleOrderItem.getItems().getName());
                     HBox itemHBox = new HBox();
-                    itemHBox.setPrefWidth(796);
                     Region region1 = new Region();
+                    itemHBox.setPrefWidth(796);
                     HBox.setHgrow(region1, Priority.ALWAYS);
-                    itemHBox.getChildren().add(indentRegion);
-                    itemHBox.getChildren().add(itemLabel);
-                    itemHBox.getChildren().add(region1);
-                    //overviewFlowPane.getChildren().add(itemHBox);
+                    itemHBox.getChildren().addAll(indentRegion,itemLabel,region1);
                     preMadeMenuVBox.getChildren().add(itemHBox);
                 }
                 overviewFlowPane.getChildren().add(preMadeMenuVBox);
             }
         }
+    }
+
+    private HBox createProductHBoxLine(Region indentRegion,SingleOrderItem singleOrderItem){
+        HBox itemHBox = createProductHBoxLine(singleOrderItem);
+        itemHBox.getChildren().add(0,indentRegion);
+        return itemHBox;
+    }
+
+    private HBox createProductHBoxLine(SingleOrderItem singleOrderItem){
+        Label amountLabel = new Label(Integer.toString(singleOrderItem.getAmount()));
+        Label label = new Label(singleOrderItem.getItems().getName());
+        Region region = new Region();
+        Button button = new Button("Remove product ");
+        button.setOnMouseClicked(mouseEvent -> removeItemFromOrderHandler(mouseEvent));
+        HBox hBox = new HBox();
+        HBox.setHgrow(region, Priority.ALWAYS);
+        hBox.setPrefWidth(796);
+        hBox.getChildren().addAll(amountLabel,label,region,button);
+        return hBox;
     }
 
     private void removeItemFromOrderHandler(MouseEvent mouseEvent) {
