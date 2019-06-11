@@ -16,7 +16,7 @@ public class CustomerScreenController {
 
     //checks if it is a string with only letters.
     private boolean isName(String name) {
-        return Pattern.matches( "[a-zA-Z]+", name );
+        return Pattern.matches( "[a-zA-Z ]+", name );
     }
 
     //checks valid phone-number
