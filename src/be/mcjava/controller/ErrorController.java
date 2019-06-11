@@ -10,13 +10,13 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 public class ErrorController {
-    public static void showError(IllegalArgumentException ex) {
+    public static void showError(Exception ex, String headerText, String contentText) {
         
         
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Exception Dialog");
-        alert.setHeaderText("Configuration is not set or invalid");
-        alert.setContentText("Please check application.properties for invalid data");
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
 
 
 // Create expandable Exception.

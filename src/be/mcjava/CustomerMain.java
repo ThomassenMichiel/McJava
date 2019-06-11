@@ -39,7 +39,7 @@ public class CustomerMain extends Application {
             DaoConnector.setURL(jdbcUrl);
             DaoConnector.setUSER(user);
         } catch (IllegalArgumentException e) {
-            ErrorController.showError(e);
+            ErrorController.showError(e,"Configuration is not set or invalid","Please check application.properties for invalid data");
             Platform.exit();
         }
     }

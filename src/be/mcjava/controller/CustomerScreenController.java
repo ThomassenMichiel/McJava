@@ -16,17 +16,18 @@ public class CustomerScreenController {
 
     //checks if it is a string with only letters.
     private boolean isName(String name) {
-        return Pattern.matches( "[a-zA-Z]+", name );
+        return Pattern.matches( "[a-zA-Z ]+", name );
     }
 
     //checks valid phone-number
     private boolean isPhoneNumber(String customerPhoneNumber) {
-        return Pattern.matches( "0[0-9]{8,9}", customerPhoneNumber );
+        return Pattern.matches( "0[1-9]{1,2}[/|\\-|0-9]{7,8}", customerPhoneNumber );
     }
 
     @FXML
     private void continueFromLoginToMenuPressed(ActionEvent event) {
-        if(isName(customername.getText()) && isPhoneNumber(customerphonenumber.getText())) {
+        String telephoneNumbersOnly = customerphonenumber.getText().replaceAll("\\D+", "");
+        if(isName(customername.getText()) && isPhoneNumber(telephoneNumbersOnly)) {
     
             CustomerOrderService.startNewCustomerOrder(customername.getText(), customerphonenumber.getText());
     
