@@ -120,4 +120,24 @@ public class CustomerOrderService {
         customerOrder.addItem(PreMadeOrderMenuService.preMadeOrderMenu);
         PreMadeOrderMenuService.resetCurrentPreMadeOrderMenu();
     }
+
+    /***
+     * this method removes a product from the current CustomerOrder
+     * @param productNameToRemoveFromOrder
+     */
+    public static void removeProductFromCurrentOrderByName(String productNameToRemoveFromOrder) {
+        for (AbstractOrderItem abstractOrderItem : customerOrder.getItemsToOrder()) {
+            if(abstractOrderItem instanceof PreMadeOrderMenu){
+                if(((PreMadeOrderMenu) abstractOrderItem).getName().equals(productNameToRemoveFromOrder)){
+                    customerOrder.removeFromOrder(abstractOrderItem);
+                    break;
+                }
+            }else{
+                if(((SingleOrderItem) abstractOrderItem).getItems().getName().equals(productNameToRemoveFromOrder)){
+                    customerOrder.removeFromOrder(abstractOrderItem);
+                    break;
+                }
+            }
+        }
+    }
 }
