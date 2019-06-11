@@ -26,12 +26,12 @@ public class CustomerScreenController {
 
     @FXML
     private void continueFromLoginToMenuPressed(ActionEvent event) {
-        //if(isName(customername.getText()) && isPhoneNumber(customerphonenumber.getText())) {
+        if(isName(customername.getText()) && isPhoneNumber(customerphonenumber.getText())) {
     
             CustomerOrderService.startNewCustomerOrder(customername.getText(), customerphonenumber.getText());
     
             ViewManager viewManager = new ViewManager();
             viewManager.displayFmxlScreen("/be/mcjava/view/CustomerMainMenuOverview.fxml");
-        //}
+        }
     }
 }
