@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 
 public class DaoConnector {
 //    private String URL = "jdbc:mysql://192.168.99.100/mcjava";
@@ -20,25 +21,30 @@ public class DaoConnector {
     private static String USER;
     private static String PASSWORD;
     
-    private DaoConnector() {}
+    private DaoConnector() {
+    }
     
-    public static Connection getConnection() throws SQLException{
+    public static Connection getConnection() throws SQLException {
         try {
-            return DriverManager.getConnection(URL,USER,PASSWORD);
+            return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (CommunicationsException ce) {
-            ErrorController.showError(ce,"Connection error","Could not connect to database");
-            Platform.exit();
+            ErrorController.showError(ce, "Connection error", "Could not connect to database");
+        } catch (SQLSyntaxErrorException sse) {
+            ErrorController.showError(sse, "Connection Error", "Database does not exist");
         } catch (SQLException se) {
-            if (se.getErrorCode() == 1045) {
-                ErrorController.showError(se,"Connection error","Check user credentials");
-                Platform.exit();
+            if (se.getErrorCode() != 1045) {
+                throw se;
             }
-            throw se;
+            ErrorController.showError(se, "Connection error", "Check user credentials");
         }
+        Platform.exit();
         return null;
     }
     
     public static void setURL(String URL) {
+        if (!URL.matches("jdbc\\:mysql:\\/\\/(\\w.+)\\/\\w+")) {
+            throw new IllegalArgumentException("The JDBC URL is invalid.");
+        }
         DaoConnector.URL = URL;
     }
     
