@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Separator;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -126,7 +125,7 @@ public class CustomerReceiptController {
         items.add(new Text(itemEntry), 0, row++);
     }
     
-    public void returnToMainMenu(ActionEvent actionEvent) {
+    public void returnToMainMenu() {
         ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("/be/mcjava/view/CustomerLoginScreen.fxml");
     }

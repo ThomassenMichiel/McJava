@@ -82,7 +82,7 @@ public class CustomerOrderOverviewController {
         }
     }
 
-    public void closeCustomerOverview(ActionEvent actionEvent) {
+    public void closeCustomerOverview() {
         ViewManager viewManager = new ViewManager();
         viewManager.displayFmxlScreen("/be/mcjava/view/CustomerMainMenuOverview.fxml");
     }

@@ -1,6 +1,5 @@
 package be.mcjava.service;
 
-import be.mcjava.model.CustomerOrder;
 import be.mcjava.model.Product;
 import be.mcjava.model.SingleOrderItem;
 
