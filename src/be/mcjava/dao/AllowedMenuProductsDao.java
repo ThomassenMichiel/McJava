@@ -32,6 +32,7 @@ public class AllowedMenuProductsDao {
                 return allowedMenuProductList;
             }
         } catch (SQLException e) {
+            //TODO laat de grebruiker weten dat er iets is fout gegaan.
             e.printStackTrace();
         }
         return null;

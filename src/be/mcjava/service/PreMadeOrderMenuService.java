@@ -69,6 +69,7 @@ public class PreMadeOrderMenuService {
     public static void addProductsToCurrentPreMadeMenuOrder(List<String> productToOrderNamesList) {
         List<SingleOrderItem> singleOrderItemList = new ArrayList<>();
         List<Product> productList = ProductService.getProductsListByNameList(productToOrderNamesList);
+        //TODO gebruik een Stream met map functie
         for (Product product : productList) {
             SingleOrderItem singleOrderItem = new SingleOrderItem();
             singleOrderItem.setItems(product);

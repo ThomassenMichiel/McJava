@@ -15,7 +15,8 @@ public class ErrorController {
         alert.setTitle("Exception Dialog");
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
-        
+
+        //TODO writes worden niet gesloten (try with resources)
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         ex.printStackTrace(pw);

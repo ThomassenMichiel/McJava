@@ -30,7 +30,8 @@ public class PropertiesLoader {
         addProperty("user","");
         addProperty("password","");
     }
-    
+
+    //TODO met een map als parameter kan je meerdere properties instellen met maar 1x een connectie naar het bestand.
     public void addProperty(String key, String value) {
         try (FileOutputStream fos = new FileOutputStream("./application.properties")) {
             properties.setProperty(key,value);

@@ -17,6 +17,7 @@ public class IngredientService {
     public static Map<Ingredient, Integer> getAllUsedIngredients(List<Product> allProductsInACustomerOrder) {
         Map<Ingredient, Integer> neededIngredientsAmountMap = new HashMap<>();
         for (Product product : allProductsInACustomerOrder) {
+            //TODO dit kan op 1 regel
             Map<Ingredient, Integer> productIngredientsMap = new HashMap<>();
             productIngredientsMap = product.getIngredients();
             for (Ingredient ingredient : productIngredientsMap.keySet()) {

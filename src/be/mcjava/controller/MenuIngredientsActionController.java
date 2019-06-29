@@ -82,6 +82,7 @@ public class MenuIngredientsActionController {
 
     private void buildAllowedItemChoicesOverview() {
         listViewList = new ArrayList<>();
+        //TODO mogelijke nullpointer op allowedMenuProductList
         List<Integer> itemPositionsNeeded = allowedMenuProductList.stream().map(AllowedMenuProduct::getItemPositionInMenu).distinct().collect(Collectors.toCollection(ArrayList::new));
         for (Integer integer : itemPositionsNeeded) {
             List<String> list = allowedMenuProductList.stream()
@@ -146,6 +147,7 @@ public class MenuIngredientsActionController {
             for (Product product : outOfStockProductsList) {
                 alert.setContentText(alert.getContentText() + product.getName() + "\n");
             }
+            //TODO wat doen we met dit resultaat?
             Optional<ButtonType> result = alert.showAndWait();
             return false;
         } else {

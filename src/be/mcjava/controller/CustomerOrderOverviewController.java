@@ -24,6 +24,7 @@ public class CustomerOrderOverviewController {
                 SingleOrderItem singleOrderItem = ((SingleOrderItem) abstractOrderItem);
                 overviewFlowPane.getChildren().add(createProductHBoxLine(singleOrderItem));
             }
+            //TODO maak hier een else if van
             if (abstractOrderItem instanceof PreMadeOrderMenu) {
                 PreMadeOrderMenu preMadeOrderMenu = (PreMadeOrderMenu) abstractOrderItem;
                 VBox preMadeMenuVBox = new VBox();

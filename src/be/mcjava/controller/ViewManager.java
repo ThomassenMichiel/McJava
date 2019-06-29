@@ -24,7 +24,8 @@ public class ViewManager {
     public static void setStageDimensions(double width, double height) {
         setStageDimensions(width, height, width, height, width, height);
     }
-    
+
+    //TODO veel te veel parameters (gebruik een pojo)
     public static void setStageDimensions(double minWidth, double minHeight, double prefWidth, double prefHeight, double maxWidth, double maxHeight) {
         stage.setMinHeight(minHeight);
         stage.setHeight(prefHeight);

@@ -10,6 +10,7 @@ public class SingleOrderItemService {
     public static void addProductsAsSingleOrderItems(List<String> productToOrderNamesList) {
         List<SingleOrderItem> singleOrderItemList = new ArrayList<>();
         List<Product> productList = ProductService.getProductsListByNameList(productToOrderNamesList);
+        //TODO dit kan mooier in een stream
         for (Product product : productList) {
             SingleOrderItem singleOrderItem = new SingleOrderItem();
             singleOrderItem.setItems(product);

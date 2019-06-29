@@ -50,6 +50,7 @@ public class ProductService {
                 .entrySet()
                 .stream()
                 .filter(ingredient -> ingredient.getKey().getCurrentStock() - ingredient.getValue().intValue() < 0)
+                //TODO gebruik hier een methode referentie in de plaats
                 .map(ingredient -> ingredient.getKey())
                 .collect(Collectors.toList());
     }

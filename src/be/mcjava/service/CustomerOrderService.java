@@ -127,11 +127,13 @@ public class CustomerOrderService {
      */
     public static void removeProductFromCurrentOrderByName(String productNameToRemoveFromOrder) {
         for (AbstractOrderItem abstractOrderItem : customerOrder.getItemsToOrder()) {
+            //TODO deze geneste if kan in 1 if.
             if(abstractOrderItem instanceof PreMadeOrderMenu){
                 if(((PreMadeOrderMenu) abstractOrderItem).getName().equals(productNameToRemoveFromOrder)){
                     customerOrder.removeFromOrder(abstractOrderItem);
                     break;
                 }
+            //TODO dit kan een else if worden
             }else{
                 if(((SingleOrderItem) abstractOrderItem).getItems().getName().equals(productNameToRemoveFromOrder)){
                     customerOrder.removeFromOrder(abstractOrderItem);
